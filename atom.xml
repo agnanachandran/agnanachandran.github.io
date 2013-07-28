@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[Things To Think About]]></title>
   <link href="http://agnanachandran.github.io/atom.xml" rel="self"/>
   <link href="http://agnanachandran.github.io/"/>
-  <updated>2013-07-28T15:38:23-04:00</updated>
+  <updated>2013-07-28T16:13:45-04:00</updated>
   <id>http://agnanachandran.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Anojh Gnanachandran]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -18,7 +18,9 @@
     <link href="http://agnanachandran.github.io/blog/2013/07/28/percent-s-slash-wordpress-slash-octopress-slash-g/"/>
     <updated>2013-07-28T14:00:00-04:00</updated>
     <id>http://agnanachandran.github.io/blog/2013/07/28/percent-s-slash-wordpress-slash-octopress-slash-g</id>
-    <content type="html"><![CDATA[<p>So after only a few months of using WordPress, I decided to switch to the new cool thing everyone else seems to be using. Octopress. I have to say, it&rsquo;s pretty cool!</p>
+    <content type="html"><![CDATA[<p>So after only a few months of using WordPress, I decided to switch to Octopress.</p>
+
+<p>I used WordPress at first because it is by far the most popular blogging platform out there, and was fairly easy to setup with my current hosting provider.</p>
 ]]></content>
   </entry>
   

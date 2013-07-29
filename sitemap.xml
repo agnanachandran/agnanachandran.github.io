@@ -4,7 +4,13 @@
         <loc>
             http://agnanachandran.github.io/blog/2013/07/28/percent-s-slash-wordpress-slash-octopress-slash-g/
         </loc>
-        <lastmod>2013-07-28T16:13:36-04:00</lastmod>
+        <lastmod>2013-07-28T20:16:55-04:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://agnanachandran.github.io/blog/2013/07/29/software-engineering-at-the-university-of-waterloo/
+        </loc>
+        <lastmod>2013-07-29T00:26:01-04:00</lastmod>
     </url>
     <url>
         <loc>http://agnanachandran.github.io/robots.txt</loc>
@@ -12,10 +18,10 @@
     </url>
     <url>
         <loc>http://agnanachandran.github.io/</loc>
-        <lastmod>2013-07-28T16:13:36-04:00</lastmod>
+        <lastmod>2013-07-29T00:26:01-04:00</lastmod>
     </url>
     <url>
         <loc>http://agnanachandran.github.io/blog/archives/</loc>
-        <lastmod>2013-07-28T16:13:36-04:00</lastmod>
+        <lastmod>2013-07-29T00:26:01-04:00</lastmod>
     </url>
 </urlset>

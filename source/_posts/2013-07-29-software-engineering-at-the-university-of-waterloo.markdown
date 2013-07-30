@@ -5,7 +5,7 @@ date: 2013-07-29 00:23
 comments: true
 categories: 
 ---
-*Originally posted May 30th, 2013 *  
+*Originally posted May 30th, 2013*  
   
   
 Hi there. I’m a 1B/2A co-op student. I’m here to talk about software engineering.

@@ -4,7 +4,7 @@
   <title><![CDATA[Things To Think About]]></title>
   <link href="http://agnanachandran.github.io/atom.xml" rel="self"/>
   <link href="http://agnanachandran.github.io/"/>
-  <updated>2013-07-29T22:16:17-04:00</updated>
+  <updated>2013-07-29T22:53:56-04:00</updated>
   <id>http://agnanachandran.github.io/</id>
   <author>
     <name><![CDATA[Anojh Gnanachandran]]></name>
@@ -20,15 +20,15 @@
     <id>http://agnanachandran.github.io/blog/2013/07/29/software-engineering-at-the-university-of-waterloo</id>
     <content type="html"><![CDATA[<p>Hi there. I’m a 1B/2A co-op student. I’m here to talk about software engineering.</p>
 
-<p><strong>The Courses</strong></p>
+<h2>The Courses</h2>
 
 <p>This post was inspired by this. That post helped me solidify my decision to come to Waterloo, so this is my way of paying it forward. Plus it’s actually kind of fun to reminisce.</p>
 
 <p>Here’s a quick list of the courses I’ve taken (the full curriculum can be found here):</p>
 
-<p>Already taken:</p>
+<h4>Already taken:</h4>
 
-<p><strong>First Term (Fall 2012)</strong>:</p>
+<h3>First Term (Fall 2012):</h3>
 
 <ul>
 <li><p>CS 137 – Programming Principles</p></li>
@@ -39,7 +39,7 @@
 </ul>
 
 
-<p><strong>Second Term (Winter 2013)</strong>:</p>
+<h3>Second Term (Winter 2013):</h3>
 
 <ul>
 <li><p>CS 138 – Introduction to Data Abstraction and Implementation</p></li>
@@ -50,13 +50,13 @@
 </ul>
 
 
-<p>First Term:</p>
+<h2>First Term:</h2>
 
 <p>I didn’t really know what to expect going into this term; people say your average will drop 10-30%, I found that that’s not always true. You can drop a lot more, and you can drop less. It all depends on your work ethic, innate abilities, and willpower.</p>
 
 <p>NOTE: any information here is only completely valid for the term I took it. If/when you take it, it may be slightly different. Your enjoyment and how much you get out of the course will also depend on the instructor. Also, my abilities and your abilities will be different. I try my best to speak to the average prospective student.</p>
 
-<p>CS 137 – Programming Principles</p>
+<h3>CS 137 – Programming Principles</h3>
 
 <p><a href="http://xkcd.com/138/">http://xkcd.com/138/</a></p>
 
@@ -68,7 +68,7 @@
 
 <p>The assignments themselves are marked with an online judge called “Marmoset”. You submit your code, it’s graded based on a comparison between your output and the expected (correct) output and you are awarded points. You may submit as many times as possible until the time it’s due. The catch is as follows. First you start by trying to pass the public (easier) tests. You have unlimited tries for these, and you can submit as often as you want. Once you get these all correct, you move on to what are called release tests. You need tokens to try a release test. You have 3 release tokens and every time you attempt the release tests, you lose a token. The token regenerates after 12 hours. Once you pass the release tests, you get 100% on the assignment. If you don’t pass all the release tests, once the deadline arrives, you get whatever points you were able to get from the public and release tests that you were able to pass.</p>
 
-<p>ECE 105 – Physics of Electrical Engineering I</p>
+<h3>ECE 105 – Physics of Electrical Engineering I</h3>
 
 <p>Hahaha. Hahahahahaha…</p>
 
@@ -79,7 +79,7 @@ The quizzes: these weren’t too bad actually, you spend most of the 2 hour tuto
 The mid-term and final: Unfortunately, our mid-term was 13 multiple choice questions (the questions weren’t actually terribly hard), which meant there was no chance for you to get marks for showing your work. You get one wrong, there goes a couple percent off your final grade. Study hard because the stuff you learn during the first half of the course will be used frequently during the second half. The final was pretty brutal. This dropped my mark/overall average a lot.
 Fortunately, there was a nice bell curve of sorts (not necessarily a true Gaussian distribution, but some sort of normalization). Study hard in this course if you want to do well; you won’t be doing mechanics again for quite some time.</p>
 
-<p>ECE 140 – Linear Circuits</p>
+<h3>ECE 140 – Linear Circuits</h3>
 
 <p>Remember the circuits in grade 9 or 10 science? It’s like that, but harder</p>
 
@@ -91,7 +91,7 @@ Fortunately, there was a nice bell curve of sorts (not necessarily a true Gaussi
 
 <p>Midterm was easy (class average of 87), final was fair, harder than the weekly quizzes that were given during the tutorial though.</p>
 
-<p>MATH 117 – Calculus I for Engineering</p>
+<h3>MATH 117 – Calculus I for Engineering</h3>
 
 <p>I wish I was your derivative… so I could lie tangent to your curves</p>
 

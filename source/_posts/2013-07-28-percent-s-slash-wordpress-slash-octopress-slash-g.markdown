@@ -15,4 +15,5 @@ There's 5 reasons I can think of at the top of my head about why Octopress is so
 rake generate
 rake deploy
 ```
-Here's some text.
+
+It's that easy.

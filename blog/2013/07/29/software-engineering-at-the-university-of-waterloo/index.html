@@ -9,7 +9,7 @@
   <meta name="author" content="Anojh Gnanachandran">
 
   
-  <meta name="description" content="Software Engineering at the University of Waterloo Jul 29th, 2013 Hi there. I’m a 1B/2A co-op student. I’m here to talk about software engineering. &hellip;">
+  <meta name="description" content="Software Engineering at the University of Waterloo Jul 29th, 2013 *Originally posted May 30th, 2013 * Hi there. I’m a 1B/2A co-op student. I’m here &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,11 +91,13 @@
 </header>
   <div class="row-fluid">
     <div class="span12">
-      <p>Hi there. I’m a 1B/2A co-op student. I’m here to talk about software engineering.</p>
+      <p>*Originally posted May 30th, 2013 *</p>
+
+<p>Hi there. I’m a 1B/2A co-op student. I’m here to talk about software engineering.</p>
 
 <h2>The Courses</h2>
 
-<p>This post was inspired by this. That post helped me solidify my decision to come to Waterloo, so this is my way of paying it forward. Plus it’s actually kind of fun to reminisce.</p>
+<p>This post was inspired by <a href="http://aimango.wordpress.com/2013/05/12/software-engineering-waterloo-courses/">this</a>. That post helped me solidify my decision to come to Waterloo, so this is my way of paying it forward. Plus it’s actually kind of fun to reminisce.</p>
 
 <p>Here’s a quick list of the courses I’ve taken (the full curriculum can be found here):</p>
 
@@ -131,142 +133,9 @@
 
 <h3>CS 137 – Programming Principles</h3>
 
-<p><a href="http://xkcd.com/138/">http://xkcd.com/138/</a></p>
+<p><em>Relevant xkcd: <a href="http://xkcd.com/138/">http://xkcd.com/138/</a></em></p>
 
-<figure class='code'><figcaption><span>Some File</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">ExitNotifyThread</span><span class="p">(</span><span class="n">Thread</span><span class="p">):</span>
-</span><span class='line'>    <span class="sd">&quot;&quot;&quot;This class is designed to alert a &quot;monitor&quot; to the fact that a thread has</span>
-</span><span class='line'><span class="sd">    exited and to provide for the ability for it to find out why.&quot;&quot;&quot;</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class='line'>        <span class="k">global</span> <span class="n">exitthreads</span><span class="p">,</span> <span class="n">profiledir</span>
-</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">threadid</span> <span class="o">=</span> <span class="n">thread</span><span class="o">.</span><span class="n">get_ident</span><span class="p">()</span>
-</span><span class='line'>        <span class="k">try</span><span class="p">:</span>
-</span><span class='line'>            <span class="k">if</span> <span class="ow">not</span> <span class="n">profiledir</span><span class="p">:</span>          <span class="c"># normal case</span>
-</span><span class='line'>                <span class="n">Thread</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-</span><span class='line'>            <span class="k">else</span><span class="p">:</span>
-</span><span class='line'>                <span class="k">try</span><span class="p">:</span>
-</span><span class='line'>                    <span class="kn">import</span> <span class="nn">cProfile</span> <span class="kn">as</span> <span class="nn">profile</span>
-</span><span class='line'>                <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-</span><span class='line'>                    <span class="kn">import</span> <span class="nn">profile</span>
-</span><span class='line'>                <span class="n">prof</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">Profile</span><span class="p">()</span>
-</span><span class='line'>                <span class="k">try</span><span class="p">:</span>
-</span><span class='line'>                    <span class="n">prof</span> <span class="o">=</span> <span class="n">prof</span><span class="o">.</span><span class="n">runctx</span><span class="p">(</span><span class="s">&quot;Thread.run(self)&quot;</span><span class="p">,</span> <span class="nb">globals</span><span class="p">(),</span> <span class="nb">locals</span><span class="p">())</span>
-</span><span class='line'>                <span class="k">except</span> <span class="ne">SystemExit</span><span class="p">:</span>
-</span><span class='line'>                    <span class="k">pass</span>
-</span><span class='line'>                <span class="n">prof</span><span class="o">.</span><span class="n">dump_stats</span><span class="p">(</span> \
-</span><span class='line'>                            <span class="n">profiledir</span> <span class="o">+</span> <span class="s">&quot;/&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threadid</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;_&quot;</span> <span class="o">+</span> \
-</span><span class='line'>                            <span class="bp">self</span><span class="o">.</span><span class="n">getName</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;.prof&quot;</span><span class="p">)</span>
-</span><span class='line'>        <span class="k">except</span><span class="p">:</span>
-</span><span class='line'>            <span class="bp">self</span><span class="o">.</span><span class="n">setExitCause</span><span class="p">(</span><span class="s">&#39;EXCEPTION&#39;</span><span class="p">)</span>
-</span><span class='line'>            <span class="k">if</span> <span class="n">sys</span><span class="p">:</span>
-</span><span class='line'>                <span class="bp">self</span><span class="o">.</span><span class="n">setExitException</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
-</span><span class='line'>                <span class="n">tb</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span>
-</span><span class='line'>                <span class="bp">self</span><span class="o">.</span><span class="n">setExitStackTrace</span><span class="p">(</span><span class="n">tb</span><span class="p">)</span>
-</span><span class='line'>        <span class="k">else</span><span class="p">:</span>
-</span><span class='line'>            <span class="bp">self</span><span class="o">.</span><span class="n">setExitCause</span><span class="p">(</span><span class="s">&#39;NORMAL&#39;</span><span class="p">)</span>
-</span><span class='line'>        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;exitmessage&#39;</span><span class="p">):</span>
-</span><span class='line'>            <span class="bp">self</span><span class="o">.</span><span class="n">setExitMessage</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">if</span> <span class="n">exitthreads</span><span class="p">:</span>
-</span><span class='line'>            <span class="n">exitthreads</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">setExitCause</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cause</span><span class="p">):</span>
-</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">exitcause</span> <span class="o">=</span> <span class="n">cause</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">getExitCause</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class='line'>        <span class="sd">&quot;&quot;&quot;Returns the cause of the exit, one of:</span>
-</span><span class='line'><span class="sd">        &#39;EXCEPTION&#39; -- the thread aborted because of an exception</span>
-</span><span class='line'><span class="sd">        &#39;NORMAL&#39; -- normal termination.&quot;&quot;&quot;</span>
-</span><span class='line'>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">exitcause</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">setExitException</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">):</span>
-</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">exitexception</span> <span class="o">=</span> <span class="n">exc</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">getExitException</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class='line'>        <span class="sd">&quot;&quot;&quot;If getExitCause() is &#39;EXCEPTION&#39;, holds the value from</span>
-</span><span class='line'><span class="sd">        sys.exc_info()[1] for this exception.&quot;&quot;&quot;</span>
-</span><span class='line'>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">exitexception</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">setExitStackTrace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">st</span><span class="p">):</span>
-</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">exitstacktrace</span> <span class="o">=</span> <span class="n">st</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">getExitStackTrace</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class='line'>        <span class="sd">&quot;&quot;&quot;If getExitCause() is &#39;EXCEPTION&#39;, returns a string representing</span>
-</span><span class='line'><span class="sd">        the stack trace for this exception.&quot;&quot;&quot;</span>
-</span><span class='line'>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">exitstacktrace</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">setExitMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
-</span><span class='line'>        <span class="sd">&quot;&quot;&quot;Sets the exit message to be fetched by a subsequent call to</span>
-</span><span class='line'><span class="sd">        getExitMessage.  This message may be any object or type except</span>
-</span><span class='line'><span class="sd">        None.&quot;&quot;&quot;</span>
-</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">exitmessage</span> <span class="o">=</span> <span class="n">msg</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">getExitMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span class='line'>        <span class="sd">&quot;&quot;&quot;For any exit cause, returns the message previously set by</span>
-</span><span class='line'><span class="sd">        a call to setExitMessage(), or None if there was no such message</span>
-</span><span class='line'><span class="sd">        set.&quot;&quot;&quot;</span>
-</span><span class='line'>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">exitmessage</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Your standard introductory CS course. Covers big-O notation (read here for more info: <a href="http://stackoverflow.com/questions/487258/plain-english-explanation-of-big-o">http://stackoverflow.com/questions/487258/plain-english-explanation-of-big-o</a>), recursion, methods, sorting and searching, and of course pointers, since the course uses C. If you know any Java, or any other C-like programming language, you shouldn’t have too much trouble.</p>
+<p>Your standard introductory CS course. Covers big-O notation (read here for more info: <a href="http://stackoverflow.com/questions/487258/plain-english-explanation-of-big-o">http://stackoverflow.com/questions/487258/plain-english-explanation-of-big-o</a>), <a href="https://www.google.ca/search?q=recursion">recursion</a>, methods, sorting and searching, and of course pointers, since the course uses C. If you know any Java, or any other C-like programming language, you shouldn’t have too much trouble.</p>
 
 <p>Many people in my class took notes on paper; I opted for writing on a laptop; I highly recommend doing this for both CS 137 and CS 138 for a couple reasons. You won’t have to type it up again to see what the code does, and you’ve got syntax highlighting so you can more easily read it.</p>
 
@@ -276,7 +145,7 @@
 
 <h3>ECE 105 – Physics of Electrical Engineering I</h3>
 
-<p>Hahaha. Hahahahahaha…</p>
+<p><em>Hahaha. Hahahahahaha…</em></p>
 
 <p>This course is infamous for a few reasons. Despite being high school level physics content for the most part (just mechanics, no electromagnetism), there’s a couple reasons why people don’t like this course.</p>
 
@@ -287,7 +156,7 @@ Fortunately, there was a nice bell curve of sorts (not necessarily a true Gaussi
 
 <h3>ECE 140 – Linear Circuits</h3>
 
-<p>Remember the circuits in grade 9 or 10 science? It’s like that, but harder</p>
+<p><em>Remember the circuits in grade 9 or 10 science? It’s like that, but harder.</em></p>
 
 <p>You start off with the basics; what’s current, charge, power, what are their units, what’s electricity. Then basic circuits, Ohm’s law, some more advanced systematic techniques of solving circuits, capacitors and inductors, and finally complex numbers play a role in some pretty abstract concepts that I will likely never remember again. Oh and op-amps; those questions were fun.</p>
 
@@ -299,7 +168,7 @@ Fortunately, there was a nice bell curve of sorts (not necessarily a true Gaussi
 
 <h3>MATH 117 – Calculus I for Engineering</h3>
 
-<p>I wish I was your derivative… so I could lie tangent to your curves</p>
+<p><em>I wish I was your derivative… so I could lie tangent to your curves</em></p>
 
 <p>Covers pre-calculus (limits, trigonometry), various types of functions (Heaviside, cosh(x)**), derivatives, integrals, applications of integrals.</p>
 
@@ -311,29 +180,29 @@ Fortunately, there was a nice bell curve of sorts (not necessarily a true Gaussi
 
 <p>**not a typo, cosh(x) is not the same as cos(x)</p>
 
-<p>MATH 115 – Linear Algebra for Engineering</p>
+<h3>MATH 115 – Linear Algebra for Engineering</h3>
 
-<p>Vectors, matrices, and proofs, oh my!</p>
+<p><em>Vectors, matrices, and proofs, oh my!</em></p>
 
 <p>Pretty abstract course; unlike most things you’ve done before; there’s proofs in this course, and the content itself is too abstract really to apply to things you’ve learned before. Fortunately we did some matrix stuff in high school, but all of it was covered in this course within a week. Once again, tons of resources on the internet if you need other places to learn the content, there’s also lots of practice problems out there. The course notes by Dan Wolczuk are great for this course.</p>
 
 <p>“Assignments” took the form of weekly test-like pieces of paper. During the tutorial you’d sit down, collaborate with whoever you want, and answer several questions relating to the previous week’s content. It’s completely open book (and open laptop ;) ), so it’s not too bad. I had this tutorial Monday mornings, and I woke up late a couple of times. That didn’t help me very much.</p>
 
-<p>SE 101 – Introduction to Methods of Software Engineering</p>
+<h3>SE 101 – Introduction to Methods of Software Engineering</h3>
 
-<p>Hard to describe this one. So here’s a funny unrelated comic <a href="http://www.somethingofthatilk.com/index.php?id=135">http://www.somethingofthatilk.com/index.php?id=135</a></p>
+<p><em>Hard to describe this one. So here’s a funny unrelated comic <a href="http://www.somethingofthatilk.com/index.php?id=135">http://www.somethingofthatilk.com/index.php?id=135</a></em></p>
 
 <p>Yes, you’re going to have 6 courses but this one’s a half-credit (or well, a 0.25 credit, most courses you take at Waterloo will be 0.5 credits, so 0.25 credit courses are called half-credit courses; confusing, I know). The majority of the course deals with things like ethics and professional engineering and rules. Some parts, like the software development life cycle were actually useful and interesting, so pay attention to that, but otherwise, the 4 quizzes we had were fairly easy.</p>
 
 <p>The final project in previous terms had students work in groups to manuever a robot with a language called “Not quite C”. We used Scribblr robots (read: roomba clones). They have a few shoddy sensors on them. There’s a fairly easy to understand API included and you code in python and get it to solve a problem (the problem itself is up to you).</p>
 
-<p>Second Term:</p>
+<h2>Second Term:</h2>
 
 <p>The subjects in this term are similar to first term’s, except the physics is about electromagnetism and integrals, not mechanics and breaking hearts.</p>
 
-<p>CS 138 – Introduction to Data Abstraction and Implementation</p>
+<h3>CS 138 – Introduction to Data Abstraction and Implementation</h3>
 
-<p>Linked lists, queues, binary trees, linked lists, C++, object oriented development, and oh, linked lists.</p>
+<p><em>Linked lists, queues, binary trees, linked lists, C++, object oriented development, and oh, linked lists.</em></p>
 
 <p>If you know about any of these, the implementations of the ADTs (abstract data types) will be easier for you to understand. Once you know how to do one of them, and understand the concepts of pointers and the new features in C++ compared to C, you won’t have much trouble understanding anything in this course. All that’s left are the assignments.</p>
 
@@ -341,9 +210,9 @@ Fortunately, there was a nice bell curve of sorts (not necessarily a true Gaussi
 
 <p>The assignments here were more involved than those in CS 137. They were assigned every 1-2 weeks and once again use marmoset. I took notes with my com-poo-ter. Found it super handy, especially when studying those ADTs. I just type them up in OneNote, paste to vim for all its awesome vim features, and stare at the screen.</p>
 
-<p>ECE 106 – Physics of Electrical Engineering II</p>
+<h3>ECE 106 – Physics of Electrical Engineering II</h3>
 
-<p>Calculus-based electromagnetism – tons of fun, for some definition of fun</p>
+<p><em>Calculus-based electromagnetism – tons of fun, for some definition of fun</em></p>
 
 <p>You don’t need much prior experience with electricity for this; but the more you remember from grade 12, the better. You’ll do Gauss’ law, Faraday’s law, Lenz’s law, Ampere’s law, Coulomb’s law, …
 You should have a good understanding of how integrals work by the time you get here. They’re used frequently. You don’t actually need to memorize many formulas though. Most of the important physics formulae and integrals on the formula sheet which are provided with the tutorial quizzes, mid-term, and final.</p>
@@ -354,17 +223,17 @@ You should have a good understanding of how integrals work by the time you get h
 
 <p>Last bit of physics you do for a while.</p>
 
-<p>ECE 124 – Digital Circuits and Systems</p>
+<h3>ECE 124 – Digital Circuits and Systems</h3>
 
-<p>There are 10 types of people in the world: Those who understand binary, those who don’t, and those who didn’t see a ternary joke coming.</p>
+<p><em>There are 10 types of people in the world: Those who understand binary, those who don’t, and those who didn’t see a ternary joke coming.</em></p>
 
 <p>This is the first course that actually kind of felt like an engineering course; there’s some design involved and the applications to the content you learn are obvious. You learn about binary, logical operators (AND, OR, XOR, etc.), and how to design various types of logic circuits. The powerpoint notes are great, but you’ll need to do a decent amount of practice. The textbook/assigned questions were at an appropriate level, but since they weren’t mandatory, you’ll really have to push yourself to actually do them.</p>
 
 <p>This course also has labs (fortnightly, as usual). You learn VHDL along the way, a hardware descriptive language that’s used to directly manipulate the lights and whatnot on an FPGA board. The labs apply only basic knowledge from the course. It’s mostly fun and design and learning the syntax of VHDL. The postlab reports here are a bit more wordy and open-ended than your previous labs. A couple pages with strict requirements on the formatting. The labs were worth a decent portion of your mark and were relatively easy, so I was happy about that. You get a partner for these labs too, so you’ll also have some practice coding together on one computer.</p>
 
-<p>MATH 119 – Calculus II for Engineering</p>
+<h3>MATH 119 – Calculus II for Engineering</h3>
 
-<p>Insert calculus pick-up line here</p>
+<p><em>Insert calculus pick-up line here</em></p>
 
 <p>Calculus II won’t be review for most people, at least for those who only know high school material (maybe you know Taylor series and Newton’s method). You learn multi-variable calculus (partial derivatives, basic limits, gradients, directional derivatives), approximations of non-polynomial functions with Taylor series, infinite series, and some vector calculus (weren’t on any tests for us). There weren’t too many proofs in this course, like some people might expect for a math course. Once again, there’s tons of places to find help if you need it for Calc II.</p>
 
@@ -372,9 +241,9 @@ You should have a good understanding of how integrals work by the time you get h
 
 <p>The final for this course was weighted 65% or so I believe. This was the highest I’ve experienced so far (common percentages were 50% and 64%). How this course is structured and marked will however depend on if they change anything for future students and/or how your fellow students taking the course are doing on the assignments/mid-terms.</p>
 
-<p>MATH 135 – Algebra for Honours Mathematics</p>
+<h3>MATH 135 – Algebra for Honours Mathematics</h3>
 
-<p>Quod erat demonstrandum</p>
+<p><em>Quod erat demonstrandum</em></p>
 
 <p>I could talk about this course for hours (or rather, write for several paragraphs). It was by far my favourite course and highest mark. You learn various properties about numbers (particularly integers), sets, primes, divisibility, and proofs. You learn how to think logically (you aren’t taught by the professor necessarily, it’s something you develop by doing proofs), and you get a taste of what math is really all about.</p>
 
@@ -384,9 +253,9 @@ You should have a good understanding of how integrals work by the time you get h
 
 <p>The mid-term and final were both good, but it’s hard to speak for others, especially in this course. You’ll just have to wait till you get here!</p>
 
-<p>SE 102 – Seminar</p>
+<h3>SE 102 – Seminar</h3>
 
-<p>Make sure you know how to make pizza for the midterm</p>
+<p><em>Make sure you know how to make pizza for the midterm</em></p>
 
 <p>Not really a course; it’s marked as Credit/No Credit (you will get the credit). The weekly seminar only actually ended up happening a few times during the term and each time we just listened to whoever speak for an hour or so. Nothing else to say here. Really.</p>
 
@@ -433,6 +302,8 @@ You should have a good understanding of how integrals work by the time you get h
           
             <a class="basic-alignment left" href="/blog/2013/07/28/percent-s-slash-wordpress-slash-octopress-slash-g/" title="Previous Post: :%s/WordPress/Octopress/g">&laquo; :%s/WordPress/Octopress/g</a>
           
+          
+            <a class="basic-alignment right" href="/blog/2013/07/29/a-masterpiece-of-music/" title="Next Post: A Masterpiece of Music">A Masterpiece of Music &raquo;</a>
           
         </p>
       </div>

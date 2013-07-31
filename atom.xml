@@ -4,7 +4,7 @@
   <title><![CDATA[Things To Think About]]></title>
   <link href="http://agnanachandran.github.io/atom.xml" rel="self"/>
   <link href="http://agnanachandran.github.io/"/>
-  <updated>2013-07-30T23:04:31-04:00</updated>
+  <updated>2013-07-30T23:10:15-04:00</updated>
   <id>http://agnanachandran.github.io/</id>
   <author>
     <name><![CDATA[Anojh Gnanachandran]]></name>
@@ -287,7 +287,7 @@ Dibidiboodiboobouyewejoubeeguidibmble</p></blockquote>
 
 <p>There&rsquo;s 5 reasons I can think of at the top of my head about why Octopress is so awesome.</p>
 
-<h2>Super quick deployment; no fumbling with &lt;insert your favourite bloggin platform here>.</h2>
+<h2>Super quick deployment; no fumbling with &lt;insert your favourite blogging platform here>.</h2>
 
 <figure class='code'><figcaption><span>octopress blogging</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

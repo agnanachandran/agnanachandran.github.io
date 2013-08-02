@@ -15,9 +15,9 @@ navigation:
 - text: Projects
   url: http://www.pluszero.ca/projects
 - text: Blog
-  url: /index.html
+  url: /
 - text: Archives
-  url: /blog/archives/index.html
+  url: /blog/archives
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
@@ -110,7 +110,7 @@ disqus_short_name: thingstothinkabout
 disqus_show_comment_count: false
 
 # Google Analytics
-google_analytics_tracking_id:
+google_analytics_tracking_id: 37973526-1
 
 # Facebook Like
 facebook_like: false

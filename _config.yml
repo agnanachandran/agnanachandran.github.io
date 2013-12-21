@@ -4,9 +4,9 @@
 
 url: http://agnanachandran.github.io
 title: Things To Think About
-subtitle: A collection of thoughts.
+subtitle: Ideas, Experiences, Thoughts <br><br> By Anojh Gnanachandran
 author: Anojh Gnanachandran
-simple_search: http://google.com/search
+simple_search: 
 description:
 
 navigation:
@@ -86,7 +86,7 @@ facebook_user: AnojhGnanachandran
 
 # Twitter
 twitter_user:
-twitter_tweet_button: true
+twitter_tweet_button: false
 
 # Google +1
 google_plus_one: false

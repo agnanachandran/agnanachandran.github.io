@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - Things To Think About</title>
+  <title>How to do X in Octopress - Things To Think About</title>
   <meta name="author" content="Anojh Gnanachandran">
 
   
-  <meta name="description" content="Blog Archive 2013 Dec 20 2013 How to do X in Octopress Jul 29 2013 A Masterpiece of Music Jul 29 2013 Software Engineering at the University of &hellip;">
+  <meta name="description" content="How to Do X in Octopress Dec 20th, 2013 I spent the last couple days tweaking my Octopress themes and re-figuring out how to do things since getting &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://agnanachandran.github.io/blog/archives/">
+  <link rel="canonical" href="http://agnanachandran.github.io/blog/2013/12/20/how-to-do-x-in-octopress/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -95,73 +95,63 @@
 
   </header>
   <section id="main">
-    <div>
-<article role="article" class="post">
-  
-    <div class="sharing-box">
+    <article class="post">
+  <div class="sharing-box">
   
   
   
 </div>
 
-  
   
   <header>
-    <h2 class="entry-title">Blog Archive</h2>
+    
+      <h2 class="entry-title">How to Do X in Octopress</h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-20T23:11:00-05:00" pubdate data-updated="true">Dec 20<span>th</span>, 2013</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<p>I spent the last couple days tweaking my Octopress themes and re-figuring out how to do things since getting one of the new Haswell MBPs (and thus switching my primary OS from Ubuntu to OS X). Navigating the octopress file hierarchy isn&rsquo;t easy, especially if you&rsquo;re not used to Ruby and/or Jekyll and/or SASS.</p>
 
-  
-  <h2>2013</h2>
+<p>So, let&rsquo;s start with a preview of what we have to work with. If you&rsquo;re reading this, I assume you know a bit about Git, the Unix shell, and what Octopress is.</p>
 
-<article>
-  
-<time datetime="2013-12-20T23:11:00-05:00" pubdate><span class='month'>Dec</span> <span class='day'>20</span> <span class='year'>2013</span></time>
+<p>Let&rsquo;s start with the file hierarchy, my current setup, and the Git configuration.</p>
 
-<h1><a href="/blog/2013/12/20/how-to-do-x-in-octopress/">How to do X in Octopress</a></h1>
+<h2>My current setup:</h2>
+
+<p>You&rsquo;ll notice right away that we&rsquo;re in the source branch. A typical octopress configuration uses two branches (master and source). I use GitHub Pages for deployment and it looks for stuff in the master branch, but we really only have to worry about the source branch. Most of the folders and files are under the source branch with the exception of <code>/_deploy</code>, whose contents are generated with <code>rake deploy</code></p>
+
+<p>For starters, I&rsquo;m using [oh-my] zsh with the popular <u>Solarized</u> colorscheme. Taking a look at a typical octopress setup, we see some familiar READMEs, some typical files found in most Ruby projects (Gemfile, Rakefile, etc.) that we don&rsquo;t need to worry about for now, and _config.yml.</p>
+
+<p>_config.yml holds various top-level/administrate info for your blog. This is where you&rsquo;d put your blog&rsquo;s name, your disqus shortname (if applicable), what links you want in your navigation bar, usernames for various services (GitHub, Facebook, G+, etc.), Google analytics tracking ID, and various other options.</p>
+
+
 
 </article>
 
-
-
-<article>
-  
-<time datetime="2013-07-29T23:29:00-04:00" pubdate><span class='month'>Jul</span> <span class='day'>29</span> <span class='year'>2013</span></time>
-
-<h1><a href="/blog/2013/07/29/a-masterpiece-of-music/">A Masterpiece of Music</a></h1>
-
-</article>
-
-
-
-<article>
-  
-<time datetime="2013-07-29T00:23:00-04:00" pubdate><span class='month'>Jul</span> <span class='day'>29</span> <span class='year'>2013</span></time>
-
-<h1><a href="/blog/2013/07/29/software-engineering-at-the-university-of-waterloo/">Software Engineering at the University of Waterloo</a></h1>
-
-</article>
-
-
-
-<article>
-  
-<time datetime="2013-07-28T14:00:00-04:00" pubdate><span class='month'>Jul</span> <span class='day'>28</span> <span class='year'>2013</span></time>
-
-<h1><a href="/blog/2013/07/28/percent-s-slash-wordpress-slash-octopress-slash-g/">:%s/WordPress/Octopress/g</a></h1>
-
-</article>
-
+  <section class="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
+  </section>
 
-  
-</article>
-
-</div>
 
     <nav role="navigation" id="pagination">
 
@@ -175,7 +165,10 @@
       var disqus_shortname = 'thingstothinkabout';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://agnanachandran.github.io/blog/2013/12/20/how-to-do-x-in-octopress/';
+        var disqus_url = 'http://agnanachandran.github.io/blog/2013/12/20/how-to-do-x-in-octopress/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -9,7 +9,7 @@
   <meta name="author" content="Anojh Gnanachandran">
 
   
-  <meta name="description" content="A Masterpiece of Music Jul 29th, 2013 Originally posted June 23rd, 2013 I was at a grocery store a couple weeks back, and over the PA system, I &hellip;">
+  <meta name="description" content="How to Do X in Octopress Dec 20th, 2013 I spent the last couple days tweaking my Octopress themes and re-figuring out how to do things since getting &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -89,11 +89,6 @@
 <!-- Octopress Love -->
 <aside id="octopress_linkback">
   <a href="http://octopress.org/">
-    <span class="unicode_square">
-      <span class="unicode_circle">
-        &nbsp;
-      </span>
-    </span>
     <span class="octopress">Powered by Octopress</span>
   </a>
 </aside>
@@ -101,6 +96,64 @@
   </header>
   <section id="main">
       
+  
+  
+    <article class="post">
+      <div class="sharing-box">
+  
+  
+  
+</div>
+
+      
+  <header>
+    
+      <h2 class="entry-title">
+        
+        <a href="/blog/2013/12/20/how-to-do-x-in-octopress/">How to Do X in Octopress</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-20T23:11:00-05:00" pubdate data-updated="true">Dec 20<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <p>I spent the last couple days tweaking my Octopress themes and re-figuring out how to do things since getting one of the new Haswell MBPs (and thus switching my primary OS from Ubuntu to OS X). Navigating the octopress file hierarchy isn&rsquo;t easy, especially if you&rsquo;re not used to Ruby and/or Jekyll and/or SASS.</p>
+
+<p>So, let&rsquo;s start with a preview of what we have to work with. If you&rsquo;re reading this, I assume you know a bit about Git, the Unix shell, and what Octopress is.</p>
+
+<p>Let&rsquo;s start with the file hierarchy, my current setup, and the Git configuration.</p>
+
+<h2>My current setup:</h2>
+
+<p>You&rsquo;ll notice right away that we&rsquo;re in the source branch. A typical octopress configuration uses two branches (master and source). I use GitHub Pages for deployment and it looks for stuff in the master branch, but we really only have to worry about the source branch. Most of the folders and files are under the source branch with the exception of <code>/_deploy</code>, whose contents are generated with <code>rake deploy</code></p>
+
+<p>For starters, I&rsquo;m using [oh-my] zsh with the popular <u>Solarized</u> colorscheme. Taking a look at a typical octopress setup, we see some familiar READMEs, some typical files found in most Ruby projects (Gemfile, Rakefile, etc.) that we don&rsquo;t need to worry about for now, and _config.yml.</p>
+
+<p>_config.yml holds various top-level/administrate info for your blog. This is where you&rsquo;d put your blog&rsquo;s name, your disqus shortname (if applicable), what links you want in your navigation bar, usernames for various services (GitHub, Facebook, G+, etc.), Google analytics tracking ID, and various other options.</p>
+
+  
+  
+
+
+    </article>
   
   
     <article class="post">
@@ -351,7 +404,7 @@ Dibidiboodiboobouyewejoubeeguidibmble</p></blockquote>
 
 <p><em>Vectors, matrices, and proofs, oh my!</em></p>
 
-<p>Pretty abstract course; unlike most things you’ve done before; there’s proofs in this course, and the content itself is too abstract really to apply to things you’ve learned before. Fortunately we did some matrix stuff in high school, but all of it was covered in this course within a week.</p>
+<p>Pretty abstract course; unlike most of the courses you&rsquo;ll have this term, there are proofs in this course, and some of the content is too abstract to apply to things you’ve learned before. Fortunately we did some work with matrices in high school, but all of it was covered in this course within a couple weeks.</p>
 
 <p>Once again, tons of resources on the internet if you need other places to learn the content, there’s also lots of practice problems out there. The course notes by Dan Wolczuk are great for this course.</p>
 

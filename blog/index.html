@@ -9,7 +9,7 @@
   <meta name="author" content="Anojh Gnanachandran">
 
   
-  <meta name="description" content="How to Do X in Octopress Dec 20th, 2013 I spent the last couple days tweaking my Octopress themes and re-figuring out how to do things since getting &hellip;">
+  <meta name="description" content="How to Do X in Octopress Dec 20th, 2013 This post is perpetually a work in progress. Last updated Dec 21, 2013. I spent the last couple days &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -128,19 +128,88 @@
   </header>
 
 
-  <p>I spent the last couple days tweaking my Octopress themes and re-figuring out how to do things since getting one of the new Haswell MBPs (and thus switching my primary OS from Ubuntu to OS X). Navigating the octopress file hierarchy isn&rsquo;t easy, especially if you&rsquo;re not used to Ruby and/or Jekyll and/or SASS.</p>
+  <p>This post is perpetually a work in progress.</p>
+
+<p><em>Last updated Dec 21, 2013.</em></p>
+
+<p>I spent the last couple days tweaking my Octopress themes and re-figuring out how to do things since getting one of the new Haswell MBPs (and thus switching my primary OS from Ubuntu to OS X). Navigating the Octopress file hierarchy isn&rsquo;t easy, but hopefully this post will help you (and be a useful reference for myself).</p>
 
 <p>So, let&rsquo;s start with a preview of what we have to work with. If you&rsquo;re reading this, I assume you know a bit about Git, the Unix shell, and what Octopress is.</p>
 
 <p>Let&rsquo;s start with the file hierarchy, my current setup, and the Git configuration.</p>
 
-<h2>My current setup:</h2>
+<h3>My current setup:</h3>
 
-<p>You&rsquo;ll notice right away that we&rsquo;re in the source branch. A typical octopress configuration uses two branches (master and source). I use GitHub Pages for deployment and it looks for stuff in the master branch, but we really only have to worry about the source branch. Most of the folders and files are under the source branch with the exception of <code>/_deploy</code>, whose contents are generated with <code>rake deploy</code></p>
+<ol>
+<li>Insert image 1</li>
+</ol>
 
-<p>For starters, I&rsquo;m using [oh-my] zsh with the popular <u>Solarized</u> colorscheme. Taking a look at a typical octopress setup, we see some familiar READMEs, some typical files found in most Ruby projects (Gemfile, Rakefile, etc.) that we don&rsquo;t need to worry about for now, and _config.yml.</p>
+
+<p>You&rsquo;ll notice right away that we&rsquo;re in the source branch. A typical octopress configuration uses two branches (master and source). I use GitHub Pages for deployment and it looks for stuff in the master branch, but we really only have to worry about the source branch. Most of the folders and files are under the source branch with the exception of <code>/_deploy</code>, whose contents are generated with <code>rake deploy</code> (I&rsquo;ll talk about the various rake tasks later).</p>
+
+<p>For starters, I&rsquo;m using [oh-my] zsh with the popular <u>Solarized</u> colorscheme.</p>
+
+<p>Taking a look at a typical octopress setup, we see some familiar READMEs, some typical files found in most Ruby projects (Gemfile, Rakefile, etc.) that we don&rsquo;t need to worry about for now, and _config.yml.</p>
+
+<h3>Top-level Configuration</h3>
 
 <p>_config.yml holds various top-level/administrate info for your blog. This is where you&rsquo;d put your blog&rsquo;s name, your disqus shortname (if applicable), what links you want in your navigation bar, usernames for various services (GitHub, Facebook, G+, etc.), Google analytics tracking ID, and various other options.</p>
+
+<h3>Rake Tasks</h3>
+
+<p>A quick primer for non-ruby enthusiasts:
+<code>rake</code> is basically the Ruby version of <code>make</code>. Upon executing any of the below rake tasks, a number of useful commands will be run resulting in some otherwise complex thing being completed.</p>
+
+<ol>
+<li>Insert image 2</li>
+</ol>
+
+
+<p>The most important of these rake tasks, namely <code>generate</code>, <code>deploy</code>, <code>new_post</code>, <code>watch</code>, will be discussed below</p>
+
+<h3>Writing a new post</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_post<span class="o">[</span><span class="s1">&#39;New foobar with Punctuation!&#39;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>creates a Markdown file in source/_posts called something like &ldquo;2013-12-21-new-foobar-with-punctuation-exclamation&rdquo;</p>
+
+<p>Deleting the file effectively deletes the post (assuming you haven&rsquo;t already published the post to the interwebs)</p>
+
+<p>If you&rsquo;d like to preview your post in the browser,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake preview
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>will do the trick and show you your blog at localhost:4000 (<a href="http://whatismyipaddress.com/localhost">more info on localhost</a>). HTTP requests and responses will be logged in the same terminal window, so I recommend opening a seperate tab/window specifically for running this process.</p>
+
+<p>Upon saving the file and refreshing the browser window, you&rsquo;ll see how your post (along with the rest of the blog) will look.</p>
+
+<h3>Changing themes</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd </span>octopress
+</span><span class='line'><span class="nv">$ </span>git clone GIT_URL .themes/THEME_NAME
+</span><span class='line'><span class="nv">$ </span>rake install<span class="o">[</span><span class="s1">&#39;THEME_NAME&#39;</span><span class="o">]</span>
+</span><span class='line'><span class="nv">$ </span>rake generate
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A number of themes are available <a href="https://github.com/imathis/octopress/wiki/3rd-Party-Octopress-Themes">here</a>. I&rsquo;ve opted for the <a href="https://github.com/mikeclarke/villainy-octopress-theme">&ldquo;villainy&rdquo;</a> theme with several personal customizations. I&rsquo;ll detail how I did those changes below.</p>
+
+<h3>Make your blog feel like home</h3>
+
+<p>Disclaimer: If you&rsquo;re anything like me, you may spend several hours tweaking the various SCSS, HTML, and JS files at your disposal. It&rsquo;s pretty addicting.</p>
+
+<p>A more detailed description can be found <a href="http://octopress.org/docs/theme/">here</a>.
+To be continued&hellip;</p>
 
   
   

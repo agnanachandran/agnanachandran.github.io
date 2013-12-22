@@ -7,18 +7,19 @@ categories:
 ---
 *Originally posted May 30th, 2013*  
   
+*Last updated December 22nd, 2013*
   
 Hi there. I’m a 1B/2A co-op student. I’m here to talk about software engineering.
 
-## The Courses
+This post was inspired by [a fellow software engineering student at UW](http://aimango.wordpress.com/2013/05/12/software-engineering-waterloo-courses/). If you want even more detail than I'm providing here, check it out.
 
-This post was inspired by [this](http://aimango.wordpress.com/2013/05/12/software-engineering-waterloo-courses/). If you want even more detail than I'm providing here, check it out.
+## The Courses
 
 Here’s a quick list of the courses I’ve taken (the full curriculum can be found [here](https://uwaterloo.ca/software-engineering/class-2017-2a#course sequence)):
 
-#### Already taken:
+<!-- more -->
 
-### First Term (Fall 2012):
+### First Term (Fall 2012) 1A:
 
 - CS 137 – Programming Principles
 
@@ -30,7 +31,7 @@ Here’s a quick list of the courses I’ve taken (the full curriculum can be fo
 
 - MATH 117 – Calculus I for Engineering
 
-### Second Term (Winter 2013):
+### Second Term (Winter 2013) 1B:
 
 - CS 138 – Introduction to Data Abstraction and Implementation
 
@@ -41,6 +42,20 @@ Here’s a quick list of the courses I’ve taken (the full curriculum can be fo
 - MATH 119 – Calculus II for Engineering
 
 - MATH 135 – Algebra for Honours Mathematics
+
+### Third Term (Fall 2013) 2A:
+
+- CS 241 - Foundations of Sequential Programs
+
+- ECE 222 - Digital Computers
+
+- CHE 102 - Chemistry for Engineers
+
+- SE 212 - Logic and Computation
+
+- STAT 206 - Statistics for Software Engineers
+
+- (elective) PSYCH 101 - Introductory Psychology
 
 ## First Term:
 
@@ -106,7 +121,7 @@ Complex numbers are also taught. You use them in a few courses, if you haven’t
 
 *Vectors, matrices, and proofs, oh my!*
 
-Pretty abstract course; unlike most things you’ve done before; there’s proofs in this course, and the content itself is too abstract really to apply to things you’ve learned before. Fortunately we did some matrix stuff in high school, but all of it was covered in this course within a week.
+Pretty abstract course; unlike most of the courses you'll have this term, there are proofs in this course, and some of the content is too abstract to apply to things you’ve learned before. Fortunately we did some work with matrices in high school, but all of it was covered in this course within a couple weeks.
 
 Once again, tons of resources on the internet if you need other places to learn the content, there’s also lots of practice problems out there. The course notes by Dan Wolczuk are great for this course.
 

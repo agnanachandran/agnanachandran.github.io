@@ -10,7 +10,7 @@ $text-color-light: #aaa !default;
 $type-border: #ddd !default;
 
 // Title fonts
-$title-font: "Roboto";
+$title-font: "Open Sans";
 
 /* General rules */
 body {
@@ -83,7 +83,7 @@ article h2 {
   font-family: $title-font, serif;
   font-size: 24px;
   line-height: 32px;
-  font-weight: 900;
+  font-weight: 800;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -94,6 +94,6 @@ article h2 a:link, article h2 a:hover, article h2 a:visited, article h2 a:active
   font-family: $title-font, serif;
   font-size: 24px;
   line-height: 32px;
-  font-weight: 900;
+  font-weight: 800;
   -webkit-font-smoothing: antialiased;
 }

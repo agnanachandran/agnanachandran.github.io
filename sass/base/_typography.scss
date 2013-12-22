@@ -1,5 +1,5 @@
 $blockquote: $type-border !default;
-$sans: "Open Sans", "Helvetica Neue", Arial, sans-serif !default;
+$sans: "Lato", "Helvetica Neue", Arial, sans-serif !default;
 $serif: "PT Serif", Georgia, Times, "Times New Roman", serif !default;
 $mono: Menlo, "Andale Mono", "lucida console", "Courier New", monospace !default;
 $heading-font-family: "Open Sans", "Georgia", "Helvetica Neue", Arial, sans-serif !default;
@@ -48,13 +48,18 @@ h1 {
   font-weight: bold;
 }
 h2, section h1 {
-  font-size: 1.5em;
+  font-size: 2.0em;
+  color: #565656;
 }
-h3, section h2, section section h1 {
-  font-size: 1.3em;
+section h2, section section h1 {
+  color: #565656;
+  font-size: 1.6em;
+}
+h3 {
+
 }
 h4, section h3, section section h2, section section section h1 {
-  font-size: 1em;
+  font-size: 1.3em;
 }
 h5, section h4, section section h3 {
   font-size: .9em;
@@ -62,7 +67,10 @@ h5, section h4, section section h3 {
 h6, section h5, section section h4, section section section h3 {
   font-size: .8em;
 }
-p, blockquote, ul, ol { margin-bottom: 1.5em; }
+p, blockquote, ul, ol {
+  font-weight: 300;
+  margin-bottom: 1.5em;
+}
 
 ul { list-style-type: disc;
   ul { list-style-type: circle; margin-bottom: 0px;

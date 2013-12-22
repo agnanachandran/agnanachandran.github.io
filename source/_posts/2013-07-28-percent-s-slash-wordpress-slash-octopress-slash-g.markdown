@@ -7,6 +7,8 @@ categories:
 ---
 So after only a few months of using WordPress, I decided to switch to Octopress. I decided to make that obligatory post that every new Octopress user writes. It's some sort of rite of passage, I think.
 
+<!-- more -->
+
 Anyway, I used WordPress at first because it is by far the most popular blogging platform out there, and was fairly easy to setup with my current hosting provider. I knew about Octopress before I started my WordPress blog but thought it wasn't worth the trouble. I was very wrong. I followed [this tutorial](http://robdodson.me/blog/2012/04/30/custom-domain-with-octopress-and-github-pages/) (with some adjustments due to GitHub Pages now being at ...github.io instead of ...github.com and updated versions of ruby/rvm) and I was up and running the same day.
 
 There's 5 reasons I can think of at the top of my head about why Octopress is so awesome.  

@@ -10,6 +10,8 @@ categories:
 
 I was at a grocery store a couple weeks back, and over the PA system, I heard the lyrics “we are, we are we are, we are we are”, and for some reason, I thought it was catchy. It sounded like Kesha, so I had a starting point for searching (and I was too embarrassed to use Soundhound/Shazam in public to recognize the song).
 
+<!-- more -->
+
 I eventually found the song [“Crazy Kids“](http://www.youtube.com/watch?v=xdeFB7I0YH4). Before you read the rest of this, I’d recommend watching the entire video from start to finish (you’ll enjoy this post much more).
 
 Note: viewing the linked video may lower your IQ by 20-40 points. You may experience feelings of hopelessness in humanity, despair, and/or intense hatred of dreadlocks.

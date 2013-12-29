@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tutorial | Things To Think About]]></title>
   <link href="http://agnanachandran.github.io/blog/categories/tutorial/atom.xml" rel="self"/>
   <link href="http://agnanachandran.github.io/"/>
-  <updated>2013-12-29T02:53:03-05:00</updated>
+  <updated>2013-12-29T02:55:09-05:00</updated>
   <id>http://agnanachandran.github.io/</id>
   <author>
     <name><![CDATA[Anojh Gnanachandran]]></name>
@@ -84,7 +84,7 @@ octopress
 <h3>Writing a new post</h3>
 
 <p><code>bash
-rake new_post['New post title with Punctuation!']
+$ rake new_post['New post title with Punctuation!']
 </code></p>
 
 <p>creates a Markdown file in <code>source/_posts</code> named &ldquo;2013-12-28-new-post-title-with-punctuation.markdown&rdquo;</p>
@@ -94,7 +94,7 @@ rake new_post['New post title with Punctuation!']
 <p>If you&rsquo;d like to preview your post in the browser,</p>
 
 <p><code>bash
-rake preview
+$ rake preview
 </code></p>
 
 <p>will do the trick and show you your blog at localhost:4000 (<a href="http://whatismyipaddress.com/localhost">more info on localhost</a>). HTTP requests and responses will be logged in the same terminal window, so I recommend opening a seperate tab/window specifically for running this process.</p>
@@ -104,9 +104,9 @@ rake preview
 <p>Lastly, saving your post&rsquo;s progress (anything done in the source branch really), can be done through</p>
 
 <p>``` bash
-git add .
-git commit -m &lsquo;Your helpful message goes here&rsquo;
-git push origin source</p>
+$ git add .
+$ git commit -m &lsquo;Your helpful message goes here&rsquo;
+$ git push origin source</p>
 
 <h1>&lsquo;git push&rsquo; can be run instead of &lsquo;git push origin source&rsquo; after running it once</h1>
 
@@ -130,8 +130,8 @@ $ rake generate
 <p>A little trick I use when I want to find where a specific class&rsquo;s selector is declared is to use <code>fgrep</code>. For example, running</p>
 
 <p>``` bash
-cd sass
-fgrep -r &lsquo;meta&rsquo; *</p>
+$ cd sass
+$ fgrep -r &lsquo;meta&rsquo; *</p>
 
 <h1>For long results, pipe to &lsquo;less&rsquo; if desired</h1>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Things To Think About]]></title>
   <link href="http://agnanachandran.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://agnanachandran.github.io/"/>
-  <updated>2013-12-29T02:49:21-05:00</updated>
+  <updated>2013-12-29T02:53:03-05:00</updated>
   <id>http://agnanachandran.github.io/</id>
   <author>
     <name><![CDATA[Anojh Gnanachandran]]></name>
@@ -100,6 +100,17 @@ rake preview
 <p>will do the trick and show you your blog at localhost:4000 (<a href="http://whatismyipaddress.com/localhost">more info on localhost</a>). HTTP requests and responses will be logged in the same terminal window, so I recommend opening a seperate tab/window specifically for running this process.</p>
 
 <p>Upon saving the file and refreshing the browser window, you&rsquo;ll see how your post (along with the rest of the blog) will look.</p>
+
+<p>Lastly, saving your post&rsquo;s progress (anything done in the source branch really), can be done through</p>
+
+<p>``` bash
+git add .
+git commit -m &lsquo;Your helpful message goes here&rsquo;
+git push origin source</p>
+
+<h1>&lsquo;git push&rsquo; can be run instead of &lsquo;git push origin source&rsquo; after running it once</h1>
+
+<p>```</p>
 
 <h3>Changing themes</h3>
 

@@ -9,7 +9,7 @@
   <meta name="author" content="Anojh Gnanachandran">
 
   
-  <meta name="description" content="How to Do X in Octopress Dec 20th, 2013 This post is perpetually a work in progress. Last updated Dec 21, 2013. I spent the last couple days &hellip;">
+  <meta name="description" content="How to Do X in Octopress Dec 20th, 2013 So I spent the last couple days tweaking my Octopress themes and relearning how to do things since not &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -128,11 +128,7 @@
   </header>
 
 
-<p>This post is perpetually a work in progress.</p>
-
-<p><em>Last updated Dec 21, 2013.</em></p>
-
-<p>I spent the last couple days tweaking my Octopress themes and re-figuring out how to do things since getting one of the new Haswell MBPs (and thus switching my primary OS from Ubuntu to OS X). Navigating the Octopress file hierarchy isn&rsquo;t easy, but hopefully this post will help you (and be a useful reference for myself).</p>
+<p>So I spent the last couple days tweaking my Octopress themes and relearning how to do things since not blogging for a while and getting a new MBP. Navigating the Octopress file hierarchy isn&rsquo;t easy, but hopefully this post will help you (and be a useful reference for myself).</p>
 
 <!-- more -->
 
@@ -143,41 +139,84 @@
 
 <h3>My current setup:</h3>
 
-<ol>
-<li>Insert image 1</li>
-</ol>
+<p>For starters, I&rsquo;m using [oh-my] zsh with the popular <u>Solarized</u> colour scheme. A typical Octopress folder looks something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>tree octopress -LF 1
+</span><span class='line'>octopress
+</span><span class='line'>├── CHANGELOG.markdown
+</span><span class='line'>├── Gemfile
+</span><span class='line'>├── Gemfile.lock
+</span><span class='line'>├── README.markdown
+</span><span class='line'>├── README.md
+</span><span class='line'>├── Rakefile
+</span><span class='line'>├── _config.yml
+</span><span class='line'>├── _deploy/
+</span><span class='line'>├── config.rb
+</span><span class='line'>├── config.ru
+</span><span class='line'>├── plugins/
+</span><span class='line'>├── public/
+</span><span class='line'>├── sass/
+</span><span class='line'>└── <span class="nb">source</span>/
+</span><span class='line'>
+</span><span class='line'>5 directories, 9 files
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>You&rsquo;ll notice right away that we&rsquo;re in the source branch. A typical octopress configuration uses two branches (master and source). I use GitHub Pages for deployment and it looks for stuff in the master branch, but we really only have to worry about the source branch. Most of the folders and files are under the source branch with the exception of <code>/_deploy</code>, whose contents are generated with <code>rake deploy</code> (I&rsquo;ll talk about the various rake tasks later).</p>
-
-<p>For starters, I&rsquo;m using [oh-my] zsh with the popular <u>Solarized</u> colorscheme.</p>
-
-<p>Taking a look at a typical octopress setup, we see some familiar READMEs, some typical files found in most Ruby projects (Gemfile, Rakefile, etc.) that we don&rsquo;t need to worry about for now, and _config.yml.</p>
+<p>A typical Octopress configuration uses two branches (master and source). I use GitHub Pages for deployment and it looks for files in the master branch. But while editing posts and stylesheets, we really only have to worry about the source branch.</p>
 
 <h3>Top-level Configuration</h3>
 
-<p>_config.yml holds various top-level/administrate info for your blog. This is where you&rsquo;d put your blog&rsquo;s name, your disqus shortname (if applicable), what links you want in your navigation bar, usernames for various services (GitHub, Facebook, G+, etc.), Google analytics tracking ID, and various other options.</p>
+<p>_config.yml holds various top-level/administrative info for your blog. This is where you&rsquo;d put your blog&rsquo;s name, your Disqus shortname (if applicable), what links you want in your navigation bar, usernames for various services (GitHub, Facebook, G+, etc.), Google analytics tracking ID, and so on.</p>
 
 <h3>Rake Tasks</h3>
 
 <p>A quick primer for non-ruby enthusiasts:
-<code>rake</code> is basically the Ruby version of <code>make</code>. Upon executing any of the below rake tasks, a number of useful commands will be run resulting in some otherwise complex thing being completed.</p>
+<code>rake</code> is basically the Ruby version of <code>GNU make</code>. Some of the useful rake tasks descriptions are below. Upon executing any of the below rake tasks, a number of useful commands will be run resulting in some otherwise complex thing being completed.</p>
 
-<ol>
-<li>Insert image 2</li>
-</ol>
+<p><strong>clean</strong>                     &mdash; clean out caches: .pygments-cache, .gist-cache, .sass-cache</p>
 
+<p><strong>deploy</strong>                    &mdash; default deploy task</p>
 
-<p>The most important of these rake tasks, namely <code>generate</code>, <code>deploy</code>, <code>new_post</code>, <code>watch</code>, will be discussed below</p>
+<p><strong>gen_deploy</strong>                &mdash; generate website and deploy</p>
+
+<p><strong>generate</strong>                  &mdash; generate jekyll site</p>
+
+<p><strong>install[theme]</strong>            &mdash; initial setup for octopress: copies the default theme into the path of jekyll&rsquo;s generator.</p>
+
+<p><strong>list</strong>                      &mdash; list tasks</p>
+
+<p><strong>new_post[title]</strong>           &mdash; begin a new post in source/_posts</p>
+
+<p><strong>preview</strong>                   &mdash; preview the site in a web browser</p>
+
+<p><strong>watch</strong>                     &mdash; watch the site and regenerate when it changes</p>
 
 <h3>Writing a new post</h3>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_post<span class="o">[</span><span class="s1">&#39;New foobar with Punctuation!&#39;</span><span class="o">]</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake new_post<span class="o">[</span><span class="s1">&#39;New post title with Punctuation!&#39;</span><span class="o">]</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>creates a Markdown file in source/_posts called something like &ldquo;2013-12-21-new-foobar-with-punctuation-exclamation&rdquo;</p>
+<p>creates a Markdown file in <code>source/_posts</code> named &ldquo;2013-12-28-new-post-title-with-punctuation.markdown&rdquo;</p>
 
 <p>Deleting the file effectively deletes the post (assuming you haven&rsquo;t already published the post to the interwebs)</p>
 
@@ -211,8 +250,22 @@
 
 <p>Disclaimer: If you&rsquo;re anything like me, you may spend several hours tweaking the various SCSS, HTML, and JS files at your disposal. It&rsquo;s pretty addicting.</p>
 
-<p>A more detailed description can be found <a href="http://octopress.org/docs/theme/">here</a>.
-To be continued&hellip;</p>
+<p>A little trick I use when I want to find where a specific class&rsquo;s selector is declared is to use <code>fgrep</code>. For example, running</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">cd </span>sass
+</span><span class='line'>fgrep -r <span class="s1">&#39;meta&#39;</span> *
+</span><span class='line'><span class="c"># For long results, pipe to &#39;less&#39; if desired</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>finds me the exact sass file(s) I need (and any duplicate declarations that need to be eliminated).</p>
+
+<p>A more detailed description can be found <a href="http://octopress.org/docs/theme/">here</a>.</p>
+
+<p>That&rsquo;s all for now folks; if there&rsquo;s anything you&rsquo;d like me to add, shoot me an <a href="mailto:anojhgnanachandran@gmail.com">email</a>!</p>
 
 
 

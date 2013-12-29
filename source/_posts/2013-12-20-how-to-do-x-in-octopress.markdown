@@ -87,6 +87,15 @@ will do the trick and show you your blog at localhost:4000 ([more info on localh
 
 Upon saving the file and refreshing the browser window, you'll see how your post (along with the rest of the blog) will look.
 
+Lastly, saving your post's progress (anything done in the source branch really), can be done through
+
+``` bash
+git add .
+git commit -m 'Your helpful message goes here'
+git push origin source
+# 'git push' can be run instead of 'git push origin source' after running it once
+```
+
 ### Changing themes
 
 ``` bash

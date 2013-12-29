@@ -70,7 +70,7 @@ A quick primer for non-ruby enthusiasts:
 ### Writing a new post
 
 ``` bash
-rake new_post['New post title with Punctuation!']
+$ rake new_post['New post title with Punctuation!']
 ```
 
 creates a Markdown file in `source/_posts` named "2013-12-28-new-post-title-with-punctuation.markdown"
@@ -80,7 +80,7 @@ Deleting the file effectively deletes the post (assuming you haven't already pub
 If you'd like to preview your post in the browser,
 
 ``` bash
-rake preview
+$ rake preview
 ```
 
 will do the trick and show you your blog at localhost:4000 ([more info on localhost](http://whatismyipaddress.com/localhost)). HTTP requests and responses will be logged in the same terminal window, so I recommend opening a seperate tab/window specifically for running this process.
@@ -90,9 +90,9 @@ Upon saving the file and refreshing the browser window, you'll see how your post
 Lastly, saving your post's progress (anything done in the source branch really), can be done through
 
 ``` bash
-git add .
-git commit -m 'Your helpful message goes here'
-git push origin source
+$ git add .
+$ git commit -m 'Your helpful message goes here'
+$ git push origin source
 # 'git push' can be run instead of 'git push origin source' after running it once
 ```
 
@@ -114,8 +114,8 @@ Disclaimer: If you're anything like me, you may spend several hours tweaking the
 A little trick I use when I want to find where a specific class's selector is declared is to use `fgrep`. For example, running
 
 ``` bash
-cd sass
-fgrep -r 'meta' *
+$ cd sass
+$ fgrep -r 'meta' *
 # For long results, pipe to 'less' if desired
 ```
 

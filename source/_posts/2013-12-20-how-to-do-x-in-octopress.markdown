@@ -6,11 +6,7 @@ comments: true
 categories: [how-to, octopress, tutorial]
 ---
 
-This post is perpetually a work in progress.
-
-*Last updated Dec 21, 2013.*
-
-I spent the last couple days tweaking my Octopress themes and re-figuring out how to do things since getting one of the new Haswell MBPs (and thus switching my primary OS from Ubuntu to OS X). Navigating the Octopress file hierarchy isn't easy, but hopefully this post will help you (and be a useful reference for myself).
+So I spent the last couple days tweaking my Octopress themes and relearning how to do things since not blogging for a while and getting a new MBP. Navigating the Octopress file hierarchy isn't easy, but hopefully this post will help you (and be a useful reference for myself).
 
 <!-- more -->
 
@@ -20,34 +16,64 @@ Let's start with the file hierarchy, my current setup, and the Git configuration
 
 ### My current setup:
 
-1. Insert image 1
+For starters, I'm using \[oh-my\] zsh with the popular <u>Solarized</u> colour scheme. A typical Octopress folder looks something like this:
 
-You'll notice right away that we're in the source branch. A typical octopress configuration uses two branches (master and source). I use GitHub Pages for deployment and it looks for stuff in the master branch, but we really only have to worry about the source branch. Most of the folders and files are under the source branch with the exception of `/_deploy`, whose contents are generated with `rake deploy` (I'll talk about the various rake tasks later).
+``` bash 
+$ tree octopress -LF 1 
+octopress
+├── CHANGELOG.markdown
+├── Gemfile
+├── Gemfile.lock
+├── README.markdown
+├── README.md
+├── Rakefile
+├── _config.yml
+├── _deploy/
+├── config.rb
+├── config.ru
+├── plugins/
+├── public/
+├── sass/
+└── source/
 
-For starters, I'm using \[oh-my\] zsh with the popular <u>Solarized</u> colorscheme.
+5 directories, 9 files
+```
 
-Taking a look at a typical octopress setup, we see some familiar READMEs, some typical files found in most Ruby projects (Gemfile, Rakefile, etc.) that we don't need to worry about for now, and _config.yml.
+A typical Octopress configuration uses two branches (master and source). I use GitHub Pages for deployment and it looks for files in the master branch. But while editing posts and stylesheets, we really only have to worry about the source branch.
+
 
 ### Top-level Configuration
-_config.yml holds various top-level/administrate info for your blog. This is where you'd put your blog's name, your disqus shortname (if applicable), what links you want in your navigation bar, usernames for various services (GitHub, Facebook, G+, etc.), Google analytics tracking ID, and various other options.
-
+_config.yml holds various top-level/administrative info for your blog. This is where you'd put your blog's name, your Disqus shortname (if applicable), what links you want in your navigation bar, usernames for various services (GitHub, Facebook, G+, etc.), Google analytics tracking ID, and so on.
 
 ### Rake Tasks
 A quick primer for non-ruby enthusiasts:
-`rake` is basically the Ruby version of `make`. Upon executing any of the below rake tasks, a number of useful commands will be run resulting in some otherwise complex thing being completed.
+`rake` is basically the Ruby version of `GNU make`. Some of the useful rake tasks descriptions are below. Upon executing any of the below rake tasks, a number of useful commands will be run resulting in some otherwise complex thing being completed.
 
+**clean**                     -- clean out caches: .pygments-cache, .gist-cache, .sass-cache
 
-2. Insert image 2
+**deploy**                    -- default deploy task
 
-The most important of these rake tasks, namely `generate`, `deploy`, `new_post`, `watch`, will be discussed below
+**gen_deploy**                -- generate website and deploy
+
+**generate**                  -- generate jekyll site
+
+**install[theme]**            -- initial setup for octopress: copies the default theme into the path of jekyll's generator.
+
+**list**                      -- list tasks
+
+**new_post[title]**           -- begin a new post in source/_posts
+
+**preview**                   -- preview the site in a web browser
+
+**watch**                     -- watch the site and regenerate when it changes
 
 ### Writing a new post
 
 ``` bash
-rake new_post['New foobar with Punctuation!']
+rake new_post['New post title with Punctuation!']
 ```
 
-creates a Markdown file in source/_posts called something like "2013-12-21-new-foobar-with-punctuation-exclamation"
+creates a Markdown file in `source/_posts` named "2013-12-28-new-post-title-with-punctuation.markdown"
 
 Deleting the file effectively deletes the post (assuming you haven't already published the post to the interwebs)
 
@@ -76,5 +102,16 @@ A number of themes are available [here](https://github.com/imathis/octopress/wik
 
 Disclaimer: If you're anything like me, you may spend several hours tweaking the various SCSS, HTML, and JS files at your disposal. It's pretty addicting.
 
+A little trick I use when I want to find where a specific class's selector is declared is to use `fgrep`. For example, running
+
+``` bash
+cd sass
+fgrep -r 'meta' *
+# For long results, pipe to 'less' if desired
+```
+
+finds me the exact sass file(s) I need (and any duplicate declarations that need to be eliminated).
+
 A more detailed description can be found [here](http://octopress.org/docs/theme/).
-To be continued...
+
+That's all for now folks; if there's anything you'd like me to add, shoot me an [email](<mailto:anojhgnanachandran@gmail.com>)!

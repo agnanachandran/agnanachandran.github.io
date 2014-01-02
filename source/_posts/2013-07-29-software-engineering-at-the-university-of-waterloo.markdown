@@ -3,15 +3,12 @@ layout: post
 title: "Software Engineering at the University of Waterloo"
 date: 2013-07-29 00:23
 comments: true
-categories: 
+categories: [UWaterloo, Software Engineering, Courses] 
 ---
-*Originally posted May 30th, 2013*  
   
-*Last updated December 22nd, 2013*
-  
-Hi there. I’m a 1B/2A co-op student. I’m here to talk about software engineering.
-
 This post was inspired by [a fellow software engineering student at UW](http://aimango.wordpress.com/2013/05/12/software-engineering-waterloo-courses/). If you want even more detail than I'm providing here, check it out.
+
+*Last updated December 29th, 2013*
 
 ## The Courses
 

@@ -1,134 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>Software Engineering at the University of Waterloo - Things To Think About</title>
-  <meta name="author" content="Anojh Gnanachandran">
-
-  
-  <meta name="description" content="Software Engineering at the University of Waterloo Jul 29th, 2013 This post was inspired by a fellow software engineering student at UW. If you want &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><![CDATA[Category: UWaterloo | Things To Think About]]></title>
+  <link href="http://agnanachandran.github.io/blog/categories/uwaterloo/atom.xml" rel="self"/>
+  <link href="http://agnanachandran.github.io/"/>
+  <updated>2014-01-01T19:34:24-05:00</updated>
+  <id>http://agnanachandran.github.io/</id>
+  <author>
+    <name><![CDATA[Anojh Gnanachandran]]></name>
+    <email><![CDATA[anojhgnanachandran@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
-  <link rel="canonical" href="http://agnanachandran.github.io/blog/2013/07/29/software-engineering-at-the-university-of-waterloo/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Things To Think About" type="application/atom+xml">
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-37973526-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
-</head>
-
-<body >
-  <header role="banner" id="sidebar">
-    <!-- Logo -->
-<aside id="logo" class="clearfix">
-  <div class="clearfix">
-    <a href="/">Things To Think About</a>
-  </div>
-</aside>
-
-<ul id="menu">
-
-  <li class="title">
-    <h1 id="title"><a href="/">Things To Think About</a></h1>
-  </li>
-
-
-  <li class="subtitle">
-    <h2 id="subtitle">Ideas, Experiences, Thoughts <br><br> By Anojh Gnanachandran</h2>
-  </li>
-
-  <li class="link">
-    <a href="/about/">About</a>
-  </li>
-
-
-  <li class="link">
-    <a href="http://github.com/agnanachandran/">Github</a>
-  </li>
-
-<li class="link">
-  <a href="/blog/archives">Archives</a>
-</li>
-<!--
-<li class="link rss">
-    <a href="/atom.xml">RSS feed</a>
-  </li>
--->
-</ul>
-
-
-
-<!-- Octopress Love -->
-<aside id="octopress_linkback">
-  <a href="http://octopress.org/">
-    <span class="octopress">Powered by Octopress</span>
-  </a>
-</aside>
-
-  </header>
-  <section id="main">
-    <article class="post">
-  <div class="sharing-box">
-  
-  
-  
-</div>
-
-  
-  <header>
-    
-      <h2 class="entry-title">Software Engineering at the University of Waterloo</h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-29T00:23:00-04:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-<p>This post was inspired by <a href="http://aimango.wordpress.com/2013/05/12/software-engineering-waterloo-courses/">a fellow software engineering student at UW</a>. If you want even more detail than I&rsquo;m providing here, check it out.</p>
+  <entry>
+    <title type="html"><![CDATA[Software Engineering at the University of Waterloo]]></title>
+    <link href="http://agnanachandran.github.io/blog/2013/07/29/software-engineering-at-the-university-of-waterloo/"/>
+    <updated>2013-07-29T00:23:00-04:00</updated>
+    <id>http://agnanachandran.github.io/blog/2013/07/29/software-engineering-at-the-university-of-waterloo</id>
+    <content type="html"><![CDATA[<p>This post was inspired by <a href="http://aimango.wordpress.com/2013/05/12/software-engineering-waterloo-courses/">a fellow software engineering student at UW</a>. If you want even more detail than I&rsquo;m providing here, check it out.</p>
 
 <p><em>Last updated December 29th, 2013</em></p>
 
@@ -318,50 +208,7 @@
 <p><em>Make sure you know how to make pizza for the midterm</em></p>
 
 <p>Not really a course; it’s marked as Credit/No Credit (you will get the credit). The weekly seminar only actually ended up happening a few times during the term and each time we just listened to (someone|some people) speak for an hour or so. Nothing else to say here. Really.</p>
-
-
-
-</article>
-
-  <section class="comments">
-    <h2>Comments</h2>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-
-    <nav role="navigation" id="pagination">
-
-</nav>
-  </section>
+]]></content>
+  </entry>
   
-
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'thingstothinkabout';
-      
-        
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://agnanachandran.github.io/blog/2013/07/29/software-engineering-at-the-university-of-waterloo/';
-        var disqus_url = 'http://agnanachandran.github.io/blog/2013/07/29/software-engineering-at-the-university-of-waterloo/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-
-
-
-
-
-
-
-
-</body>
-</html>
+</feed>

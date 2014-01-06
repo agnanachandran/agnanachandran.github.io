@@ -4,7 +4,7 @@
   <title><![CDATA[Things To Think About]]></title>
   <link href="http://agnanachandran.github.io/atom.xml" rel="self"/>
   <link href="http://agnanachandran.github.io/"/>
-  <updated>2014-01-04T21:20:30-05:00</updated>
+  <updated>2014-01-05T23:48:18-05:00</updated>
   <id>http://agnanachandran.github.io/</id>
   <author>
     <name><![CDATA[Anojh Gnanachandran]]></name>
@@ -459,12 +459,15 @@ Dibidiboodiboobouyewejoubeeguidibmble</p></blockquote>
 
 <p>Probably one of the most enjoyable courses thus far (around the same level as MATH 135). The course is extremely well-structured and the applications to the things you learn are immediately obvious.</p>
 
-<p>The course starts off with some tedious (though not too tedious) work with a subset of MIPS, which is of the many types of Assembly languages out there. Eventually you move to compiler design&hellip;</p>
+<p>The course starts off with some tedious (though not too tedious) work with a subset of MIPS, which is of the many types of Assembly languages out there. Eventually you move to compiler design which made me appreciate how &lsquo;deep the rabbit hole goes&rsquo;. That is, there are several steps that must be taken before an idea in your head can become a reality on a computer, and thanks to thousands of people who came before you, you can do all these steps in a matter of minutes.</p>
 
 <p>To be continued&hellip;</p>
 
+<h3>ECE 222 &ndash; Digital Computers</h3>
+
+<p>Another in a series of hardware courses.</p>
+
 <ul>
-<li><p>ECE 222 &ndash; Digital Computers</p></li>
 <li><p>CHE 102 &ndash; Chemistry for Engineers</p></li>
 <li><p>SE 212 &ndash; Logic and Computation</p></li>
 <li><p>STAT 206 &ndash; Statistics for Software Engineers</p></li>

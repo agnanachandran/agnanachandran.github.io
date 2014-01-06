@@ -212,11 +212,13 @@ This weekly seminar only actually ended up happening a few times during the term
 
 Probably one of the most enjoyable courses thus far (around the same level as MATH 135). The course is extremely well-structured and the applications to the things you learn are immediately obvious.
 
-The course starts off with some tedious (though not too tedious) work with a subset of MIPS, which is of the many types of Assembly languages out there. Eventually you move to compiler design...
+The course starts off with some tedious (though not too tedious) work with a subset of MIPS, which is of the many types of Assembly languages out there. Eventually you move to compiler design which made me appreciate how 'deep the rabbit hole goes'. That is, there are several steps that must be taken before an idea in your head can become a reality on a computer, and thanks to thousands of people who came before you, you can do all these steps in a matter of minutes.
 
 To be continued...
 
-- ECE 222 - Digital Computers
+### ECE 222 - Digital Computers
+
+Another in a series of hardware courses.
 
 - CHE 102 - Chemistry for Engineers
 

@@ -212,19 +212,36 @@ This weekly seminar only actually ended up happening a few times during the term
 
 Probably one of the most enjoyable courses thus far (around the same level as MATH 135). The course is extremely well-structured and the applications to the things you learn are immediately obvious.
 
-The course starts off with some tedious (though not too tedious) work with a subset of MIPS, which is of the many types of Assembly languages out there. Eventually you move to compiler design which made me appreciate how 'deep the rabbit hole goes'. That is, there are several steps that must be taken before an idea in your head can become a reality on a computer, and thanks to thousands of people who came before you, you can do all these steps in a matter of minutes.
+The course starts off with some tedious (though not too tedious) work with a subset of MIPS, which is one of the many types of assembly languages out there. Eventually you move to compiler design which made me appreciate how 'deep the rabbit hole goes'. That is, there are several steps that must be taken before an idea in your head can become a reality on a computer, and thanks to thousands of people who came before you, you can do all these steps in a matter of minutes.
 
-To be continued...
+The coolest thing about the course is that the assignments are directly connected to each other as well as to the course content. By the end, if you complete all the assignments, you'll have built a compiler for a *very* *very* small subset of C++.
+
+This course is probably the most important one I've taken with regards to my profession. This fact will probably change by the end of 2B.
 
 ### ECE 222 - Digital Computers
 
-Another in a series of hardware courses.
+Another in a series of hardware courses. This course was more interesting than I initially gave it credit for. I'm definitely at fault here; it was hard to deal with morning classes for me this term.
+
+At any rate, I learned a lot of useful info from this course, most notably, how to design a cache, memory management, and memory pipelining. I'd definitely like to continue learning about this stuff, whether as part of a course or on my own.
+
+The assignments were not mandatory for my class, but they were very helpful. Be careful not to fall into the trap of not doing the assignments though. The labs required you to program an ARM Cortex-M3 processor to perform increasingly complex tasks.
 
 - CHE 102 - Chemistry for Engineers
 
+To be continued...
+
 - SE 212 - Logic and Computation
+
+To be continued...
 
 - STAT 206 - Statistics for Software Engineers
 
+The only stats course you'll have to take as a software engineer. Statistics is of course very important in various sub-fields of CS, like machine learning. Also, if you took data management in high school, many parts of the course will be familiar. Probability and statistical distributions are the main focuses of the course.
+
+Unfortunately, by the end of the course, I felt I did not have a thorough understanding of the meaning of some of the statistical distributions we studied. Much of the course required memorization of unintuitive formulas. I believe this course, which is a combination of STAT 230 and STAT 231, is too compact to provide a sufficient explanation of all the concepts covered. Proofs were few and far between and too abstract for the average student to relate the concept to the real world. 
+
+Once again, no mandatory assignments here. A common complaint of the course was a lack of homework problems which probably contributed to the aforementioned problem. Unfortunately, we were kinda swathed this term with the whole 6 courses and non-trivial assignments due every week and JobMine and exams and ..., so who knows if I would have had time for them anyway.
+
 - (elective) PSYCH 101 - Introductory Psychology
 
+To be continued...

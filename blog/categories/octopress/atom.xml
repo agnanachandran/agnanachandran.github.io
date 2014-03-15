@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Things To Think About]]></title>
   <link href="http://agnanachandran.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://agnanachandran.github.io/"/>
-  <updated>2014-01-05T23:48:18-05:00</updated>
+  <updated>2014-03-14T23:04:46-04:00</updated>
   <id>http://agnanachandran.github.io/</id>
   <author>
     <name><![CDATA[Anojh Gnanachandran]]></name>
@@ -87,7 +87,7 @@ octopress
 $ rake new_post['New post title with Punctuation!']
 </code></p>
 
-<p>creates a Markdown file in <code>source/_posts</code> named &ldquo;2013-12-28-new-post-title-with-punctuation.markdown&rdquo;</p>
+<p>creates a Markdown file in <code>source/_posts</code> named &ldquo;2013-12-28-new-post-title-with-punctuation.markdown&rdquo;, for example.</p>
 
 <p>Deleting the file effectively deletes the post (assuming you haven&rsquo;t already published the post to the interwebs)</p>
 
@@ -103,14 +103,11 @@ $ rake preview
 
 <p>Lastly, saving your post&rsquo;s progress (anything done in the source branch really), can be done through</p>
 
-<p>``` bash
+<p><code>bash
 $ git add .
-$ git commit -m &lsquo;Your helpful message goes here&rsquo;
-$ git push origin source</p>
-
-<h1>&lsquo;git push&rsquo; can be run instead of &lsquo;git push origin source&rsquo; after running it once</h1>
-
-<p>```</p>
+$ git commit -m 'Your helpful message goes here'
+$ git push origin source
+</code></p>
 
 <h3>Changing themes</h3>
 
@@ -127,7 +124,7 @@ $ rake generate
 
 <p>Disclaimer: If you&rsquo;re anything like me, you may spend several hours tweaking the various SCSS, HTML, and JS files at your disposal. It&rsquo;s pretty addicting.</p>
 
-<p>A little trick I use when I want to find where a specific class&rsquo;s selector is declared is to use <code>fgrep</code>. For example, running</p>
+<p>A little trick I use when I want to find where a specific css selector&rsquo;s attributes are defined is to use <code>fgrep</code>. For example, running</p>
 
 <p>``` bash
 $ cd sass
@@ -137,7 +134,7 @@ $ fgrep -r &lsquo;meta&rsquo; *</p>
 
 <p>```</p>
 
-<p>finds me the exact sass file(s) I need (and any duplicate declarations that need to be eliminated).</p>
+<p>finds me the exact SASS file(s) I need (and any duplicate declarations that need to be eliminated).</p>
 
 <p>A more detailed description can be found <a href="http://octopress.org/docs/theme/">here</a>.</p>
 

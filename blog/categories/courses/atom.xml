@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Courses | Things To Think About]]></title>
   <link href="http://agnanachandran.github.io/blog/categories/courses/atom.xml" rel="self"/>
   <link href="http://agnanachandran.github.io/"/>
-  <updated>2014-01-05T23:48:18-05:00</updated>
+  <updated>2014-03-14T23:04:46-04:00</updated>
   <id>http://agnanachandran.github.io/</id>
   <author>
     <name><![CDATA[Anojh Gnanachandran]]></name>
@@ -221,21 +221,51 @@
 
 <p>Probably one of the most enjoyable courses thus far (around the same level as MATH 135). The course is extremely well-structured and the applications to the things you learn are immediately obvious.</p>
 
-<p>The course starts off with some tedious (though not too tedious) work with a subset of MIPS, which is of the many types of Assembly languages out there. Eventually you move to compiler design which made me appreciate how &lsquo;deep the rabbit hole goes&rsquo;. That is, there are several steps that must be taken before an idea in your head can become a reality on a computer, and thanks to thousands of people who came before you, you can do all these steps in a matter of minutes.</p>
+<p>The course starts off with some tedious (though not too tedious) work with a subset of MIPS, which is one of the many types of assembly languages out there. Eventually you move to compiler design which made me appreciate how &lsquo;deep the rabbit hole goes&rsquo;. That is, there are several steps that must be taken before an idea in your head can become a reality on a computer, and thanks to thousands of people who came before you, you can do all these steps in a matter of minutes.</p>
 
-<p>To be continued&hellip;</p>
+<p>The coolest thing about the course is that the assignments are directly connected to each other as well as to the course content. By the end, if you complete all the assignments, you&rsquo;ll have built a compiler for a <em>very</em> <em>very</em> small subset of C++.</p>
+
+<p>This course is probably the most important one I&rsquo;ve taken with regards to my profession. This fact will probably change by the end of 2B.</p>
 
 <h3>ECE 222 &ndash; Digital Computers</h3>
 
-<p>Another in a series of hardware courses.</p>
+<p>Another in a series of hardware courses. This course was more interesting than I initially gave it credit for. I&rsquo;m definitely at fault here; it was hard to deal with morning classes for me this term.</p>
+
+<p>At any rate, I learned a lot of useful info from this course, most notably, how to design a cache, memory management, and memory pipelining. I&rsquo;d definitely like to continue learning about this stuff, whether as part of a course or on my own.</p>
+
+<p>The assignments were not mandatory for my class, but they were very helpful. Be careful not to fall into the trap of not doing the assignments though. The labs required you to program an ARM Cortex-M3 processor to perform increasingly complex tasks.</p>
 
 <ul>
-<li><p>CHE 102 &ndash; Chemistry for Engineers</p></li>
-<li><p>SE 212 &ndash; Logic and Computation</p></li>
-<li><p>STAT 206 &ndash; Statistics for Software Engineers</p></li>
-<li><p>(elective) PSYCH 101 &ndash; Introductory Psychology</p></li>
+<li>CHE 102 &ndash; Chemistry for Engineers</li>
 </ul>
 
+
+<p>To be continued&hellip;</p>
+
+<ul>
+<li>SE 212 &ndash; Logic and Computation</li>
+</ul>
+
+
+<p>To be continued&hellip;</p>
+
+<ul>
+<li>STAT 206 &ndash; Statistics for Software Engineers</li>
+</ul>
+
+
+<p>The only stats course you&rsquo;ll have to take as a software engineer. Statistics is of course very important in various sub-fields of CS, like machine learning. Also, if you took data management in high school, many parts of the course will be familiar. Probability and statistical distributions are the main focuses of the course.</p>
+
+<p>Unfortunately, by the end of the course, I felt I did not have a thorough understanding of the meaning of some of the statistical distributions we studied. Much of the course required memorization of unintuitive formulas. I believe this course, which is a combination of STAT 230 and STAT 231, is too compact to provide a sufficient explanation of all the concepts covered. Proofs were few and far between and too abstract for the average student to relate the concept to the real world.</p>
+
+<p>Once again, no mandatory assignments here. A common complaint of the course was a lack of homework problems which probably contributed to the aforementioned problem. Unfortunately, we were kinda swathed this term with the whole 6 courses and non-trivial assignments due every week and JobMine and exams and &hellip;, so who knows if I would have had time for them anyway.</p>
+
+<ul>
+<li>(elective) PSYCH 101 &ndash; Introductory Psychology</li>
+</ul>
+
+
+<p>To be continued&hellip;</p>
 ]]></content>
   </entry>
   

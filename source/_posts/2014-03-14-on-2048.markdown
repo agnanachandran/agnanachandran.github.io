@@ -1,0 +1,35 @@
+---
+layout: post
+title: "On 2048"
+date: 2014-03-14 23:08
+comments: true
+categories: 
+---
+
+This week on Hacker News, a game called 2048 rose to the top of the front page.  Subsequently, productivity at software companies everywhere dropped tremendously. The game quickly spread around the office.
+
+The game itself is quite simple. Use the arrow keys and get the numbered tiles to combine over and over again until you get a '2048' tile. [Here's the link so you can see for yourself.](http://gabrielecirulli.github.io/2048/).
+
+The game is partially (read: very) luck-based. When the board is getting tight, a single wrong number, or a number popping up in the wrong place, can mess you up for the rest of the game.
+
+The general strategy to winning the game is a simple one. Keep your largest number in the corner, and progressively smaller numbers next to it in a row/column. Doing this guarantees you won't have useless pieces floating around the board (as long as you don't move a piece in the row/column in any perpendicular direction), and provides a systematic method to playing the game. Since you're limited to only a couple directions at that point, the game becomes more luck-based. 
+
+<br>
+
+{% img center caption /images/small_moment.png 'About to win' 'My crowning moment' %}
+
+<br>
+
+The game is pretty addicting; you feel some sense of satisfaction when pieces combine to make numbers twice as large (and twice as yellow). The larger the number , the greater the satisfaction. After finally beating the game, I'm probably not going to play it again, at least not to completion. Now that I've done it worse, I'm not really interested in the game from this point of view anymore.
+
+What is interesting is the viral nature of the game's popularity. What started as a Hacker News post with thousands of points, became an office-phenomenon at the place I currently work. Walking by people, you'd see random computers with the game shamelessly front and centre on the screen. I have no doubt that the same sort of thing happened at other software companies.
+
+Also of interest are the numerous spinoffs of this game. There's been everything from 2 (like 2048, except starting at the opposite end and numbers get halved instead of doubled when they meet), to 2048 in the terminal (thanks to some sweet python). 
+
+There's also an AI that uses the [Minimax algorithm](http://en.wikipedia.org/wiki/Minimax) to play the game. [It's kinda cool to watch](http://ov3y.github.io/2048-AI/). It doesn't win every time, but when it does, it's pretty spectacular. 
+
+Overall, the game is fairly well made. It's not an original idea (the author states his inspirations), but it's a good one. It hooked me for hours. Maybe it'll do the same thing to you.
+
+<br>
+
+{% img center /images/small_win.png 'win' 'Image of a win' %}

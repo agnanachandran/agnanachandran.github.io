@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>When StackOverflow isn't the answer - Things To Think About</title>
+  <meta name="author" content="Anojh Gnanachandran">
+
+  
+  <meta name="description" content="When StackOverflow Isn't the Answer Apr 6th, 2014 I spent the better half of today debugging one of my current projects, an Android app designed to &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://agnanachandran.github.io/blog/2014/04/06/when-stackoverflow-isnt-the-answer/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Things To Think About" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37973526-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body >
+  <header role="banner" id="sidebar">
+    <!-- Logo -->
+<aside id="logo" class="clearfix">
+  <div class="clearfix">
+    <a href="/">Things To Think About</a>
+  </div>
+</aside>
+
+<ul id="menu">
+
+  <li class="title">
+    <h1 id="title"><a href="/">Things To Think About</a></h1>
+  </li>
+
+
+  <li class="subtitle">
+    <h2 id="subtitle">Ideas, Experiences, Thoughts <br><br> By Anojh Gnanachandran</h2>
+  </li>
+
+  <li class="link">
+    <a href="/about/">About</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://github.com/agnanachandran/">Github</a>
+  </li>
+
+<li class="link">
+  <a href="/blog/archives">Archives</a>
+</li>
+<!--
+<li class="link rss">
+    <a href="/atom.xml">RSS feed</a>
+  </li>
+-->
+</ul>
+
+
+
+<!-- Octopress Love -->
+<aside id="octopress_linkback">
+  <a href="http://octopress.org/">
+    <span class="octopress">Powered by Octopress</span>
+  </a>
+</aside>
+
+  </header>
+  <section id="main">
+    <article class="post">
+  <div class="sharing-box">
+  
+  
+  
+</div>
+
+  
+  <header>
+    
+      <h2 class="entry-title">When StackOverflow Isn't the Answer</h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-06T20:10:00-04:00" pubdate data-updated="true">Apr 6<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<p>I spent the better half of today debugging one of my current projects, an Android app designed to help users do things on their phone faster. Vague, I know.</p>
+
+<p>The issue at hand was a &ldquo;java.lang.IllegalStateException&rdquo; resulting from a fragment not being attached to its activity. Reproducing the bug was easy. Launch the app, search for a YouTube video, back out of the app, and search for another YouTube video. The app crashes. An easy &lsquo;solution&rsquo; was to check <code>fragment.isAdded()</code> in the <code>onVideosRetrieved</code> callback. Of course, the real problem is that the fragment still wasn&rsquo;t attached to an activity.</p>
+
+<blockquote><p><a href="http://developer.android.com/guide/components/fragments.html">&ldquo;A fragment must always be embedded in an activity&rdquo;</a>.</p></blockquote>
+
+<p>Searching every stackoverflow answer yielded nothing. I tried switching to the non-support version of <code>fragment</code>, not using a <code>FragmentActivity</code>, and not using the <code>&lt;fragment&gt;</code> tag in the activity layout. Nothing changed.</p>
+
+<p>The answer revealed itself to me after reading a tangentially related answer</p>
+
+<blockquote><p><a href="http://stackoverflow.com/questions/11536166/android-get-activity-returns-null">&ldquo;This can happen if you&rsquo;re trying to keep references to your Fragments, rather than accessing them via the FragmentManager.&rdquo;</a></p></blockquote>
+
+<p>I immediately remembered all the &ldquo;Manager&rdquo; classes I had, which for some reason, I decided should be singletons.</p>
+
+<pre><code>public static WeatherManager getInstance(Fragment fragment, OnFinishedListener listener) {
+    if (instance == null) {
+        instance = new WeatherManager(fragment, listener);
+    }
+    return instance;
+}
+</code></pre>
+
+<p>Oops.</p>
+
+<p>The static reference to the WeatherManager instance is of course kept across the lifetime of the app, and thus, so is the fragment, and its reference to its activity. Big mistake. Fragments are detached from their activity as necessary when the app is backgrounded. By maintaining this static reference, not only was more memory being consumed, but the fragment couldn&rsquo;t reattach itself to the activity (presumably due to the logic present in <code>Fragment.java</code>).</p>
+
+<p>What did I learn from all this?</p>
+
+<p>1) Don&rsquo;t use singletons if you don&rsquo;t need to. Or rather, make sure you understand the reason you&rsquo;re using them in the first place.
+2) StackOverflow is a tremendous help in most situations. And it was a great help here too (so my title is a lie). <a href="https://xkcd.com/979/">Sometimes, you have to figure it out yourself</a>. And if/when you do, you&rsquo;ll probably facepalm.</p>
+
+<p>Singletons. Not even once.</p>
+
+
+
+</article>
+
+  <section class="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+    <nav role="navigation" id="pagination">
+
+</nav>
+  </section>
+  
+
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'thingstothinkabout';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://agnanachandran.github.io/blog/2014/04/06/when-stackoverflow-isnt-the-answer/';
+        var disqus_url = 'http://agnanachandran.github.io/blog/2014/04/06/when-stackoverflow-isnt-the-answer/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

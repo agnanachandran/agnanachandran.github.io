@@ -34,6 +34,7 @@ The static reference to the WeatherManager instance is of course kept across the
 What did I learn from all this?
 
 1) Don't use singletons if you don't need to. Or rather, make sure you understand the reason you're using them in the first place.
+
 2) StackOverflow is a tremendous help in most situations. And it was a great help here too (so my title is a lie). [Sometimes, you have to figure it out yourself](https://xkcd.com/979/). And if/when you do, you'll probably facepalm.
 
 Singletons. Not even once.

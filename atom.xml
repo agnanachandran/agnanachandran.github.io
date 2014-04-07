@@ -4,7 +4,7 @@
   <title><![CDATA[Things To Think About]]></title>
   <link href="http://agnanachandran.github.io/atom.xml" rel="self"/>
   <link href="http://agnanachandran.github.io/"/>
-  <updated>2014-04-06T20:34:44-04:00</updated>
+  <updated>2014-04-06T20:37:22-04:00</updated>
   <id>http://agnanachandran.github.io/</id>
   <author>
     <name><![CDATA[Anojh Gnanachandran]]></name>
@@ -46,8 +46,9 @@
 
 <p>What did I learn from all this?</p>
 
-<p>1) Don&rsquo;t use singletons if you don&rsquo;t need to. Or rather, make sure you understand the reason you&rsquo;re using them in the first place.
-2) StackOverflow is a tremendous help in most situations. And it was a great help here too (so my title is a lie). <a href="https://xkcd.com/979/">Sometimes, you have to figure it out yourself</a>. And if/when you do, you&rsquo;ll probably facepalm.</p>
+<p>1) Don&rsquo;t use singletons if you don&rsquo;t need to. Or rather, make sure you understand the reason you&rsquo;re using them in the first place.</p>
+
+<p>2) StackOverflow is a tremendous help in most situations. And it was a great help here too (so my title is a lie). <a href="https://xkcd.com/979/">Sometimes, you have to figure it out yourself</a>. And if/when you do, you&rsquo;ll probably facepalm.</p>
 
 <p>Singletons. Not even once.</p>
 ]]></content>

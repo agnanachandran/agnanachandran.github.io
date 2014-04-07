@@ -130,25 +130,37 @@
 
 <p>I spent the better half of today debugging one of my current projects, an Android app designed to help users do things on their phone faster. Vague, I know.</p>
 
-<p>The issue at hand was a &ldquo;java.lang.IllegalStateException&rdquo; resulting from a fragment not being attached to its activity. Reproducing the bug was easy. Launch the app, search for a YouTube video, back out of the app, and search for another YouTube video. The app crashes. An easy &lsquo;solution&rsquo; was to check <code>fragment.isAdded()</code> in the <code>onVideosRetrieved</code> callback. Of course, the real problem is that the fragment still wasn&rsquo;t attached to an activity.</p>
+<p>The issue at hand was a <code>java.lang.IllegalStateException</code> resulting from a fragment not being attached to its activity. Reproducing the bug was easy. Launch the app, search for a YouTube video, back out of the app, and search for another YouTube video. The app crashes. An easy &lsquo;solution&rsquo; was to check <code>fragment.isAdded()</code> in the <code>onVideosRetrieved</code> callback. Of course, the real problem is that the fragment still wasn&rsquo;t attached to an activity.</p>
 
 <blockquote><p><a href="http://developer.android.com/guide/components/fragments.html">&ldquo;A fragment must always be embedded in an activity&rdquo;</a>.</p></blockquote>
 
-<p>Searching every stackoverflow answer yielded nothing. I tried switching to the non-support version of <code>fragment</code>, not using a <code>FragmentActivity</code>, and not using the <code>&lt;fragment&gt;</code> tag in the activity layout. Nothing changed.</p>
+<!-- more -->
+
+
+<p>Searching every relevant stackoverflow answer yielded nothing. I tried switching to the non-support version of <code>fragment</code>, not using a <code>FragmentActivity</code>, and not using the <code>&lt;fragment&gt;</code> tag in the activity layout. Nothing changed.</p>
 
 <p>The answer revealed itself to me after reading a tangentially related answer</p>
 
 <blockquote><p><a href="http://stackoverflow.com/questions/11536166/android-get-activity-returns-null">&ldquo;This can happen if you&rsquo;re trying to keep references to your Fragments, rather than accessing them via the FragmentManager.&rdquo;</a></p></blockquote>
 
+<h3>Singleton misuse</h3>
+
 <p>I immediately remembered all the &ldquo;Manager&rdquo; classes I had, which for some reason, I decided should be singletons.</p>
 
-<pre><code>public static WeatherManager getInstance(Fragment fragment, OnFinishedListener listener) {
-    if (instance == null) {
-        instance = new WeatherManager(fragment, listener);
-    }
-    return instance;
-}
-</code></pre>
+<figure class='code'><figcaption><span>Singleton misuse</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="n">WeatherManager</span> <span class="nf">getInstance</span><span class="o">(</span><span class="n">Fragment</span> <span class="n">fragment</span><span class="o">,</span> <span class="n">OnFinishedListener</span> <span class="n">listener</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WeatherManager</span><span class="o">(</span><span class="n">fragment</span><span class="o">,</span> <span class="n">listener</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Oops.</p>
 

@@ -130,39 +130,16 @@
 
   <p>I spent the better half of today debugging one of my current projects, an Android app designed to help users do things on their phone faster. Vague, I know.</p>
 
-<p>The issue at hand was a &ldquo;java.lang.IllegalStateException&rdquo; resulting from a fragment not being attached to its activity. Reproducing the bug was easy. Launch the app, search for a YouTube video, back out of the app, and search for another YouTube video. The app crashes. An easy &lsquo;solution&rsquo; was to check <code>fragment.isAdded()</code> in the <code>onVideosRetrieved</code> callback. Of course, the real problem is that the fragment still wasn&rsquo;t attached to an activity.</p>
+<p>The issue at hand was a <code>java.lang.IllegalStateException</code> resulting from a fragment not being attached to its activity. Reproducing the bug was easy. Launch the app, search for a YouTube video, back out of the app, and search for another YouTube video. The app crashes. An easy &lsquo;solution&rsquo; was to check <code>fragment.isAdded()</code> in the <code>onVideosRetrieved</code> callback. Of course, the real problem is that the fragment still wasn&rsquo;t attached to an activity.</p>
 
 <blockquote><p><a href="http://developer.android.com/guide/components/fragments.html">&ldquo;A fragment must always be embedded in an activity&rdquo;</a>.</p></blockquote>
 
-<p>Searching every stackoverflow answer yielded nothing. I tried switching to the non-support version of <code>fragment</code>, not using a <code>FragmentActivity</code>, and not using the <code>&lt;fragment&gt;</code> tag in the activity layout. Nothing changed.</p>
-
-<p>The answer revealed itself to me after reading a tangentially related answer</p>
-
-<blockquote><p><a href="http://stackoverflow.com/questions/11536166/android-get-activity-returns-null">&ldquo;This can happen if you&rsquo;re trying to keep references to your Fragments, rather than accessing them via the FragmentManager.&rdquo;</a></p></blockquote>
-
-<p>I immediately remembered all the &ldquo;Manager&rdquo; classes I had, which for some reason, I decided should be singletons.</p>
-
-<pre><code>public static WeatherManager getInstance(Fragment fragment, OnFinishedListener listener) {
-    if (instance == null) {
-        instance = new WeatherManager(fragment, listener);
-    }
-    return instance;
-}
-</code></pre>
-
-<p>Oops.</p>
-
-<p>The static reference to the WeatherManager instance is of course kept across the lifetime of the app, and thus, so is the fragment, and its reference to its activity. Big mistake. Fragments are detached from their activity as necessary when the app is backgrounded. By maintaining this static reference, not only was more memory being consumed, but the fragment couldn&rsquo;t reattach itself to the activity (presumably due to the logic present in <code>Fragment.java</code>).</p>
-
-<p>What did I learn from all this?</p>
-
-<p>1) Don&rsquo;t use singletons if you don&rsquo;t need to. Or rather, make sure you understand the reason you&rsquo;re using them in the first place.</p>
-
-<p>2) StackOverflow is a tremendous help in most situations. And it was a great help here too (so my title is a lie). <a href="https://xkcd.com/979/">Sometimes, you have to figure it out yourself</a>. And if/when you do, you&rsquo;ll probably facepalm.</p>
-
-<p>Singletons. Not even once.</p>
 
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/06/when-stackoverflow-isnt-the-answer/">Read on &rarr;</a>
+    </footer>
   
 
 </article>

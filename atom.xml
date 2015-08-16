@@ -4,7 +4,7 @@
   <title><![CDATA[Things To Think About]]></title>
   <link href="http://agnanachandran.github.io/atom.xml" rel="self"/>
   <link href="http://agnanachandran.github.io/"/>
-  <updated>2014-04-30T14:17:31-04:00</updated>
+  <updated>2015-08-16T00:11:24-07:00</updated>
   <id>http://agnanachandran.github.io/</id>
   <author>
     <name><![CDATA[Anojh Gnanachandran]]></name>
@@ -14,9 +14,122 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Short Interval Updating in Angular]]></title>
+    <link href="http://agnanachandran.github.io/blog/2015/08/15/short-interval-updating-in-angular/"/>
+    <updated>2015-08-15T22:51:00-07:00</updated>
+    <id>http://agnanachandran.github.io/blog/2015/08/15/short-interval-updating-in-angular</id>
+    <content type="html"><![CDATA[<p>Let&rsquo;s take a look at a problem. We have a webapp to track build times for a continuous integration (CI) server. The main page has an HTML table with dozens of rows (one row for each build) and each row has an entry for the creation time of the build and the length of time it took for the build to be deployed, tested, or whatever else you&rsquo;re doing with your CI server.</p>
+
+<p>For most rows in your table, the duration can be populated with information from the server. The server sends back a creation time, and if the build is finished, a finishing time. Both the creation time and finishing time are specified in <a href="https://en.wikipedia.org/wiki/Unix_time">Unix time</a>. The duration is easy enough to calculate. Firstly, in Angular we would opt to use the <code>ng-repeat</code> directive to display the data in a table:</p>
+
+<!-- more -->
+
+
+<p>(I use double square brackets instead of double curly braces in Angular templating here because it conflicts with the rendering engine I use for this blog)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;tr</span> <span class="na">ng-repeat=</span><span class="s">&quot;contentData in content&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;td</span> <span class="na">ng-repeat=</span><span class="s">&quot;header in headers&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        [[contentData[header].value]]
+</span><span class='line'>    <span class="nt">&lt;/td&gt;</span>
+</span><span class='line'><span class="nt">&lt;/tr&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and a specific <code>contentData</code> object would look something like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">contentData</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">...</span>
+</span><span class='line'>    <span class="nx">durationString</span><span class="o">:</span> <span class="nx">getDurationString</span><span class="p">(</span><span class="nx">msTimeDifferenceInSeconds</span><span class="p">(</span>
+</span><span class='line'>        <span class="nx">serverData</span><span class="p">.</span><span class="nx">creationTime</span><span class="p">,</span> <span class="nx">serverData</span><span class="p">.</span><span class="nx">finishingTime</span><span class="p">)),</span>
+</span><span class='line'>    <span class="p">...</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">content</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">contentData</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">msTimeDifferenceInSeconds</span><span class="p">(</span><span class="nx">startTime</span><span class="p">,</span> <span class="nx">endTime</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">msDifference</span> <span class="o">=</span> <span class="nx">endTime</span> <span class="o">-</span> <span class="nx">startTime</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nx">msDifference</span><span class="o">/</span><span class="mi">1000</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>where getDurationString(seconds) is some function that returns a nicer version of a duration in seconds.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">getDurationString</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="mi">1</span> <span class="nx">second</span>
+</span><span class='line'><span class="nx">getDurationString</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="mi">1</span> <span class="nx">minute</span><span class="p">,</span> <span class="mi">40</span> <span class="nx">seconds</span>
+</span><span class='line'><span class="nx">getDurationString</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="mi">2</span> <span class="nx">hours</span><span class="p">,</span> <span class="mi">46</span> <span class="nx">minutes</span><span class="p">,</span> <span class="mi">40</span> <span class="nx">seconds</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What about the (arguably more interesting) case when a build isn&rsquo;t complete? We want to update the duration every second for every row in the table whose corresponding build is incomplete. We would also want to poll the server every so often so that the table displays the most updated information. How would you do this sort of thing in Angular?</p>
+
+<p>Well the obvious thing to do would be to have a function that updates the specific model data for the build that contains the duration. Store the duration as part of the model data for the build, and update it (and the value that&rsquo;s display in the HTML table through getDurationString) every second. Something similar to the following pseudocode:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">durationInterval</span> <span class="o">=</span> <span class="nx">$interval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">for</span> <span class="nx">each</span> <span class="nx">contentData</span> <span class="k">in</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">content</span><span class="o">:</span>
+</span><span class='line'>        <span class="k">if</span> <span class="o">!</span><span class="p">(</span><span class="nx">contentData</span><span class="p">.</span><span class="nx">isFinished</span><span class="p">())</span><span class="o">:</span>
+</span><span class='line'>           <span class="nx">contentData</span><span class="p">.</span><span class="nx">duration</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>           <span class="nx">contentData</span><span class="p">.</span><span class="nx">durationString</span> <span class="o">=</span> <span class="nx">getDurationString</span><span class="p">(</span><span class="nx">contentData</span><span class="p">.</span><span class="nx">duration</span><span class="p">);</span>
+</span><span class='line'><span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and we could have this code run just after loading all the data into the <code>content</code> array. We can stop this interval and restart it upon polling for updated data from the server.</p>
+
+<p>Since this is executing once every second, the duration property increments every second. This seems like an okay solution. Angular will automatically update the DOM for us once it sees that the underlying model has changed.</p>
+
+<p>But there&rsquo;s a couple major problems with it. For one, there&rsquo;s a fairly large delay between the first element in the <code>content</code> array being populated with the finishing time and the time that the <code>durationInterval</code> gets set off (more than 1 second). This effect compounds with other delays and effects the rest of the <code>content</code> array as well. We can sort of solve this by calculating the duration again using the current time (<code>new Date().getTime</code>) and the known creation time every second, since it&rsquo;s not really that expensive.</p>
+
+<p>A bigger issue still is that it takes time for the DOM to update. Angular needs to realize the <code>content</code> array has been changed and update the appropriate parts of the DOM (specifically the duration column in the table for every affected row). This happens in the <code>$digest</code> cycle Angular uses to update the DOM upon model changes. This can take a substantial amount of time and adds further delay to the DOM updating.</p>
+
+<p>Implementing this solution, I found the table updates about 10 times in 14 seconds. It should have updated 14 times though. We can&rsquo;t update the model directly and wait for Angular to update the DOM.</p>
+
+<p>An alternative solution would be to update the DOM ourselves. Since this is just a simple table cell and not an input element, Angular won&rsquo;t check it as part of its 2-way data binding procedures. In other words, when we update a table cell, the corresponding model in the Javascript won&rsquo;t change, which is what we want.</p>
+
+<p>We simply want to update the table cell every second. First, we have to find the table cell. One way to do this would be to place a unique id on the table cell</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">td</span> <span class="nx">ng</span><span class="o">-</span><span class="nx">attr</span><span class="o">-</span><span class="nx">id</span><span class="o">=</span><span class="s2">&quot;[[header.field + &#39;-&#39; + $parent.$index + &#39;-cell&#39;]]&quot;</span> <span class="p">...</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and we can easily find the table cell we wish to modify (the one corresponding to header.field = durationString)</p>
+
+<p>We could parse what&rsquo;s in the table cell (a <code>durationString</code> like 3 minutes and 4 seconds) back to a time in seconds (184), add 1, and transform it back to a <code>durationString</code>. But that&rsquo;s more work than necessary, and can result in the time slowly drifting (so naturally, I tried that first). We&rsquo;ll just go with the approach of calculating the duration each time for every applicable row (once for each incomplete build), and updating the table cell&rsquo;s <code>innerHTML</code> with our updated data.</p>
+
+<p>This solution works super well; the duration field in the table correctly updates once every second. And that&rsquo;s the solution to our problem.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[When StackOverflow isn't the answer]]></title>
     <link href="http://agnanachandran.github.io/blog/2014/04/06/when-stackoverflow-isnt-the-answer/"/>
-    <updated>2014-04-06T20:10:00-04:00</updated>
+    <updated>2014-04-06T20:10:00-07:00</updated>
     <id>http://agnanachandran.github.io/blog/2014/04/06/when-stackoverflow-isnt-the-answer</id>
     <content type="html"><![CDATA[<p>I spent the better half of today debugging one of my current projects, an Android app designed to help users do things on their phone faster. Vague, I know.</p>
 
@@ -69,7 +182,7 @@
   <entry>
     <title type="html"><![CDATA[On 2048]]></title>
     <link href="http://agnanachandran.github.io/blog/2014/03/14/on-2048/"/>
-    <updated>2014-03-14T23:08:00-04:00</updated>
+    <updated>2014-03-14T23:08:00-07:00</updated>
     <id>http://agnanachandran.github.io/blog/2014/03/14/on-2048</id>
     <content type="html"><![CDATA[<p>This week on Hacker News, a game called 2048 rose to the top of the front page.  Subsequently, productivity at software companies everywhere dropped tremendously.</p>
 
@@ -112,7 +225,7 @@
   <entry>
     <title type="html"><![CDATA[How to do X in Octopress]]></title>
     <link href="http://agnanachandran.github.io/blog/2013/12/20/how-to-do-x-in-octopress/"/>
-    <updated>2013-12-20T23:11:00-05:00</updated>
+    <updated>2013-12-20T23:11:00-08:00</updated>
     <id>http://agnanachandran.github.io/blog/2013/12/20/how-to-do-x-in-octopress</id>
     <content type="html"><![CDATA[<p>So I spent the last couple days tweaking my Octopress themes and relearning how to do things since not blogging for a while and getting a new MBP. Navigating the Octopress file hierarchy isn&rsquo;t easy, but hopefully this post will help you (and be a useful reference for myself).</p>
 
@@ -269,7 +382,7 @@
   <entry>
     <title type="html"><![CDATA[A Masterpiece of Music]]></title>
     <link href="http://agnanachandran.github.io/blog/2013/07/29/a-masterpiece-of-music/"/>
-    <updated>2013-07-29T23:29:00-04:00</updated>
+    <updated>2013-07-29T23:29:00-07:00</updated>
     <id>http://agnanachandran.github.io/blog/2013/07/29/a-masterpiece-of-music</id>
     <content type="html"><![CDATA[<p><em>Originally posted June 23rd, 2013</em></p>
 
@@ -348,7 +461,7 @@ Dibidiboodiboobouyewejoubeeguidibmble</p></blockquote>
   <entry>
     <title type="html"><![CDATA[Software Engineering at the University of Waterloo]]></title>
     <link href="http://agnanachandran.github.io/blog/2013/07/29/software-engineering-at-the-university-of-waterloo/"/>
-    <updated>2013-07-29T00:23:00-04:00</updated>
+    <updated>2013-07-29T00:23:00-07:00</updated>
     <id>http://agnanachandran.github.io/blog/2013/07/29/software-engineering-at-the-university-of-waterloo</id>
     <content type="html"><![CDATA[<p>This post was inspired by <a href="http://aimango.wordpress.com/2013/05/12/software-engineering-waterloo-courses/">a fellow software engineering student at UW</a>. If you want even more detail than I&rsquo;m providing here, check it out.</p>
 
@@ -551,7 +664,7 @@ Dibidiboodiboobouyewejoubeeguidibmble</p></blockquote>
 
 <h3>CS 241 &ndash; Foundations of Sequential Programs</h3>
 
-<p>Probably one of the most enjoyable courses thus far (around the same level as MATH 135). The course is extremely well-structured and the applications to the things you learn are immediately obvious.</p>
+<p>Probably one of the most enjoyable courses thus far. The course is extremely well-structured and the applications to the things you learn are immediately obvious.</p>
 
 <p>The course starts off with some tedious (though not too tedious) work with a subset of MIPS, which is one of the many types of assembly languages out there. Eventually you move to compiler design which made me appreciate how &lsquo;deep the rabbit hole goes&rsquo;. That is, there are several steps that must be taken before an idea in your head can become a reality on a computer, and thanks to thousands of people who came before you, you can do all these steps in a matter of minutes.</p>
 
@@ -604,7 +717,7 @@ Dibidiboodiboobouyewejoubeeguidibmble</p></blockquote>
   <entry>
     <title type="html"><![CDATA[:%s/WordPress/Octopress/g]]></title>
     <link href="http://agnanachandran.github.io/blog/2013/07/28/percent-s-slash-wordpress-slash-octopress-slash-g/"/>
-    <updated>2013-07-28T14:00:00-04:00</updated>
+    <updated>2013-07-28T14:00:00-07:00</updated>
     <id>http://agnanachandran.github.io/blog/2013/07/28/percent-s-slash-wordpress-slash-octopress-slash-g</id>
     <content type="html"><![CDATA[<p>So after only a few months of using WordPress, I decided to switch to Octopress. I decided to make that obligatory post that every new Octopress user writes. It&rsquo;s some sort of rite of passage, I think.</p>
 

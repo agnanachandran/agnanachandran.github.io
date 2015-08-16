@@ -9,7 +9,7 @@
   <meta name="author" content="Anojh Gnanachandran">
 
   
-  <meta name="description" content="When StackOverflow Isn&#8217;t the Answer Apr 6th, 2014 I spent the better half of today debugging one of my current projects, an Android app &hellip;">
+  <meta name="description" content="Short Interval Updating in Angular Aug 15th, 2015 Let&rsquo;s take a look at a problem. We have a webapp to track build times for a continuous &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,6 +103,51 @@
     
       <h2 class="entry-title">
         
+        <a href="/blog/2015/08/15/short-interval-updating-in-angular/">Short Interval Updating in Angular</a>
+        
+      </h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-08-15T22:51:00-07:00" pubdate data-updated="true">Aug 15<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <p>Let&rsquo;s take a look at a problem. We have a webapp to track build times for a continuous integration (CI) server. The main page has an HTML table with dozens of rows (one row for each build) and each row has an entry for the creation time of the build and the length of time it took for the build to be deployed, tested, or whatever else you&rsquo;re doing with your CI server.</p>
+
+<p>For most rows in your table, the duration can be populated with information from the server. The server sends back a creation time, and if the build is finished, a finishing time. Both the creation time and finishing time are specified in <a href="https://en.wikipedia.org/wiki/Unix_time">Unix time</a>. The duration is easy enough to calculate. Firstly, in Angular we would opt to use the <code>ng-repeat</code> directive to display the data in a table:</p>
+
+
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/08/15/short-interval-updating-in-angular/">Read on &rarr;</a>
+    </footer>
+  
+
+</article>
+
+
+    <article class="post">
+  <header>
+    
+      <h2 class="entry-title">
+        
         <a href="/blog/2014/04/06/when-stackoverflow-isnt-the-answer/">When StackOverflow Isn&#8217;t the Answer</a>
         
       </h2>
@@ -121,7 +166,7 @@
   
 
 
-<time datetime="2014-04-06T20:10:00-04:00" pubdate data-updated="true">Apr 6<span>th</span>, 2014</time>
+<time datetime="2014-04-06T20:10:00-07:00" pubdate data-updated="true">Apr 6<span>th</span>, 2014</time>
         
       </p>
     
@@ -168,7 +213,7 @@
   
 
 
-<time datetime="2014-03-14T23:08:00-04:00" pubdate data-updated="true">Mar 14<span>th</span>, 2014</time>
+<time datetime="2014-03-14T23:08:00-07:00" pubdate data-updated="true">Mar 14<span>th</span>, 2014</time>
         
       </p>
     
@@ -227,7 +272,7 @@
   
 
 
-<time datetime="2013-12-20T23:11:00-05:00" pubdate data-updated="true">Dec 20<span>th</span>, 2013</time>
+<time datetime="2013-12-20T23:11:00-08:00" pubdate data-updated="true">Dec 20<span>th</span>, 2013</time>
         
       </p>
     
@@ -270,7 +315,7 @@
   
 
 
-<time datetime="2013-07-29T23:29:00-04:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
+<time datetime="2013-07-29T23:29:00-07:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
         
       </p>
     
@@ -315,7 +360,7 @@
   
 
 
-<time datetime="2013-07-29T00:23:00-04:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
+<time datetime="2013-07-29T00:23:00-07:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
         
       </p>
     
@@ -364,7 +409,7 @@
   
 
 
-<time datetime="2013-07-28T14:00:00-04:00" pubdate data-updated="true">Jul 28<span>th</span>, 2013</time>
+<time datetime="2013-07-28T14:00:00-07:00" pubdate data-updated="true">Jul 28<span>th</span>, 2013</time>
         
       </p>
     

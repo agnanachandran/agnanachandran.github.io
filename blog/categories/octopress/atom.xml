@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | Things To Think About]]></title>
   <link href="http://agnanachandran.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://agnanachandran.github.io/"/>
-  <updated>2014-04-30T14:17:31-04:00</updated>
+  <updated>2015-08-16T00:11:24-07:00</updated>
   <id>http://agnanachandran.github.io/</id>
   <author>
     <name><![CDATA[Anojh Gnanachandran]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[How to do X in Octopress]]></title>
     <link href="http://agnanachandran.github.io/blog/2013/12/20/how-to-do-x-in-octopress/"/>
-    <updated>2013-12-20T23:11:00-05:00</updated>
+    <updated>2013-12-20T23:11:00-08:00</updated>
     <id>http://agnanachandran.github.io/blog/2013/12/20/how-to-do-x-in-octopress</id>
     <content type="html"><![CDATA[<p>So I spent the last couple days tweaking my Octopress themes and relearning how to do things since not blogging for a while and getting a new MBP. Navigating the Octopress file hierarchy isn&rsquo;t easy, but hopefully this post will help you (and be a useful reference for myself).</p>
 

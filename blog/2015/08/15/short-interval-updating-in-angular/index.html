@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Short Interval Updating in Angular - Things To Think About</title>
+  <meta name="author" content="Anojh Gnanachandran">
+
+  
+  <meta name="description" content="Short Interval Updating in Angular Aug 15th, 2015 Let&rsquo;s take a look at a problem. We have a webapp to track build times for a continuous &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://agnanachandran.github.io/blog/2015/08/15/short-interval-updating-in-angular/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Things To Think About" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37973526-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body >
+  <header role="banner" id="sidebar">
+    <!-- Logo -->
+<aside id="logo" class="clearfix">
+  <div class="clearfix">
+    <a href="/">Things To Think About</a>
+  </div>
+</aside>
+
+<ul id="menu">
+
+  <li class="title">
+    <h1 id="title"><a href="/">Things To Think About</a></h1>
+  </li>
+
+
+  <li class="subtitle">
+    <h2 id="subtitle">Ideas, Experiences, Thoughts <br><br> By Anojh Gnanachandran</h2>
+  </li>
+
+  <li class="link">
+    <a href="/about/">About</a>
+  </li>
+
+
+  <li class="link">
+    <a href="http://github.com/agnanachandran/">Github</a>
+  </li>
+
+<li class="link">
+  <a href="/blog/archives">Archives</a>
+</li>
+<!--
+<li class="link rss">
+    <a href="/atom.xml">RSS feed</a>
+  </li>
+-->
+</ul>
+
+
+
+<!-- Octopress Love -->
+<aside id="octopress_linkback">
+  <a href="http://octopress.org/">
+    <span class="octopress">Powered by Octopress</span>
+  </a>
+</aside>
+
+  </header>
+  <section id="main">
+    <article class="post">
+  <div class="sharing-box">
+  
+  
+  
+</div>
+
+  
+  <header>
+    
+      <h2 class="entry-title">Short Interval Updating in Angular</h2>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-08-15T22:51:00-07:00" pubdate data-updated="true">Aug 15<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+<p>Let&rsquo;s take a look at a problem. We have a webapp to track build times for a continuous integration (CI) server. The main page has an HTML table with dozens of rows (one row for each build) and each row has an entry for the creation time of the build and the length of time it took for the build to be deployed, tested, or whatever else you&rsquo;re doing with your CI server.</p>
+
+<p>For most rows in your table, the duration can be populated with information from the server. The server sends back a creation time, and if the build is finished, a finishing time. Both the creation time and finishing time are specified in <a href="https://en.wikipedia.org/wiki/Unix_time">Unix time</a>. The duration is easy enough to calculate. Firstly, in Angular we would opt to use the <code>ng-repeat</code> directive to display the data in a table:</p>
+
+<!-- more -->
+
+
+<p>(I use double square brackets instead of double curly braces in Angular templating here because it conflicts with the rendering engine I use for this blog)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;tr</span> <span class="na">ng-repeat=</span><span class="s">&quot;contentData in content&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;td</span> <span class="na">ng-repeat=</span><span class="s">&quot;header in headers&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>        [[contentData[header].value]]
+</span><span class='line'>    <span class="nt">&lt;/td&gt;</span>
+</span><span class='line'><span class="nt">&lt;/tr&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and a specific <code>contentData</code> object would look something like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">contentData</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">...</span>
+</span><span class='line'>    <span class="nx">durationString</span><span class="o">:</span> <span class="nx">getDurationString</span><span class="p">(</span><span class="nx">msTimeDifferenceInSeconds</span><span class="p">(</span>
+</span><span class='line'>        <span class="nx">serverData</span><span class="p">.</span><span class="nx">creationTime</span><span class="p">,</span> <span class="nx">serverData</span><span class="p">.</span><span class="nx">finishingTime</span><span class="p">)),</span>
+</span><span class='line'>    <span class="p">...</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="nx">$scope</span><span class="p">.</span><span class="nx">content</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">contentData</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">function</span> <span class="nx">msTimeDifferenceInSeconds</span><span class="p">(</span><span class="nx">startTime</span><span class="p">,</span> <span class="nx">endTime</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">msDifference</span> <span class="o">=</span> <span class="nx">endTime</span> <span class="o">-</span> <span class="nx">startTime</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nx">msDifference</span><span class="o">/</span><span class="mi">1000</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>where getDurationString(seconds) is some function that returns a nicer version of a duration in seconds.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">getDurationString</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="mi">1</span> <span class="nx">second</span>
+</span><span class='line'><span class="nx">getDurationString</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="mi">1</span> <span class="nx">minute</span><span class="p">,</span> <span class="mi">40</span> <span class="nx">seconds</span>
+</span><span class='line'><span class="nx">getDurationString</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="mi">2</span> <span class="nx">hours</span><span class="p">,</span> <span class="mi">46</span> <span class="nx">minutes</span><span class="p">,</span> <span class="mi">40</span> <span class="nx">seconds</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What about the (arguably more interesting) case when a build isn&rsquo;t complete? We want to update the duration every second for every row in the table whose corresponding build is incomplete. We would also want to poll the server every so often so that the table displays the most updated information. How would you do this sort of thing in Angular?</p>
+
+<p>Well the obvious thing to do would be to have a function that updates the specific model data for the build that contains the duration. Store the duration as part of the model data for the build, and update it (and the value that&rsquo;s display in the HTML table through getDurationString) every second. Something similar to the following pseudocode:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">durationInterval</span> <span class="o">=</span> <span class="nx">$interval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">for</span> <span class="nx">each</span> <span class="nx">contentData</span> <span class="k">in</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">content</span><span class="o">:</span>
+</span><span class='line'>        <span class="k">if</span> <span class="o">!</span><span class="p">(</span><span class="nx">contentData</span><span class="p">.</span><span class="nx">isFinished</span><span class="p">())</span><span class="o">:</span>
+</span><span class='line'>           <span class="nx">contentData</span><span class="p">.</span><span class="nx">duration</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>           <span class="nx">contentData</span><span class="p">.</span><span class="nx">durationString</span> <span class="o">=</span> <span class="nx">getDurationString</span><span class="p">(</span><span class="nx">contentData</span><span class="p">.</span><span class="nx">duration</span><span class="p">);</span>
+</span><span class='line'><span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and we could have this code run just after loading all the data into the <code>content</code> array. We can stop this interval and restart it upon polling for updated data from the server.</p>
+
+<p>Since this is executing once every second, the duration property increments every second. This seems like an okay solution. Angular will automatically update the DOM for us once it sees that the underlying model has changed.</p>
+
+<p>But there&rsquo;s a couple major problems with it. For one, there&rsquo;s a fairly large delay between the first element in the <code>content</code> array being populated with the finishing time and the time that the <code>durationInterval</code> gets set off (more than 1 second). This effect compounds with other delays and effects the rest of the <code>content</code> array as well. We can sort of solve this by calculating the duration again using the current time (<code>new Date().getTime</code>) and the known creation time every second, since it&rsquo;s not really that expensive.</p>
+
+<p>A bigger issue still is that it takes time for the DOM to update. Angular needs to realize the <code>content</code> array has been changed and update the appropriate parts of the DOM (specifically the duration column in the table for every affected row). This happens in the <code>$digest</code> cycle Angular uses to update the DOM upon model changes. This can take a substantial amount of time and adds further delay to the DOM updating.</p>
+
+<p>Implementing this solution, I found the table updates about 10 times in 14 seconds. It should have updated 14 times though. We can&rsquo;t update the model directly and wait for Angular to update the DOM.</p>
+
+<p>An alternative solution would be to update the DOM ourselves. Since this is just a simple table cell and not an input element, Angular won&rsquo;t check it as part of its 2-way data binding procedures. In other words, when we update a table cell, the corresponding model in the Javascript won&rsquo;t change, which is what we want.</p>
+
+<p>We simply want to update the table cell every second. First, we have to find the table cell. One way to do this would be to place a unique id on the table cell</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">td</span> <span class="nx">ng</span><span class="o">-</span><span class="nx">attr</span><span class="o">-</span><span class="nx">id</span><span class="o">=</span><span class="s2">&quot;[[header.field + &#39;-&#39; + $parent.$index + &#39;-cell&#39;]]&quot;</span> <span class="p">...</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and we can easily find the table cell we wish to modify (the one corresponding to header.field = durationString)</p>
+
+<p>We could parse what&rsquo;s in the table cell (a <code>durationString</code> like 3 minutes and 4 seconds) back to a time in seconds (184), add 1, and transform it back to a <code>durationString</code>. But that&rsquo;s more work than necessary, and can result in the time slowly drifting (so naturally, I tried that first). We&rsquo;ll just go with the approach of calculating the duration each time for every applicable row (once for each incomplete build), and updating the table cell&rsquo;s <code>innerHTML</code> with our updated data.</p>
+
+<p>This solution works super well; the duration field in the table correctly updates once every second. And that&rsquo;s the solution to our problem.</p>
+
+
+
+</article>
+
+  <section class="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+    <nav role="navigation" id="pagination">
+
+</nav>
+  </section>
+  
+
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'thingstothinkabout';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://agnanachandran.github.io/blog/2015/08/15/short-interval-updating-in-angular/';
+        var disqus_url = 'http://agnanachandran.github.io/blog/2015/08/15/short-interval-updating-in-angular/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

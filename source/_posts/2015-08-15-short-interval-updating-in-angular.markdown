@@ -8,7 +8,7 @@ categories: [Angular]
 
 Let's take a look at a problem. We have a webapp to track build times for a continuous integration (CI) server. The main page has an HTML table with dozens of rows (one row for each build) and each row has an entry for the creation time of the build and the length of time it took for the build to be deployed, tested, or whatever else you're doing with your CI server.
 
-For most rows in your table, the duration can be populated with information from the server. The server sends back a creation time, and if the build is finished, a finishing time. Both the creation time and finishing time are specified in [Unix time](https://en.wikipedia.org/wiki/Unix_time). The duration is easy enough to calculate. Firstly, in Angular we would opt to use the `ng-repeat` directive to display the data in a table:
+For most rows in your table, the duration can be populated with information from the server. The server sends back a creation time, and if the build is finished, a finishing time. Both the creation time and finishing time are specified in a milliseconds version of [Unix time](https://en.wikipedia.org/wiki/Unix_time). The duration is easy enough to calculate. Firstly, in Angular we would opt to use the `ng-repeat` directive to display the data in a table:
 
 <!-- more -->
 

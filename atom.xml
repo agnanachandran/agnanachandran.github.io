@@ -4,7 +4,7 @@
   <title><![CDATA[Things To Think About]]></title>
   <link href="http://agnanachandran.github.io/atom.xml" rel="self"/>
   <link href="http://agnanachandran.github.io/"/>
-  <updated>2015-08-16T00:17:20-07:00</updated>
+  <updated>2015-08-16T00:31:23-07:00</updated>
   <id>http://agnanachandran.github.io/</id>
   <author>
     <name><![CDATA[Anojh Gnanachandran]]></name>
@@ -20,7 +20,7 @@
     <id>http://agnanachandran.github.io/blog/2015/08/15/short-interval-updating-in-angular</id>
     <content type="html"><![CDATA[<p>Let&rsquo;s take a look at a problem. We have a webapp to track build times for a continuous integration (CI) server. The main page has an HTML table with dozens of rows (one row for each build) and each row has an entry for the creation time of the build and the length of time it took for the build to be deployed, tested, or whatever else you&rsquo;re doing with your CI server.</p>
 
-<p>For most rows in your table, the duration can be populated with information from the server. The server sends back a creation time, and if the build is finished, a finishing time. Both the creation time and finishing time are specified in <a href="https://en.wikipedia.org/wiki/Unix_time">Unix time</a>. The duration is easy enough to calculate. Firstly, in Angular we would opt to use the <code>ng-repeat</code> directive to display the data in a table:</p>
+<p>For most rows in your table, the duration can be populated with information from the server. The server sends back a creation time, and if the build is finished, a finishing time. Both the creation time and finishing time are specified in a milliseconds version of <a href="https://en.wikipedia.org/wiki/Unix_time">Unix time</a>. The duration is easy enough to calculate. Firstly, in Angular we would opt to use the <code>ng-repeat</code> directive to display the data in a table:</p>
 
 <!-- more -->
 

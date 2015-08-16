@@ -7,7 +7,7 @@ sharing: false
 footer: false
 ---
 
-Hi, I'm Anojh. I'm a 2B software engineering student at the University of Waterloo.
+Hi, I'm Anojh. I'm a 3B software engineering student at the University of Waterloo.
 
 For employment inquiries, check out [my résumé](http://pluszero.ca/resume). 
 

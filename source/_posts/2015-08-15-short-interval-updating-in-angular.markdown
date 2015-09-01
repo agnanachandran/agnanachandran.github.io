@@ -78,9 +78,13 @@ We simply want to update the table cell every second. First, we have to find the
 ```
 <td ng-attr-id="[[header.field + '-' + $parent.$index + '-cell']]" ...>
 ```
-and we can easily find the table cell we wish to modify (the one corresponding to header.field = durationString)
+and we can easily find the table cell we wish to modify.
 
 We could parse what's in the table cell (a `durationString` like 3 minutes and 4 seconds) back to a time in seconds (184), add 1, and transform it back to a `durationString`. But that's more work than necessary, and can result in the time slowly drifting (so naturally, I tried that first). We'll just go with the approach of calculating the duration each time for every applicable row (once for each incomplete build), and updating the table cell's `innerHTML` with our updated data.
+
+The finished product looks something like this:
+
+{% img center /images/angular_timer.gif 410 334 %}
 
 This solution works super well; the duration field in the table correctly updates once every second. And that's the solution to our problem.
 

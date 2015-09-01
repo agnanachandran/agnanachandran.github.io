@@ -121,7 +121,7 @@
   
 
 
-<time datetime="2015-08-15T22:51:00-07:00" pubdate data-updated="true">Aug 15<span>th</span>, 2015</time>
+<time datetime="2015-08-15T22:51:00-04:00" pubdate data-updated="true">Aug 15<span>th</span>, 2015</time>
         
       </p>
     
@@ -228,9 +228,13 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>and we can easily find the table cell we wish to modify (the one corresponding to header.field = durationString)</p>
+<p>and we can easily find the table cell we wish to modify.</p>
 
 <p>We could parse what&rsquo;s in the table cell (a <code>durationString</code> like 3 minutes and 4 seconds) back to a time in seconds (184), add 1, and transform it back to a <code>durationString</code>. But that&rsquo;s more work than necessary, and can result in the time slowly drifting (so naturally, I tried that first). We&rsquo;ll just go with the approach of calculating the duration each time for every applicable row (once for each incomplete build), and updating the table cell&rsquo;s <code>innerHTML</code> with our updated data.</p>
+
+<p>The finished product looks something like this:</p>
+
+<p><img class="center" src="/images/angular_timer.gif" width="410" height="334"></p>
 
 <p>This solution works super well; the duration field in the table correctly updates once every second. And that&rsquo;s the solution to our problem.</p>
 

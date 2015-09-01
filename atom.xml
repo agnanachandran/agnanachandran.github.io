@@ -4,7 +4,7 @@
   <title><![CDATA[Things To Think About]]></title>
   <link href="http://agnanachandran.github.io/atom.xml" rel="self"/>
   <link href="http://agnanachandran.github.io/"/>
-  <updated>2015-08-16T00:31:23-07:00</updated>
+  <updated>2015-09-01T14:00:11-04:00</updated>
   <id>http://agnanachandran.github.io/</id>
   <author>
     <name><![CDATA[Anojh Gnanachandran]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Short Interval Updating in Angular]]></title>
     <link href="http://agnanachandran.github.io/blog/2015/08/15/short-interval-updating-in-angular/"/>
-    <updated>2015-08-15T22:51:00-07:00</updated>
+    <updated>2015-08-15T22:51:00-04:00</updated>
     <id>http://agnanachandran.github.io/blog/2015/08/15/short-interval-updating-in-angular</id>
     <content type="html"><![CDATA[<p>Let&rsquo;s take a look at a problem. We have a webapp to track build times for a continuous integration (CI) server. The main page has an HTML table with dozens of rows (one row for each build) and each row has an entry for the creation time of the build and the length of time it took for the build to be deployed, tested, or whatever else you&rsquo;re doing with your CI server.</p>
 
@@ -118,9 +118,13 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>and we can easily find the table cell we wish to modify (the one corresponding to header.field = durationString)</p>
+<p>and we can easily find the table cell we wish to modify.</p>
 
 <p>We could parse what&rsquo;s in the table cell (a <code>durationString</code> like 3 minutes and 4 seconds) back to a time in seconds (184), add 1, and transform it back to a <code>durationString</code>. But that&rsquo;s more work than necessary, and can result in the time slowly drifting (so naturally, I tried that first). We&rsquo;ll just go with the approach of calculating the duration each time for every applicable row (once for each incomplete build), and updating the table cell&rsquo;s <code>innerHTML</code> with our updated data.</p>
+
+<p>The finished product looks something like this:</p>
+
+<p><img class="center" src="http://agnanachandran.github.io/images/angular_timer.gif" width="410" height="334"></p>
 
 <p>This solution works super well; the duration field in the table correctly updates once every second. And that&rsquo;s the solution to our problem.</p>
 ]]></content>
@@ -129,7 +133,7 @@
   <entry>
     <title type="html"><![CDATA[When StackOverflow isn't the answer]]></title>
     <link href="http://agnanachandran.github.io/blog/2014/04/06/when-stackoverflow-isnt-the-answer/"/>
-    <updated>2014-04-06T20:10:00-07:00</updated>
+    <updated>2014-04-06T20:10:00-04:00</updated>
     <id>http://agnanachandran.github.io/blog/2014/04/06/when-stackoverflow-isnt-the-answer</id>
     <content type="html"><![CDATA[<p>I spent the better half of today debugging one of my current projects, an Android app designed to help users do things on their phone faster. Vague, I know.</p>
 
@@ -182,7 +186,7 @@
   <entry>
     <title type="html"><![CDATA[On 2048]]></title>
     <link href="http://agnanachandran.github.io/blog/2014/03/14/on-2048/"/>
-    <updated>2014-03-14T23:08:00-07:00</updated>
+    <updated>2014-03-14T23:08:00-04:00</updated>
     <id>http://agnanachandran.github.io/blog/2014/03/14/on-2048</id>
     <content type="html"><![CDATA[<p>This week on Hacker News, a game called 2048 rose to the top of the front page.  Subsequently, productivity at software companies everywhere dropped tremendously.</p>
 
@@ -225,7 +229,7 @@
   <entry>
     <title type="html"><![CDATA[How to do X in Octopress]]></title>
     <link href="http://agnanachandran.github.io/blog/2013/12/20/how-to-do-x-in-octopress/"/>
-    <updated>2013-12-20T23:11:00-08:00</updated>
+    <updated>2013-12-20T23:11:00-05:00</updated>
     <id>http://agnanachandran.github.io/blog/2013/12/20/how-to-do-x-in-octopress</id>
     <content type="html"><![CDATA[<p>So I spent the last couple days tweaking my Octopress themes and relearning how to do things since not blogging for a while and getting a new MBP. Navigating the Octopress file hierarchy isn&rsquo;t easy, but hopefully this post will help you (and be a useful reference for myself).</p>
 
@@ -382,7 +386,7 @@
   <entry>
     <title type="html"><![CDATA[A Masterpiece of Music]]></title>
     <link href="http://agnanachandran.github.io/blog/2013/07/29/a-masterpiece-of-music/"/>
-    <updated>2013-07-29T23:29:00-07:00</updated>
+    <updated>2013-07-29T23:29:00-04:00</updated>
     <id>http://agnanachandran.github.io/blog/2013/07/29/a-masterpiece-of-music</id>
     <content type="html"><![CDATA[<p><em>Originally posted June 23rd, 2013</em></p>
 
@@ -461,7 +465,7 @@ Dibidiboodiboobouyewejoubeeguidibmble</p></blockquote>
   <entry>
     <title type="html"><![CDATA[Software Engineering at the University of Waterloo]]></title>
     <link href="http://agnanachandran.github.io/blog/2013/07/29/software-engineering-at-the-university-of-waterloo/"/>
-    <updated>2013-07-29T00:23:00-07:00</updated>
+    <updated>2013-07-29T00:23:00-04:00</updated>
     <id>http://agnanachandran.github.io/blog/2013/07/29/software-engineering-at-the-university-of-waterloo</id>
     <content type="html"><![CDATA[<p>This post was inspired by <a href="http://aimango.wordpress.com/2013/05/12/software-engineering-waterloo-courses/">a fellow software engineering student at UW</a>. If you want even more detail than I&rsquo;m providing here, check it out.</p>
 
@@ -717,7 +721,7 @@ Dibidiboodiboobouyewejoubeeguidibmble</p></blockquote>
   <entry>
     <title type="html"><![CDATA[:%s/WordPress/Octopress/g]]></title>
     <link href="http://agnanachandran.github.io/blog/2013/07/28/percent-s-slash-wordpress-slash-octopress-slash-g/"/>
-    <updated>2013-07-28T14:00:00-07:00</updated>
+    <updated>2013-07-28T14:00:00-04:00</updated>
     <id>http://agnanachandran.github.io/blog/2013/07/28/percent-s-slash-wordpress-slash-octopress-slash-g</id>
     <content type="html"><![CDATA[<p>So after only a few months of using WordPress, I decided to switch to Octopress. I decided to make that obligatory post that every new Octopress user writes. It&rsquo;s some sort of rite of passage, I think.</p>
 

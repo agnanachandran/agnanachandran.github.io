@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Angular | Things To Think About]]></title>
   <link href="http://agnanachandran.github.io/blog/categories/angular/atom.xml" rel="self"/>
   <link href="http://agnanachandran.github.io/"/>
-  <updated>2015-08-16T00:31:23-07:00</updated>
+  <updated>2015-09-01T14:00:11-04:00</updated>
   <id>http://agnanachandran.github.io/</id>
   <author>
     <name><![CDATA[Anojh Gnanachandran]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Short Interval Updating in Angular]]></title>
     <link href="http://agnanachandran.github.io/blog/2015/08/15/short-interval-updating-in-angular/"/>
-    <updated>2015-08-15T22:51:00-07:00</updated>
+    <updated>2015-08-15T22:51:00-04:00</updated>
     <id>http://agnanachandran.github.io/blog/2015/08/15/short-interval-updating-in-angular</id>
     <content type="html"><![CDATA[<p>Let&rsquo;s take a look at a problem. We have a webapp to track build times for a continuous integration (CI) server. The main page has an HTML table with dozens of rows (one row for each build) and each row has an entry for the creation time of the build and the length of time it took for the build to be deployed, tested, or whatever else you&rsquo;re doing with your CI server.</p>
 
@@ -103,9 +103,13 @@ var durationInterval = $interval(function() {</p>
 <p><code>
 &lt;td ng-attr-id="[[header.field + '-' + $parent.$index + '-cell']]" ...&gt;
 </code>
-and we can easily find the table cell we wish to modify (the one corresponding to header.field = durationString)</p>
+and we can easily find the table cell we wish to modify.</p>
 
 <p>We could parse what&rsquo;s in the table cell (a <code>durationString</code> like 3 minutes and 4 seconds) back to a time in seconds (184), add 1, and transform it back to a <code>durationString</code>. But that&rsquo;s more work than necessary, and can result in the time slowly drifting (so naturally, I tried that first). We&rsquo;ll just go with the approach of calculating the duration each time for every applicable row (once for each incomplete build), and updating the table cell&rsquo;s <code>innerHTML</code> with our updated data.</p>
+
+<p>The finished product looks something like this:</p>
+
+<p><img class="center" src="/images/angular_timer.gif" width="410" height="334"></p>
 
 <p>This solution works super well; the duration field in the table correctly updates once every second. And that&rsquo;s the solution to our problem.</p>
 ]]></content>

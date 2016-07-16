@@ -2,11 +2,26 @@
 layout: default
 ---
 
-  {% assign index = true %}
-  {% for post in paginator.posts %}
-  {% assign content = post.content %}
-    <article class="post">
-      {% include post/sharing.html %}
-      {% include article.html %}
-    </article>
-  {% endfor %}
+<div class="home-page">
+  <div class="her-row nav-bar">
+    <div class="container">
+        <div class="row">
+          {% include custom/home_landing_row.html %}
+        </div>
+    </div>
+  </div>
+
+  <div class="article-list">
+    <div class="container">
+      {% for post in paginator.posts %}
+        {% assign content = post.content %}
+        <div class="row">
+          <div class="col-md-offset-2 col-md-8">
+            {% include article_listing.html %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>

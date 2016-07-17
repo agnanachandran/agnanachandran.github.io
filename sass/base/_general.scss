@@ -226,7 +226,7 @@ mark {
 
 code, tt {
     padding: 1px 3px;
-    font-family: Inconsolata, monospace, sans-serif;
+    font-family: Inconsolata, Consolas, Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;
     font-size: 0.85em;
     white-space: normal;
     border: 1px solid #E3EDF3;
@@ -241,7 +241,6 @@ pre {
     border: 1px solid #E3EDF3;
     width: 100%;
     padding: 0px;
-    font-family: Inconsolata, monospace, sans-serif;
     font-size: 0.9em;
     white-space: pre;
     word-break: normal;

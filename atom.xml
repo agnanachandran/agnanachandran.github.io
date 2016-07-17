@@ -4,7 +4,7 @@
   <title><![CDATA[Things To Think About]]></title>
   <link href="http://agnanachandran.github.io/atom.xml" rel="self"/>
   <link href="http://agnanachandran.github.io/"/>
-  <updated>2016-05-08T17:36:57-04:00</updated>
+  <updated>2016-07-17T03:07:57-04:00</updated>
   <id>http://agnanachandran.github.io/</id>
   <author>
     <name><![CDATA[Anojh Gnanachandran]]></name>
@@ -12,6 +12,288 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using Simulated Annealing To Solve Logic Puzzles]]></title>
+    <link href="http://agnanachandran.github.io/blog/2016/07/17/using-simulated-annealing-to-solve-logic-puzzles/"/>
+    <updated>2016-07-17T02:43:00-04:00</updated>
+    <id>http://agnanachandran.github.io/blog/2016/07/17/using-simulated-annealing-to-solve-logic-puzzles</id>
+    <content type="html"><![CDATA[<p>The other day, I was watching Ted Ed&rsquo;s collection of YouTube videos on riddles and came across this interesting logic puzzle described as <a href="https://www.youtube.com/watch?v=1rDVz_Fb6HQ">&ldquo;Einstein&rsquo;s Riddle&rdquo;</a>. Einstein probably didn&rsquo;t make up the riddle, but the problem itself is kind of interesting for a few reasons. You can either watch the video or keep reading for a retelling of the problem below.</p>
+
+<!-- more -->
+
+
+<hr />
+
+<h3>The Riddle</h3>
+
+<blockquote><p>The world&rsquo;s rarest fish has been stolen from the city aquarium, and the police have followed the scent to a street of 5 identical looking houses all in a row. The police can only search one house without the thief getting away, and so we have to find out which house contains the fish.</p></blockquote>
+
+<p><span class="caption-wrapper center" style="width: 1702px"><img class="caption" src="http://agnanachandran.github.io/images/simulated_annealing/houses.png" title="Houses in a row" alt="The 5 houses as shown in the video"><span class="caption-text">The 5 houses as shown in the video</span></span></p>
+
+<p>We have the following information:</p>
+
+<ol>
+<li>Each house&rsquo;s owner is of a different nationality.<br/>
+The choices are Dane, Brit, Swede, Norwegian, and German.</li>
+<li>The interior walls of each house are coloured differently.<br/>
+The choices are yellow, red, white, green, and blue.</li>
+<li>Each house contains a different animal.<br/>
+The choices are horse, cat, bird, fish, and dog.</li>
+<li>The owner of each house drinks a different beverage.<br/>
+The choices are water, tea, milk, coffee, and root beer.</li>
+<li>The owner of each house smokes a different kind of cigar.<br/>
+The choices are Pall Mall, Prince, Blue Master, Dunhill, and Blends.</li>
+</ol>
+
+
+<p>Furthermore, we have the following 15 clues:</p>
+
+<ol>
+<li>The Brit lives in the house with red walls.</li>
+<li>The Swede has a dog.</li>
+<li>The Dane drinks tea.</li>
+<li>The house with green walls is directly to the left of the house with white walls.</li>
+<li>The owner of the house with green walls drinks coffee.</li>
+<li>The person who smokes Pall Mall cigars owns a bird.</li>
+<li>The owner of the house with yellow walls smokes Dunhill.</li>
+<li>The man living in the center house drinks milk.</li>
+<li>The Norwegian lives in the first house.</li>
+<li>The man who smokes blends lives next to the cat owner.</li>
+<li>The horse&rsquo;s owner lives next to the man who smokes Dunhill.</li>
+<li>The man who smokes Blue Master drinks root beer.</li>
+<li>The German smokes Prince.</li>
+<li>The Norwegian lives next to the house with blue walls.</li>
+<li>The man who smokes Blends lives next to the man who drinks water.</li>
+</ol>
+
+
+<p>Using nothing but this information, it is possible to figure out who has the fish.</p>
+
+<p>Don&rsquo;t read ahead yet if you want to figure this out on your own first.</p>
+
+<hr />
+
+<p>I remember having seen this problem several years ago, and I solved it on paper using the traditional logical solution shown in the video using a lot of process of elimination. Solving the problem using this method is probably how it was meant to be done, and I&rsquo;d recommend trying it first to compare the different methods.</p>
+
+<p>When I first learned about the problem years ago, I didn&rsquo;t have much programming knowledge. But now, I wondered if I could use my programming knowledge to solve the problem a different way. At first I wondered if it could be brute forced, just trying every possible arrangement.</p>
+
+<p>How many arrangements are there? Well for the first house, there are 5 &ldquo;attributes&rdquo; to pick (nationality, wall colour, animal, beverage, and cigar), and each has 5 options. This gives 5<sup>5</sup> possibilities for the first house. Then for the second house, there are still 5 attributes to pick, but only 4 options for each. This gives 4<sup>5</sup> possibilities for the second house, 3<sup>5</sup> for the third, 2<sup>5</sup> for the fourth and 1<sup>5</sup> for the fifth. Multiplying these together gives 24 883 200 000 or almost 25 billion possibilities. If we could check 100 000 possibilities every second, it would take 69 hours to check all the possibilities.</p>
+
+<p>There are many ways we could speed up the process, like using some of the clues to significantly reduce the size of the search space. We could also turn the clues into logic expressions in code and use them to perform a similar process of elimination technique to simulate how it would be done on paper. I thought to use a technique I learned in my cooperative and adaptive algorithms class called simulated annealing. Simulated annealing can be used to solve problems like this, where there&rsquo;s a large search space and we are trying to find a global optimum. In this case, the global optimum is the arrangement in which all 15 of the clues are satisfied.</p>
+
+<h3>Simulated Annealing</h3>
+
+<p>The idea behind simulated annealing is fairly simple.</p>
+
+<p>We start with an initial state (or &ldquo;solution&rdquo;), where a state is one of the almost 25 billion possibilities described above. That is, for each house and for each of its attributes, one of the five choices for the attribute is picked.</p>
+
+<p>We also need to define a cost function which, when given a state, tells us how &ldquo;good&rdquo; the state is. Here, a natural cost function would be &ldquo;the number of clues that are NOT satisfied&rdquo;. For example, if out of the 15 clues, 12 are satisfied, but 3 are not satisfied, our cost function would give us 3 for the corresponding state. We seek to minimize the cost of our state. If the cost of a state is 0, that means all the clues are satisfied!</p>
+
+<p>So now we have the concept of a state and a cost function. Now what if the initial state we picked doesn&rsquo;t have a cost of zero? Then we want to reduce it, right? But how? We have to pick a new state to replace our initial one and evaluate its cost and hope its cost is better (lower). But if we just pick another totally random state, that&rsquo;s basically just doing the brute-force method described earlier.</p>
+
+<p>Instead, we can try to take advantage of what we have and change it little by little. We can do that by defining what&rsquo;s called a &ldquo;neighbour state&rdquo;. Here, a neighbour state is simply a state which can be reached by swapping an attribute choice between two houses. For example, if our current state has the German in the second house and the Brit in the fourth house, a neighbour of the current state would be the state in which everything is the same except that the German is in the fourth house and the Brit is in the second house. For a given state, there are <sub>5</sub>C<sub>2</sub> = 10 choices for the two houses to swap, and 5 attributes to choose from, giving a total of 50 neighbouring states for any state. The hope is that by simply performing a swap, the cost will probably not drastically increase.</p>
+
+<p>Now that we have the concept of a neighbour state, we can simply choose a random neighbour and &ldquo;move&rdquo; to it; that is, change our current state to the neighbour state. But we probably don&rsquo;t want to do that if it has a worse cost right? If our current state has cost 3, then we probably don&rsquo;t want to move to a state of cost 7. However, we will not always be able to move to a state of lower cost. For this problem, it turns out we&rsquo;ll often get stuck in a local minimum, a state in which all neighbouring states have cost greater than or equal to the cost of the current state.</p>
+
+<p><span class="caption-wrapper center" style="width: 391px"><img class="caption" src="http://agnanachandran.github.io/images/simulated_annealing/local_minimum.png" title="Local minimum" alt="We want to find the global minimum, not the local minimum"><span class="caption-text">We want to find the global minimum, not the local minimum</span></span></p>
+
+<p>We won&rsquo;t be able to find the global minimum just by choosing neighbours with lower cost all the time, because eventually there won&rsquo;t be any. We can escape this trap either by moving to another random state, or instead, we can sometimes accept worse solutions. The hope here is that by following this worse solution, we can eventually get to the global minimum.</p>
+
+<p>Simulated annealing performs the latter using what&rsquo;s called an acceptance probability. The acceptance probability is used to determine whether we want to move to a neighbouring state or not. There are a few basic properties of the acceptance probability.</p>
+
+<p>If the neighbouring state has lesser or equal cost, then we will always move to it.</p>
+
+<p>If it has greater cost, we will only move to it with a certain probability. Otherwise we&rsquo;ll stay where we are and choose another neighbour. We define the cost delta denoted by Δc, which is simply the current cost subtracted from the neighbour cost, and a parameter t, which stands for temperature, and influences how likely we are to accept the neighbouring state.</p>
+
+<p><span class="caption-wrapper center" style="width: 894px"><img class="caption" src="http://agnanachandran.github.io/images/simulated_annealing/acceptance_probability.png" title="Acceptance Probability" ><span class="caption-text"></span></span></p>
+
+<p>Looking at the exponential function, the greater the cost delta, the lower the power, and thus the lower the acceptance probability is. If the neighbouring cost is much higher than the current cost, we are not likely to move to it.</p>
+
+<p>t affects how often we pick worse solutions. The greater the value of t, the higher the acceptance probability is. t is a parameter we choose and which typically starts high and steadily decreases every so often, so we are less likely to accept worse solutions as time goes on (where we are hopefully close to finding the global minimum).</p>
+
+<p>Note that since Δc and t are both positive, the exponential function&rsquo;s value is in the range (0, 1). We can use a random number in this range to choose, based on the acceptance probability, whether we should move to the new state or not. If the random number is less than the acceptance probability&rsquo;s value, we should move to the new state.</p>
+
+<h4>Turning It Into Code</h4>
+
+<p>We now have everything necessary to apply this technique to our problem. To summarize:</p>
+
+<ol>
+<li>Pick an initial solution and compute its cost</li>
+<li>Pick a random neighbour of the current solution</li>
+<li>Compute its cost, the cost delta, and the acceptance probability</li>
+<li>Move to the neighbour if a random number in (0, 1) is less than the acceptance probability</li>
+<li>Repeat steps 2-4 until the current solution&rsquo;s cost is 0. Decrease the temperature <code>t</code> every so often.</li>
+</ol>
+
+
+<p>We&rsquo;ll write the code in python because it&rsquo;s great for stuff like this. First, we need to setup the initial state.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">nationalities</span> <span class="o">=</span> <span class="p">[</span> <span class="s">&#39;dane&#39;</span><span class="p">,</span>      <span class="s">&#39;brit&#39;</span><span class="p">,</span>   <span class="s">&#39;swede&#39;</span><span class="p">,</span>       <span class="s">&#39;norwegian&#39;</span><span class="p">,</span> <span class="s">&#39;german&#39;</span>    <span class="p">]</span>
+</span><span class='line'><span class="n">colours</span>       <span class="o">=</span> <span class="p">[</span> <span class="s">&#39;yellow&#39;</span><span class="p">,</span>    <span class="s">&#39;red&#39;</span><span class="p">,</span>    <span class="s">&#39;white&#39;</span><span class="p">,</span>       <span class="s">&#39;green&#39;</span><span class="p">,</span>     <span class="s">&#39;blue&#39;</span>      <span class="p">]</span>
+</span><span class='line'><span class="n">animals</span>       <span class="o">=</span> <span class="p">[</span> <span class="s">&#39;horse&#39;</span><span class="p">,</span>     <span class="s">&#39;cat&#39;</span><span class="p">,</span>    <span class="s">&#39;bird&#39;</span><span class="p">,</span>        <span class="s">&#39;fish&#39;</span><span class="p">,</span>      <span class="s">&#39;dog&#39;</span>       <span class="p">]</span>
+</span><span class='line'><span class="n">beverages</span>     <span class="o">=</span> <span class="p">[</span> <span class="s">&#39;water&#39;</span><span class="p">,</span>     <span class="s">&#39;tea&#39;</span><span class="p">,</span>    <span class="s">&#39;milk&#39;</span><span class="p">,</span>        <span class="s">&#39;coffee&#39;</span><span class="p">,</span>    <span class="s">&#39;root beer&#39;</span> <span class="p">]</span>
+</span><span class='line'><span class="n">cigars</span>        <span class="o">=</span> <span class="p">[</span> <span class="s">&#39;pall mall&#39;</span><span class="p">,</span> <span class="s">&#39;prince&#39;</span><span class="p">,</span> <span class="s">&#39;blue master&#39;</span><span class="p">,</span> <span class="s">&#39;dunhill&#39;</span><span class="p">,</span>   <span class="s">&#39;blends&#39;</span>    <span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">attributes</span> <span class="o">=</span> <span class="p">[</span><span class="n">nationalities</span><span class="p">,</span> <span class="n">colours</span><span class="p">,</span> <span class="n">animals</span><span class="p">,</span> <span class="n">beverages</span><span class="p">,</span> <span class="n">cigars</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">NUM_HOUSES</span> <span class="o">=</span> <span class="mi">5</span>
+</span><span class='line'><span class="n">initial</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">NUM_HOUSES</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">initial</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">attr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">attributes</span><span class="p">])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For each attribute, the <i>i<sup>th</sup></i> house will take on the <i>i<sup>th</sup></i> choice for the attribute. Thus, the initial state can be represented by a list of 5 houses, each of which is a list of the attributes it takes on.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='python'><span class='line'><span class="p">[</span>
+</span><span class='line'>    <span class="p">[</span> <span class="s">&#39;dane&#39;</span><span class="p">,</span>      <span class="s">&#39;yellow&#39;</span><span class="p">,</span> <span class="s">&#39;horse&#39;</span><span class="p">,</span> <span class="s">&#39;water&#39;</span><span class="p">,</span>     <span class="s">&#39;pall mall&#39;</span>   <span class="p">],</span> <span class="c"># House 1</span>
+</span><span class='line'>    <span class="p">[</span> <span class="s">&#39;brit&#39;</span><span class="p">,</span>      <span class="s">&#39;red&#39;</span><span class="p">,</span>    <span class="s">&#39;cat&#39;</span><span class="p">,</span>   <span class="s">&#39;tea&#39;</span><span class="p">,</span>       <span class="s">&#39;prince&#39;</span>      <span class="p">],</span> <span class="c"># House 2</span>
+</span><span class='line'>    <span class="p">[</span> <span class="s">&#39;swede&#39;</span><span class="p">,</span>     <span class="s">&#39;white&#39;</span><span class="p">,</span>  <span class="s">&#39;bird&#39;</span><span class="p">,</span>  <span class="s">&#39;milk&#39;</span><span class="p">,</span>      <span class="s">&#39;blue master&#39;</span> <span class="p">],</span> <span class="c"># House 3</span>
+</span><span class='line'>    <span class="p">[</span> <span class="s">&#39;norwegian&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">,</span>  <span class="s">&#39;fish&#39;</span><span class="p">,</span>  <span class="s">&#39;coffee&#39;</span><span class="p">,</span>    <span class="s">&#39;dunhill&#39;</span>     <span class="p">],</span> <span class="c"># House 4</span>
+</span><span class='line'>    <span class="p">[</span> <span class="s">&#39;german&#39;</span><span class="p">,</span>    <span class="s">&#39;blue&#39;</span><span class="p">,</span>   <span class="s">&#39;dog&#39;</span><span class="p">,</span>   <span class="s">&#39;root beer&#39;</span><span class="p">,</span> <span class="s">&#39;blends&#39;</span>      <span class="p">],</span> <span class="c"># House 5</span>
+</span><span class='line'><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For convenience, we&rsquo;ll also define the following constants:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">NAT</span> <span class="o">=</span> <span class="mi">0</span> <span class="c"># Nationality index</span>
+</span><span class='line'><span class="n">COL</span> <span class="o">=</span> <span class="mi">1</span> <span class="c"># Colour index</span>
+</span><span class='line'><span class="n">ANI</span> <span class="o">=</span> <span class="mi">2</span> <span class="c"># Animal index</span>
+</span><span class='line'><span class="n">BEV</span> <span class="o">=</span> <span class="mi">3</span> <span class="c"># Beverage index</span>
+</span><span class='line'><span class="n">CIG</span> <span class="o">=</span> <span class="mi">4</span> <span class="c"># Cigar index</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Each index in the list for a house corresponds to a specific attribute as shown above.</p>
+
+<p>Now we&rsquo;re ready to define our simulated annealing technique.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">copy</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">math</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">random</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">sa</span><span class="p">(</span><span class="n">initial</span><span class="p">):</span>
+</span><span class='line'>    <span class="c"># Define initial values</span>
+</span><span class='line'>    <span class="n">current</span> <span class="o">=</span> <span class="n">initial</span>
+</span><span class='line'>    <span class="n">current_cost</span> <span class="o">=</span> <span class="n">cost_of_state</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">temp</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c"># initial value of t used in acceptance probability</span>
+</span><span class='line'>    <span class="n">num_iterations</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">while</span> <span class="n">current_cost</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># keep going until we find the global minimum</span>
+</span><span class='line'>        <span class="n">neighbour</span> <span class="o">=</span> <span class="n">get_random_neighbour</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">neighbour_cost</span> <span class="o">=</span> <span class="n">cost_of_state</span><span class="p">(</span><span class="n">neighbour</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">current_cost</span> <span class="o">=</span> <span class="n">cost_of_state</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">cost_delta</span> <span class="o">=</span> <span class="n">neighbour_cost</span> <span class="o">-</span> <span class="n">current_cost</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c"># If the neighbouring state is at least as good as the current state</span>
+</span><span class='line'>        <span class="c"># move to it, otherwise check the acceptance probability and only</span>
+</span><span class='line'>        <span class="c"># move if the random number is less than it</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">cost_delta</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">cost_delta</span><span class="o">/</span><span class="n">temp</span><span class="p">):</span>
+</span><span class='line'>            <span class="n">current</span><span class="p">,</span> <span class="n">current_cost</span> <span class="o">=</span> <span class="n">neighbour</span><span class="p">,</span> <span class="n">neighbour_cost</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">num_iterations</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c"># Decrease the temperature by 0.10 every 50 iterations until it&#39;s at 0.30</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">num_iterations</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">temp</span> <span class="o">&gt;</span> <span class="mf">0.30</span><span class="p">:</span>
+</span><span class='line'>            <span class="n">temp</span> <span class="o">-=</span> <span class="mf">0.10</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c"># We found the solution!</span>
+</span><span class='line'>    <span class="c"># Return it and the number of iterations it took to get there</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">current</span><span class="p">,</span> <span class="n">num_iterations</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There&rsquo;s two functions we haven&rsquo;t defined yet that are used above. These are <code>get_random_neighbour</code> and <code>cost_of_state</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">get_random_neighbour</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+</span><span class='line'>    <span class="c"># Swap two attribute choices in two houses</span>
+</span><span class='line'>    <span class="n">neighbour</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">i</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">j</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</span><span class='line'>    <span class="n">attr_idx</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">neighbour</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">attr_idx</span><span class="p">],</span> <span class="n">neighbour</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">attr_idx</span><span class="p">]</span> <span class="o">=</span>
+</span><span class='line'>        <span class="n">neighbour</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">attr_idx</span><span class="p">],</span> <span class="n">neighbour</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">attr_idx</span><span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="n">neighbour</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We first deepcopy the current state since we don&rsquo;t want to mutate the current state when determining the neighbour state. We then pick two houses to swap (<code>i</code> and <code>j</code>) and an <code>attr_index</code> (one of NAT, COL, ANI, BEV, and CIG, the constants we defined earlier). Finally, for the two houses picked, we swap their attribute choices for the corresponding attribute and return the neighbour state.</p>
+
+<p>We now need to define the <code>cost_of_state</code> function, which when given a state returns its cost. As mentioned earlier, it will be the number of clues that are not satisfied by the state.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">cost_of_state</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">cost</span> <span class="o">=</span> <span class="mi">15</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">cost</span> <span class="o">-=</span> <span class="nb">sum</span><span class="p">([</span>
+</span><span class='line'>            <span class="n">h</span><span class="p">[</span><span class="n">NAT</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;brit&#39;</span> <span class="ow">and</span> <span class="n">h</span><span class="p">[</span><span class="n">COL</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;red&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">h</span><span class="p">[</span><span class="n">NAT</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;swede&#39;</span> <span class="ow">and</span> <span class="n">h</span><span class="p">[</span><span class="n">ANI</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;dog&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">h</span><span class="p">[</span><span class="n">NAT</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;dane&#39;</span> <span class="ow">and</span> <span class="n">h</span><span class="p">[</span><span class="n">BEV</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;tea&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">h</span><span class="p">[</span><span class="n">COL</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;green&#39;</span> <span class="ow">and</span> <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">COL</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;white&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">h</span><span class="p">[</span><span class="n">COL</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;green&#39;</span> <span class="ow">and</span> <span class="n">h</span><span class="p">[</span><span class="n">BEV</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;coffee&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">h</span><span class="p">[</span><span class="n">CIG</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;pall mall&#39;</span> <span class="ow">and</span> <span class="n">h</span><span class="p">[</span><span class="n">ANI</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;bird&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">h</span><span class="p">[</span><span class="n">COL</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;yellow&#39;</span> <span class="ow">and</span> <span class="n">h</span><span class="p">[</span><span class="n">CIG</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;dunhill&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">i</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">h</span><span class="p">[</span><span class="n">BEV</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;milk&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">h</span><span class="p">[</span><span class="n">NAT</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;norwegian&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">h</span><span class="p">[</span><span class="n">CIG</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;blends&#39;</span> <span class="ow">and</span> <span class="p">((</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">ANI</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;cat&#39;</span><span class="p">)</span>
+</span><span class='line'>                                 <span class="ow">or</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">ANI</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;cat&#39;</span><span class="p">)),</span>
+</span><span class='line'>            <span class="n">h</span><span class="p">[</span><span class="n">ANI</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;horse&#39;</span> <span class="ow">and</span> <span class="p">((</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">CIG</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;dunhill&#39;</span><span class="p">)</span>
+</span><span class='line'>                                 <span class="ow">or</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">CIG</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;dunhill&#39;</span><span class="p">)),</span>
+</span><span class='line'>            <span class="n">h</span><span class="p">[</span><span class="n">CIG</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;blue master&#39;</span> <span class="ow">and</span> <span class="n">h</span><span class="p">[</span><span class="n">BEV</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;root beer&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">h</span><span class="p">[</span><span class="n">NAT</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;german&#39;</span> <span class="ow">and</span> <span class="n">h</span><span class="p">[</span><span class="n">CIG</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;prince&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="n">h</span><span class="p">[</span><span class="n">NAT</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;norwegian&#39;</span> <span class="ow">and</span> <span class="p">((</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">COL</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;blue&#39;</span><span class="p">)</span>
+</span><span class='line'>                                    <span class="ow">or</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">COL</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;blue&#39;</span><span class="p">)),</span>
+</span><span class='line'>            <span class="n">h</span><span class="p">[</span><span class="n">CIG</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;blends&#39;</span> <span class="ow">and</span> <span class="p">((</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">BEV</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;water&#39;</span><span class="p">)</span>
+</span><span class='line'>                                 <span class="ow">or</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">BEV</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;water&#39;</span><span class="p">)),</span>
+</span><span class='line'>        <span class="p">])</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="n">cost</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above 15 boolean expressions correspond to the 15 clues in the order they were presented at the beginning of this post.  For each house, we check how many clues are satisfied and subtract this total from the current cost. After doing this for each house we have our cost for the state.</p>
+
+<p>Finally we have everything we need to run the simulated annealing technique.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">solution</span><span class="p">,</span> <span class="n">iterations</span> <span class="o">=</span> <span class="n">sa</span><span class="p">(</span><span class="n">initial</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="n">house</span> <span class="ow">in</span> <span class="n">solution</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">print</span> <span class="n">house</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">print</span> <span class="s">&#39;Number of iterations:&#39;</span><span class="p">,</span> <span class="n">iterations</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We use a seed value of 100 for the random number generator so we can produce the same results over and over. The output of the above is:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='python'><span class='line'><span class="p">[</span><span class="s">&#39;norwegian&#39;</span><span class="p">,</span> <span class="s">&#39;yellow&#39;</span><span class="p">,</span> <span class="s">&#39;cat&#39;</span><span class="p">,</span> <span class="s">&#39;water&#39;</span><span class="p">,</span> <span class="s">&#39;dunhill&#39;</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="s">&#39;dane&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;horse&#39;</span><span class="p">,</span> <span class="s">&#39;tea&#39;</span><span class="p">,</span> <span class="s">&#39;blends&#39;</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="s">&#39;brit&#39;</span><span class="p">,</span> <span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;bird&#39;</span><span class="p">,</span> <span class="s">&#39;milk&#39;</span><span class="p">,</span> <span class="s">&#39;pall mall&#39;</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="s">&#39;german&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;fish&#39;</span><span class="p">,</span> <span class="s">&#39;coffee&#39;</span><span class="p">,</span> <span class="s">&#39;prince&#39;</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="s">&#39;swede&#39;</span><span class="p">,</span> <span class="s">&#39;white&#39;</span><span class="p">,</span> <span class="s">&#39;dog&#39;</span><span class="p">,</span> <span class="s">&#39;root beer&#39;</span><span class="p">,</span> <span class="s">&#39;blue master&#39;</span><span class="p">]</span>
+</span><span class='line'><span class="n">Number</span> <span class="n">of</span> <span class="n">iterations</span><span class="p">:</span> <span class="mi">10010</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We found the solution! In 10010 iterations of simulated annealing, we found that the German has the fish in the fourth house. Running the <code>time</code> command shows this took 0.76 seconds to run on my machine, a 2013 MacBook Pro.</p>
+
+<p>Now, although taking the time to code this may have taken longer than to solve the problem by hand, this technique can be applied to many other problems, most notably, the <a href="https://en.wikipedia.org/wiki/Travelling_salesman_problem">Travelling Salesman Problem</a> in which we would swap cities instead. The only things we would need to change are the state representation, the neighbouring state selection, and the cost function. The technique itself is generally applicable to all sorts of problems.</p>
+
+<p>Logic problems can be often be solved in a variety of ways. Doing it this way allows us to do very little thinking with regards to the clues and how they all relate to each other. We let the computer do the work for us.</p>
+
+<p>The applications of techniques like this are of course not limited to logic puzzles like this. Simulated annealing in particular can be used for circuit board placement, physics simulations, and structural optimization. Artificial intelligence techniques in general have wide-reaching applications and implications. Learning about different techniques is both interesting and valuable, if only for solving fun logic puzzles like this one.</p>
+
+<p>P.S. if you find any mistakes, please don&rsquo;t hesitate to <a href="mailto:anojhgnanachandran@gmail.com">contact me</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Short Interval Updating in Angular]]></title>
@@ -27,12 +309,7 @@
 
 <p>(I use double square brackets instead of double curly braces in Angular templating here because it conflicts with the rendering engine I use for this blog)</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;tr</span> <span class="na">ng-repeat=</span><span class="s">&quot;contentData in content&quot;</span><span class="nt">&gt;</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;tr</span> <span class="na">ng-repeat=</span><span class="s">&quot;contentData in content&quot;</span><span class="nt">&gt;</span>
 </span><span class='line'>    <span class="nt">&lt;td</span> <span class="na">ng-repeat=</span><span class="s">&quot;header in headers&quot;</span><span class="nt">&gt;</span>
 </span><span class='line'>        [[contentData[header].value]]
 </span><span class='line'>    <span class="nt">&lt;/td&gt;</span>
@@ -42,19 +319,7 @@
 
 <p>and a specific <code>contentData</code> object would look something like:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">contentData</span> <span class="o">=</span> <span class="p">{</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">contentData</span> <span class="o">=</span> <span class="p">{</span>
 </span><span class='line'>    <span class="p">...</span>
 </span><span class='line'>    <span class="nx">durationString</span><span class="o">:</span> <span class="nx">getDurationString</span><span class="p">(</span><span class="nx">msTimeDifferenceInSeconds</span><span class="p">(</span>
 </span><span class='line'>        <span class="nx">serverData</span><span class="p">.</span><span class="nx">creationTime</span><span class="p">,</span> <span class="nx">serverData</span><span class="p">.</span><span class="nx">finishingTime</span><span class="p">)),</span>
@@ -71,10 +336,7 @@
 
 <p>where getDurationString(seconds) is some function that returns a nicer version of a duration in seconds.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">getDurationString</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="mi">1</span> <span class="nx">second</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">getDurationString</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="mi">1</span> <span class="nx">second</span>
 </span><span class='line'><span class="nx">getDurationString</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="mi">1</span> <span class="nx">minute</span><span class="p">,</span> <span class="mi">40</span> <span class="nx">seconds</span>
 </span><span class='line'><span class="nx">getDurationString</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="mi">2</span> <span class="nx">hours</span><span class="p">,</span> <span class="mi">46</span> <span class="nx">minutes</span><span class="p">,</span> <span class="mi">40</span> <span class="nx">seconds</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -84,13 +346,7 @@
 
 <p>Well the obvious thing to do would be to have a function that updates the specific model data for the build that contains the duration. Store the duration as part of the model data for the build, and update it (and the value that&rsquo;s display in the HTML table through getDurationString) every second. Something similar to the following pseudocode:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">durationInterval</span> <span class="o">=</span> <span class="nx">$interval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">durationInterval</span> <span class="o">=</span> <span class="nx">$interval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 </span><span class='line'>    <span class="k">for</span> <span class="nx">each</span> <span class="nx">contentData</span> <span class="k">in</span> <span class="nx">$scope</span><span class="p">.</span><span class="nx">content</span><span class="o">:</span>
 </span><span class='line'>        <span class="k">if</span> <span class="o">!</span><span class="p">(</span><span class="nx">contentData</span><span class="p">.</span><span class="nx">isFinished</span><span class="p">())</span><span class="o">:</span>
 </span><span class='line'>           <span class="nx">contentData</span><span class="p">.</span><span class="nx">duration</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
@@ -113,8 +369,7 @@
 
 <p>We simply want to update the table cell every second. First, we have to find the table cell. One way to do this would be to place a unique id on the table cell</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">td</span> <span class="nx">ng</span><span class="o">-</span><span class="nx">attr</span><span class="o">-</span><span class="nx">id</span><span class="o">=</span><span class="s2">&quot;[[header.field + &#39;-&#39; + $parent.$index + &#39;-cell&#39;]]&quot;</span> <span class="p">...</span><span class="o">&gt;</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">td</span> <span class="nx">ng</span><span class="o">-</span><span class="nx">attr</span><span class="o">-</span><span class="nx">id</span><span class="o">=</span><span class="s2">&quot;[[header.field + &#39;-&#39; + $parent.$index + &#39;-cell&#39;]]&quot;</span> <span class="p">...</span><span class="o">&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -139,10 +394,10 @@
 
 <p>The issue at hand was a <code>java.lang.IllegalStateException</code> resulting from a fragment not being attached to its activity. Reproducing the bug was easy. Launch the app, search for a YouTube video, back out of the app, and search for another YouTube video. The app crashes. An easy &lsquo;solution&rsquo; was to check <code>fragment.isAdded()</code> in the <code>onVideosRetrieved</code> callback. Of course, the real problem is that the fragment still wasn&rsquo;t attached to an activity.</p>
 
-<blockquote><p><a href="http://developer.android.com/guide/components/fragments.html">&ldquo;A fragment must always be embedded in an activity&rdquo;</a>.</p></blockquote>
-
 <!-- more -->
 
+
+<blockquote><p><a href="http://developer.android.com/guide/components/fragments.html">&ldquo;A fragment must always be embedded in an activity&rdquo;</a>.</p></blockquote>
 
 <p>Searching every relevant stackoverflow answer yielded nothing. I tried switching to the non-support version of <code>fragment</code>, not using a <code>FragmentActivity</code>, and not using the <code>&lt;fragment&gt;</code> tag in the activity layout. Nothing changed.</p>
 
@@ -154,13 +409,7 @@
 
 <p>I immediately remembered all the &ldquo;Manager&rdquo; classes I had, which for some reason, I decided should be singletons.</p>
 
-<figure class='code'><figcaption><span>Singleton misuse</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="n">WeatherManager</span> <span class="nf">getInstance</span><span class="o">(</span><span class="n">Fragment</span> <span class="n">fragment</span><span class="o">,</span> <span class="n">OnFinishedListener</span> <span class="n">listener</span><span class="o">)</span> <span class="o">{</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">static</span> <span class="n">WeatherManager</span> <span class="nf">getInstance</span><span class="o">(</span><span class="n">Fragment</span> <span class="n">fragment</span><span class="o">,</span> <span class="n">OnFinishedListener</span> <span class="n">listener</span><span class="o">)</span> <span class="o">{</span>
 </span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">instance</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
 </span><span class='line'>        <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WeatherManager</span><span class="o">(</span><span class="n">fragment</span><span class="o">,</span> <span class="n">listener</span><span class="o">);</span>
 </span><span class='line'>    <span class="o">}</span>
@@ -194,19 +443,17 @@
 
 <p>The game is partially (read: very) luck-based. When the board is getting tight, a single wrong number, or a number popping up in the wrong place, can mess you up for the rest of the game.</p>
 
+<!-- more -->
+
+
 <p>The general strategy to winning the game is a simple one. Keep your largest number in the corner, and progressively smaller numbers next to it in a row/column. Doing this guarantees you won&rsquo;t have useless pieces floating around the board (as long as you don&rsquo;t move a piece in the row/column in any perpendicular direction), and provides a systematic method to playing the game. You&rsquo;re then limited to moving in only a couple directions.</p>
 
 <br>
 
 
-<p><span class="caption-wrapper center" style="width: 600px"><img class="caption" src="http://agnanachandran.github.io/images/small_moment.png" title="About to win" alt="My crowning moment"><span class="caption-text">My crowning moment</span></span></p>
+<p><span class="caption-wrapper center" style="width: 600px"><img class="caption" src="http://agnanachandran.github.io/images/small_moment.png" title="'About to win'" ><span class="caption-text"></span></span></p>
 
 <br>
-
-
-
-
-<!-- more -->
 
 
 <p>The game is pretty addicting; you feel some sense of satisfaction when pieces combine to make numbers twice as large (and twice as yellow). The larger the number , the greater the satisfaction. After finally beating the game, I&rsquo;m probably not going to play it again, at least not to completion.</p>
@@ -244,25 +491,7 @@
 
 <p>For starters, I&rsquo;m using [oh-my] zsh with the popular <u>Solarized</u> colour scheme. A typical Octopress folder looks something like this:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>tree octopress -LF 1
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>tree octopress -LF 1
 </span><span class='line'>octopress
 </span><span class='line'>├── CHANGELOG.markdown
 </span><span class='line'>├── Gemfile
@@ -314,8 +543,7 @@
 
 <h3>Writing a new post</h3>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake new_post<span class="o">[</span><span class="s1">&#39;New post title with Punctuation!&#39;</span><span class="o">]</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake new_post<span class="o">[</span><span class="s1">&#39;New post title with Punctuation!&#39;</span><span class="o">]</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -325,8 +553,7 @@
 
 <p>If you&rsquo;d like to preview your post in the browser,</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake preview
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake preview
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -336,10 +563,7 @@
 
 <p>Lastly, saving your post&rsquo;s progress (anything done in the source branch really), can be done through</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git add .
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git add .
 </span><span class='line'><span class="nv">$ </span>git commit -m <span class="s1">&#39;Your helpful message goes here&#39;</span>
 </span><span class='line'><span class="nv">$ </span>git push origin <span class="nb">source</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -347,11 +571,7 @@
 
 <h3>Changing themes</h3>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd </span>octopress
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd </span>octopress
 </span><span class='line'><span class="nv">$ </span>git clone GIT_URL .themes/THEME_NAME
 </span><span class='line'><span class="nv">$ </span>rake install<span class="o">[</span><span class="s1">&#39;THEME_NAME&#39;</span><span class="o">]</span>
 </span><span class='line'><span class="nv">$ </span>rake generate
@@ -366,10 +586,7 @@
 
 <p>A little trick I use when I want to find where a specific css selector&rsquo;s attributes are defined is to use <code>fgrep</code>. For example, running</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd </span>sass
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd </span>sass
 </span><span class='line'><span class="nv">$ </span>fgrep -r <span class="s1">&#39;meta&#39;</span> *
 </span><span class='line'><span class="c"># For long results, pipe to &#39;less&#39; if desired</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -734,19 +951,14 @@ Dibidiboodiboobouyewejoubeeguidibmble</p></blockquote>
 
 <h2>Super quick deployment; no fumbling with &lt;insert your favourite blogging platform here>.</h2>
 
-<figure class='code'><figcaption><span>octopress blogging</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake generate
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='bash'><span class='line'>rake generate
 </span><span class='line'>rake deploy
 </span></code></pre></td></tr></table></div></figure>
 
 
 <p>It&rsquo;s that easy. Octopress uses <a href="http://jekyllrb.com/">Jekyll</a>, a static site generator, to push the static HTML, CSS, JS etc. to my master branch at agnanachandran.github.io, and with some quick commands (which I should really make aliases for):</p>
 
-<figure class='code'><figcaption><span>committing changes</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git add .
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='bash'><span class='line'>git add .
 </span><span class='line'>git commit -m <span class="s1">&#39;new post&#39;</span>
 </span><span class='line'>git push origin <span class="nb">source</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -758,8 +970,7 @@ Dibidiboodiboobouyewejoubeeguidibmble</p></blockquote>
 
 <p>Thanks to the magic of localhost:4000 and the built-in rake tasks, I can easily see what I&rsquo;m working on in (more or less) real-time.</p>
 
-<figure class='code'><figcaption><span>rake preview</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake preview
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='bash'><span class='line'>rake preview
 </span></code></pre></td></tr></table></div></figure>
 
 

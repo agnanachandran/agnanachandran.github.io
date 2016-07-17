@@ -4,64 +4,74 @@
         <loc>
             http://agnanachandran.github.io/blog/2013/07/28/percent-s-slash-wordpress-slash-octopress-slash-g/
         </loc>
-        <lastmod>2014-04-06T20:36:09-04:00</lastmod>
+        <lastmod>2016-07-17T02:05:55-04:00</lastmod>
     </url>
     <url>
         <loc>
             http://agnanachandran.github.io/blog/2013/07/29/software-engineering-at-the-university-of-waterloo/
         </loc>
-        <lastmod>2015-01-08T14:07:04-05:00</lastmod>
+        <lastmod>2016-07-16T04:09:24-04:00</lastmod>
     </url>
     <url>
         <loc>http://agnanachandran.github.io/blog/2013/07/29/a-masterpiece-of-music/</loc>
-        <lastmod>2014-04-06T20:36:09-04:00</lastmod>
+        <lastmod>2016-07-16T04:09:24-04:00</lastmod>
     </url>
     <url>
         <loc>http://agnanachandran.github.io/blog/2013/12/20/how-to-do-x-in-octopress/</loc>
-        <lastmod>2014-04-06T20:36:09-04:00</lastmod>
+        <lastmod>2016-07-16T04:09:24-04:00</lastmod>
     </url>
     <url>
         <loc>http://agnanachandran.github.io/blog/2014/03/14/on-2048/</loc>
-        <lastmod>2014-04-06T20:36:09-04:00</lastmod>
+        <lastmod>2016-07-17T01:47:21-04:00</lastmod>
     </url>
     <url>
         <loc>
             http://agnanachandran.github.io/blog/2014/04/06/when-stackoverflow-isnt-the-answer/
         </loc>
-        <lastmod>2014-04-06T20:41:39-04:00</lastmod>
+        <lastmod>2016-07-17T01:45:46-04:00</lastmod>
     </url>
     <url>
         <loc>
             http://agnanachandran.github.io/blog/2015/08/15/short-interval-updating-in-angular/
         </loc>
-        <lastmod>2015-09-01T13:59:17-04:00</lastmod>
+        <lastmod>2016-07-16T04:09:24-04:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://agnanachandran.github.io/blog/2016/07/17/using-simulated-annealing-to-solve-logic-puzzles/
+        </loc>
+        <lastmod>2016-07-17T03:07:11-04:00</lastmod>
     </url>
     <url>
         <loc>http://agnanachandran.github.io/about/</loc>
-        <lastmod>2016-05-08T17:36:24-04:00</lastmod>
+        <lastmod>2016-07-16T04:09:24-04:00</lastmod>
     </url>
     <url>
         <loc>http://agnanachandran.github.io/archives/</loc>
-        <lastmod>2015-09-01T13:59:17-04:00</lastmod>
+        <lastmod>2016-07-17T03:07:11-04:00</lastmod>
     </url>
     <url>
         <loc>http://agnanachandran.github.io/blog/archives/</loc>
-        <lastmod>2015-09-01T13:59:17-04:00</lastmod>
-    </url>
-    <url>
-        <loc>http://agnanachandran.github.io/blog/categories/</loc>
-        <lastmod>2014-04-06T20:36:09-04:00</lastmod>
+        <lastmod>2016-07-17T03:07:11-04:00</lastmod>
     </url>
     <url>
         <loc>http://agnanachandran.github.io/blog/</loc>
-        <lastmod>2015-09-01T13:59:17-04:00</lastmod>
+        <lastmod>2016-07-17T03:07:11-04:00</lastmod>
     </url>
     <url>
         <loc>http://agnanachandran.github.io/</loc>
-        <lastmod>2015-09-01T13:59:17-04:00</lastmod>
+        <lastmod>2016-07-17T03:07:11-04:00</lastmod>
+    </url>
+    <url>
+        <loc>http://agnanachandran.github.io/posts/</loc>
+        <lastmod>2016-07-17T03:07:11-04:00</lastmod>
+    </url>
+    <url>
+        <loc>http://agnanachandran.github.io/robots.txt</loc>
+        <lastmod>2016-07-16T04:09:24-04:00</lastmod>
     </url>
     <url>
         <loc>http://agnanachandran.github.io/search.html</loc>
-        <lastmod>2014-04-06T20:36:10-04:00</lastmod>
+        <lastmod>2016-07-16T04:09:24-04:00</lastmod>
     </url>
 </urlset>

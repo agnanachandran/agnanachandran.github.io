@@ -1,420 +1,216 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>Things To Think About</title>
-  <meta name="author" content="Anojh Gnanachandran">
+	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta charset="utf-8">
+	<title>Things To Think About</title>
 
-  
-  <meta name="description" content="Short Interval Updating in Angular Aug 15th, 2015 Let&rsquo;s take a look at a problem. We have a webapp to track build times for a continuous &hellip;">
-  
+	<meta name="author" content="Anojh Gnanachandran">
+	
+	<meta name="description" content="17 Jul 2016 Using Simulated Annealing to Solve Logic Puzzles The other day, I was watching Ted Ed&rsquo;s collection of YouTube videos on riddles &hellip;">
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="HandheldFriendly" content="True" />
+	<meta name="MobileOptimized" content="320" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  
-  <link rel="canonical" href="http://agnanachandran.github.io/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="Things To Think About" type="application/atom+xml">
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-37973526-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
+	<link href="/atom.xml" rel="alternate" title="Things To Think About" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700,400italic|Open+Sans:700,400|Droid+Serif:300,400,700,400italic" />
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/monokai-sublime.min.css" />
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 
-<body >
-  <header role="banner" id="sidebar">
-    <!-- Logo -->
-<aside id="logo" class="clearfix">
-  <div class="clearfix">
-    <a href="/">Things To Think About</a>
+
+<body class="home-template">
+  <header id="site-head">
+  <div class="vertical">
+    <div id="site-head-content" class="inner">
+      <h1 class="blog-title"><a class="no-rollover" href="/">Things To Think About</a></h1>
+      <h2 class="blog-description">By <a class="white" href="http://www.pluszero.ca">Anojh Gnanachandran</a></h2>
+    </div>
   </div>
-</aside>
+</header>
 
-<ul id="menu">
-
-  <li class="title">
-    <h1 id="title"><a href="/">Things To Think About</a></h1>
-  </li>
-
-
-  <li class="subtitle">
-    <h2 id="subtitle">Ideas, Experiences, Thoughts <br><br> By Anojh Gnanachandran</h2>
-  </li>
-
-  <li class="link">
-    <a href="/about/">About</a>
-  </li>
-
-
-  <li class="link">
-    <a href="http://github.com/agnanachandran/">Github</a>
-  </li>
-
-<li class="link">
-  <a href="/blog/archives">Archives</a>
-</li>
-<!--
-<li class="link rss">
-    <a href="/atom.xml">RSS feed</a>
-  </li>
--->
-</ul>
+  <main class="content" role="main">
+    
 
 
 
-<!-- Octopress Love -->
-<aside id="octopress_linkback">
-  <a href="http://octopress.org/">
-    <span class="octopress">Powered by Octopress</span>
-  </a>
-</aside>
-
-  </header>
-  <section id="main">
-      
-  
   
     <article class="post">
-      <div class="sharing-box">
-  
-  
-  
-</div>
-
       
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2015/08/15/short-interval-updating-in-angular/">Short Interval Updating in Angular</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
+	
+		
+	
+	<header class="post-header">
+		<span class="post-meta">17 Jul 2016</span>
+		<h2 class="post-title">
+			
+			<a href="/blog/2016/07/17/using-simulated-annealing-to-solve-logic-puzzles/">
+			
+				Using Simulated Annealing to Solve Logic Puzzles</a>
+		</h2>
+	</header>
+	<section class="post-excerpt">
+		<p>The other day, I was watching Ted Ed&rsquo;s collection of YouTube videos on riddles and came across this interesting logic puzzle described as <a href="https://www.youtube.com/watch?v=1rDVz_Fb6HQ">&ldquo;Einstein&rsquo;s Riddle&rdquo;</a>. Einstein probably didn&rsquo;t make up the riddle, but the problem itself is kind of interesting for a few reasons. You can either watch the video or keep reading for a retelling of the problem below.</p>
 
 
-
-
-
-
-
-
+	</section>
+  <a href="/blog/2016/07/17/using-simulated-annealing-to-solve-logic-puzzles/">Read on &rarr;</a>
   
 
 
-<time datetime="2015-08-15T22:51:00-04:00" pubdate data-updated="true">Aug 15<span>th</span>, 2015</time>
-        
-      </p>
-    
-  </header>
+    </article>
 
-
-  <p>Let&rsquo;s take a look at a problem. We have a webapp to track build times for a continuous integration (CI) server. The main page has an HTML table with dozens of rows (one row for each build) and each row has an entry for the creation time of the build and the length of time it took for the build to be deployed, tested, or whatever else you&rsquo;re doing with your CI server.</p>
+  
+    <article class="post">
+      
+	
+	<header class="post-header">
+		<span class="post-meta">15 Aug 2015</span>
+		<h2 class="post-title">
+			
+			<a href="/blog/2015/08/15/short-interval-updating-in-angular/">
+			
+				Short Interval Updating in Angular</a>
+		</h2>
+	</header>
+	<section class="post-excerpt">
+		<p>Let&rsquo;s take a look at a problem. We have a webapp to track build times for a continuous integration (CI) server. The main page has an HTML table with dozens of rows (one row for each build) and each row has an entry for the creation time of the build and the length of time it took for the build to be deployed, tested, or whatever else you&rsquo;re doing with your CI server.</p>
 
 <p>For most rows in your table, the duration can be populated with information from the server. The server sends back a creation time, and if the build is finished, a finishing time. Both the creation time and finishing time are specified in a milliseconds version of <a href="https://en.wikipedia.org/wiki/Unix_time">Unix time</a>. The duration is easy enough to calculate. Firstly, in Angular we would opt to use the <code>ng-repeat</code> directive to display the data in a table:</p>
 
 
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/08/15/short-interval-updating-in-angular/">Read on &rarr;</a>
-    </footer>
+	</section>
+  <a href="/blog/2015/08/15/short-interval-updating-in-angular/">Read on &rarr;</a>
   
 
 
     </article>
-  
+
   
     <article class="post">
-      <div class="sharing-box">
-  
-  
-  
-</div>
-
       
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2014/04/06/when-stackoverflow-isnt-the-answer/">When StackOverflow Isn&#8217;t the Answer</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-06T20:10:00-04:00" pubdate data-updated="true">Apr 6<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <p>I spent the better half of today debugging one of my current projects, an Android app designed to help users do things on their phone faster. Vague, I know.</p>
+	
+	<header class="post-header">
+		<span class="post-meta">06 Apr 2014</span>
+		<h2 class="post-title">
+			
+			<a href="/blog/2014/04/06/when-stackoverflow-isnt-the-answer/">
+			
+				When StackOverflow Isn&#8217;t the Answer</a>
+		</h2>
+	</header>
+	<section class="post-excerpt">
+		<p>I spent the better half of today debugging one of my current projects, an Android app designed to help users do things on their phone faster. Vague, I know.</p>
 
 <p>The issue at hand was a <code>java.lang.IllegalStateException</code> resulting from a fragment not being attached to its activity. Reproducing the bug was easy. Launch the app, search for a YouTube video, back out of the app, and search for another YouTube video. The app crashes. An easy &lsquo;solution&rsquo; was to check <code>fragment.isAdded()</code> in the <code>onVideosRetrieved</code> callback. Of course, the real problem is that the fragment still wasn&rsquo;t attached to an activity.</p>
 
-<blockquote><p><a href="http://developer.android.com/guide/components/fragments.html">&ldquo;A fragment must always be embedded in an activity&rdquo;</a>.</p></blockquote>
 
-
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/04/06/when-stackoverflow-isnt-the-answer/">Read on &rarr;</a>
-    </footer>
+	</section>
+  <a href="/blog/2014/04/06/when-stackoverflow-isnt-the-answer/">Read on &rarr;</a>
   
 
 
     </article>
-  
+
   
     <article class="post">
-      <div class="sharing-box">
-  
-  
-  
-</div>
-
       
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2014/03/14/on-2048/">On 2048</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-14T23:08:00-04:00" pubdate data-updated="true">Mar 14<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <p>This week on Hacker News, a game called 2048 rose to the top of the front page.  Subsequently, productivity at software companies everywhere dropped tremendously.</p>
+	
+	<header class="post-header">
+		<span class="post-meta">14 Mar 2014</span>
+		<h2 class="post-title">
+			
+			<a href="/blog/2014/03/14/on-2048/">
+			
+				On 2048</a>
+		</h2>
+	</header>
+	<section class="post-excerpt">
+		<p>This week on Hacker News, a game called 2048 rose to the top of the front page.  Subsequently, productivity at software companies everywhere dropped tremendously.</p>
 
 <p><a href="http://gabrielecirulli.github.io/2048/">The game itself is quite simple</a>. Use the arrow keys and get the numbered tiles to combine over and over again until you get a &lsquo;2048&rsquo; tile.</p>
 
 <p>The game is partially (read: very) luck-based. When the board is getting tight, a single wrong number, or a number popping up in the wrong place, can mess you up for the rest of the game.</p>
 
-<p>The general strategy to winning the game is a simple one. Keep your largest number in the corner, and progressively smaller numbers next to it in a row/column. Doing this guarantees you won&rsquo;t have useless pieces floating around the board (as long as you don&rsquo;t move a piece in the row/column in any perpendicular direction), and provides a systematic method to playing the game. You&rsquo;re then limited to moving in only a couple directions.</p>
 
-<br>
-
-
-<p><span class="caption-wrapper center" style="width: 600px"><img class="caption" src="/images/small_moment.png" title="About to win" alt="My crowning moment"><span class="caption-text">My crowning moment</span></span></p>
-
-<br>
-
-
-
-
-
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/03/14/on-2048/">Read on &rarr;</a>
-    </footer>
+	</section>
+  <a href="/blog/2014/03/14/on-2048/">Read on &rarr;</a>
   
 
 
     </article>
-  
+
   
     <article class="post">
-      <div class="sharing-box">
-  
-  
-  
-</div>
-
       
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2013/12/20/how-to-do-x-in-octopress/">How to Do X in Octopress</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
+	
+	<header class="post-header">
+		<span class="post-meta">20 Dec 2013</span>
+		<h2 class="post-title">
+			
+			<a href="/blog/2013/12/20/how-to-do-x-in-octopress/">
+			
+				How to Do X in Octopress</a>
+		</h2>
+	</header>
+	<section class="post-excerpt">
+		<p>So I spent the last couple days tweaking my Octopress themes and relearning how to do things since not blogging for a while and getting a new MBP. Navigating the Octopress file hierarchy isn&rsquo;t easy, but hopefully this post will help you (and be a useful reference for myself).</p>
 
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-20T23:11:00-05:00" pubdate data-updated="true">Dec 20<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <p>So I spent the last couple days tweaking my Octopress themes and relearning how to do things since not blogging for a while and getting a new MBP. Navigating the Octopress file hierarchy isn&rsquo;t easy, but hopefully this post will help you (and be a useful reference for myself).</p>
-
-
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/12/20/how-to-do-x-in-octopress/">Read on &rarr;</a>
-    </footer>
+	</section>
+  <a href="/blog/2013/12/20/how-to-do-x-in-octopress/">Read on &rarr;</a>
   
 
 
     </article>
-  
+
   
     <article class="post">
-      <div class="sharing-box">
-  
-  
-  
-</div>
-
       
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2013/07/29/a-masterpiece-of-music/">A Masterpiece of Music</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-29T23:29:00-04:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <p><em>Originally posted June 23rd, 2013</em></p>
+	
+	<header class="post-header">
+		<span class="post-meta">29 Jul 2013</span>
+		<h2 class="post-title">
+			
+			<a href="/blog/2013/07/29/a-masterpiece-of-music/">
+			
+				A Masterpiece of Music</a>
+		</h2>
+	</header>
+	<section class="post-excerpt">
+		<p><em>Originally posted June 23rd, 2013</em></p>
 
 <p>I was at a grocery store a couple weeks back, and over the PA system, I heard the lyrics “we are, we are we are, we are we are”, and for some reason, I thought it was catchy. It sounded like Kesha, so I had a starting point for searching (and I was too embarrassed to use Soundhound/Shazam in public to recognize the song).</p>
 
 
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/29/a-masterpiece-of-music/">Read on &rarr;</a>
-    </footer>
+	</section>
+  <a href="/blog/2013/07/29/a-masterpiece-of-music/">Read on &rarr;</a>
   
 
 
     </article>
-  
+
   
     <article class="post">
-      <div class="sharing-box">
-  
-  
-  
-</div>
-
       
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2013/07/29/software-engineering-at-the-university-of-waterloo/">Software Engineering at the University of Waterloo</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-29T00:23:00-04:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <p>This post was inspired by <a href="http://aimango.wordpress.com/2013/05/12/software-engineering-waterloo-courses/">a fellow software engineering student at UW</a>. If you want even more detail than I&rsquo;m providing here, check it out.</p>
+	
+	<header class="post-header">
+		<span class="post-meta">29 Jul 2013</span>
+		<h2 class="post-title">
+			
+			<a href="/blog/2013/07/29/software-engineering-at-the-university-of-waterloo/">
+			
+				Software Engineering at the University of Waterloo</a>
+		</h2>
+	</header>
+	<section class="post-excerpt">
+		<p>This post was inspired by <a href="http://aimango.wordpress.com/2013/05/12/software-engineering-waterloo-courses/">a fellow software engineering student at UW</a>. If you want even more detail than I&rsquo;m providing here, check it out.</p>
 
 <p><em>Last updated December 29th, 2013</em></p>
 
@@ -423,75 +219,75 @@
 <p>Here&rsquo;s a quick list of the courses I&rsquo;ve taken (the full curriculum can be found <a href="https://uwaterloo.ca/software-engineering/class-2017-2a#course%20sequence">here</a>):</p>
 
 
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/29/software-engineering-at-the-university-of-waterloo/">Read on &rarr;</a>
-    </footer>
+	</section>
+  <a href="/blog/2013/07/29/software-engineering-at-the-university-of-waterloo/">Read on &rarr;</a>
   
 
 
     </article>
-  
+
   
     <article class="post">
-      <div class="sharing-box">
-  
-  
-  
-</div>
-
       
-  <header>
-    
-      <h2 class="entry-title">
-        
-        <a href="/blog/2013/07/28/percent-s-slash-wordpress-slash-octopress-slash-g/">:%s/WordPress/Octopress/g</a>
-        
-      </h2>
-    
-    
-      <p class="meta">
-        
+	
+	<header class="post-header">
+		<span class="post-meta">28 Jul 2013</span>
+		<h2 class="post-title">
+			
+			<a href="/blog/2013/07/28/percent-s-slash-wordpress-slash-octopress-slash-g/">
+			
+				:%s/WordPress/Octopress/g</a>
+		</h2>
+	</header>
+	<section class="post-excerpt">
+		<p>So after only a few months of using WordPress, I decided to switch to Octopress. I decided to make that obligatory post that every new Octopress user writes. It&rsquo;s some sort of rite of passage, I think.</p>
 
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-28T14:00:00-04:00" pubdate data-updated="true">Jul 28<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <p>So after only a few months of using WordPress, I decided to switch to Octopress. I decided to make that obligatory post that every new Octopress user writes. It&rsquo;s some sort of rite of passage, I think.</p>
-
-
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/28/percent-s-slash-wordpress-slash-octopress-slash-g/">Read on &rarr;</a>
-    </footer>
+	</section>
+  <a href="/blog/2013/07/28/percent-s-slash-wordpress-slash-octopress-slash-g/">Read on &rarr;</a>
   
 
 
     </article>
+
+
+<nav class="pagination" role="pagination">
   
 
-    <nav role="navigation" id="pagination">
+  <span class="page-number">
+    Page 1 of 1
+  </span>
 
+  
 </nav>
-  </section>
-  
 
-  
+
+  </main>
+  <footer class="site-footer"><div class="inner">
+
+
+Follow me on
+
+
+
+
+
+<a class="social github" href="http://github.com/agnanachandran" title="GitHub">GitHub</a>
+
+
+
+
+<section class="copyright">All content copyright <a href="/">Anojh Gnanachandran</a> © 2016 • All rights reserved.</section>
+
+<!-- <section class="poweredby">Casper theme by <a class="icon&#45;ghost" href="http://tryghost.org">Ghost</a> &#38;amp; Published with <a href="http://octopress.org">Octopress</a></section> -->
+
+</div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+
+
 
 <script type="text/javascript">
       var disqus_shortname = 'thingstothinkabout';
@@ -501,17 +297,24 @@
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
 
 
 
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-37973526-1']);
+		_gaq.push(['_trackPageview']);
 
-
-
-
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 
 
 

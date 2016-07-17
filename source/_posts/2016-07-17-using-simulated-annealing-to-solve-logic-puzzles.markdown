@@ -185,7 +185,7 @@ Now we're ready to define our simulated annealing technique.
         return current, num_iterations
 ```
 
-There's two functions we haven't defined yet that are used in the above function. These are `get_random_neighbour` and `cost_of_state`.
+There's two functions we haven't defined yet that are used above. These are `get_random_neighbour` and `cost_of_state`.
 
 ```python
     def get_random_neighbour(state):

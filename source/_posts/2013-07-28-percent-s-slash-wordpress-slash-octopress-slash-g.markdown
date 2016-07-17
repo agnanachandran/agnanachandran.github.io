@@ -15,14 +15,14 @@ There's 5 reasons I can think of at the top of my head about why Octopress is so
 
 ## Super quick deployment; no fumbling with \<insert your favourite blogging platform here\>.
 
-``` bash octopress blogging
+``` bash
 rake generate
 rake deploy
 ```
 
 It's that easy. Octopress uses [Jekyll](http://jekyllrb.com/), a static site generator, to push the static HTML, CSS, JS etc. to my master branch at agnanachandran.github.io, and with some quick commands (which I should really make aliases for):
 
-``` bash committing changes
+``` bash
 git add .
 git commit -m 'new post'
 git push origin source
@@ -34,7 +34,7 @@ my work is pushed to my GitHub repo.
 
 Thanks to the magic of localhost:4000 and the built-in rake tasks, I can easily see what I'm working on in (more or less) real-time.
 
-``` bash rake preview
+``` bash
 rake preview
 ```
 

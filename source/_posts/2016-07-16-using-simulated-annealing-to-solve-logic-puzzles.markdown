@@ -61,7 +61,7 @@ When I first learned about the problem years ago, I didn't have much programming
 
 How many arrangements are there? Well for the first house, there are 5 "attributes" to pick (nationality, wall colour, animal, beverage, and cigar), and each has 5 options. This gives 5<sup>5</sup> possibilities for the first house. Then for the second house, there are still 5 attributes to pick, but only 4 options for each. This gives 4<sup>5</sup> possibilities for the second house, 3<sup>5</sup> for the third, 2<sup>5</sup> for the fourth and 1<sup>5</sup> for the fifth. Multiplying these together gives 24 883 200 000 or almost 25 billion possibilities. If we could check 100 000 possibilities every second, it would take 69 hours to check all the possibilities.
 
-There are many ways we could speed up the process, like using some of the clues to significantly reduce the size of the search space. We could also turn the clues into logic expressions in code and use them to perform a similar process of elimination technique to simulate how it would be done on paper. I thought to use a technique I learned in my Cooperative and Adaptive Algorithms class called Simulated Annealing. Simulated annealing can be used to solve problems like this, where there's a large search space and we are trying to find a global optimum. In this case, the global optimum is the arrangement in which all 15 of the clues are satisfied.
+There are many ways we could speed up the process, like using some of the clues to significantly reduce the size of the search space. We could also turn the clues into logic expressions in code and use them to perform a similar process of elimination technique to simulate how it would be done on paper. I thought to use a technique I learned in my cooperative and adaptive algorithms class called simulated annealing. Simulated annealing can be used to solve problems like this, where there's a large search space and we are trying to find a global optimum. In this case, the global optimum is the arrangement in which all 15 of the clues are satisfied.
 
 ### Simulated Annealing
 
@@ -93,7 +93,7 @@ Looking at the exponential function, the greater the cost delta, the lower the p
 
 t affects how often we pick worse solutions. The greater the value of t, the higher the acceptance probability is. t is a parameter we choose and which typically starts high and steadily decreases every so often, so we are less likely to accept worse solutions as time goes on (where we are hopefully close to finding the global minimum). 
 
-Note that since Δc and t are both positive, the exponential function's value is in the range (0, 1) We can use a random number in the range (0, 1) to choose, based on the acceptance probability, whether we should move to the new state or not. If the random number is less than the acceptance probability's value, we should move to the new state.
+Note that since Δc and t are both positive, the exponential function's value is in the range (0, 1). We can use a random number in this range to choose, based on the acceptance probability, whether we should move to the new state or not. If the random number is less than the acceptance probability's value, we should move to the new state.
 
 #### Turning It Into Code
 
@@ -123,7 +123,7 @@ We'll write the code in python because it's great for stuff like this. First, we
         initial.append([attr[i] for attr in attributes])
 ```
 
-For each attribute, the <i>i<sup>th</sup></i> house will take the <i>i<sup>th</sup></i> choice for the attribute. Thus, the initial state can be represented by a list of 5 houses, each of which is an array of the attributes it takes on.
+For each attribute, the <i>i<sup>th</sup></i> house will take on the <i>i<sup>th</sup></i> choice for the attribute. Thus, the initial state can be represented by a list of 5 houses, each of which is a list of the attributes it takes on.
 
 ```python
     [
@@ -145,7 +145,7 @@ For convenience, we'll also define the following constants:
     CIG = 4 # Cigar index
 ```
 
-Each index in the array for a house corresponds to a specific attribute as shown above.
+Each index in the list for a house corresponds to a specific attribute as shown above.
 
 Now we're ready to define our simulated annealing technique.
 

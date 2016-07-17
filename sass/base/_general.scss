@@ -240,22 +240,22 @@ pre {
     margin: 0;
     border: 1px solid #E3EDF3;
     width: 100%;
-    padding: 10px;
+    padding: 0px;
     font-family: Inconsolata, monospace, sans-serif;
     font-size: 0.9em;
     white-space: pre;
     word-break: normal;
     overflow: auto;
     background: #F7FAFB;
-    border-radius: 3px;
+    border-radius: 5px;
 }
 
 pre code, tt {
-    font-size: inherit;
+    font-size: 0.85em;
     white-space: pre;
     background: transparent;
     border: none;
-    padding: 0;
+    padding: 1em !important;
 }
 
 kbd {
@@ -330,6 +330,10 @@ table.plain {
    3. Utilities - These things get used a lot
    =================================================================== */
 
+.white {
+  color: white;
+}
+
 /* Hides shit */
 .hidden {
     text-indent: -9999px;
@@ -341,7 +345,7 @@ table.plain {
 .inner {
     position: relative;
     width: 80%;
-    max-width: 700px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
@@ -416,8 +420,8 @@ table.plain {
 /* Every post, on every page, gets this style on its <article> tag */
 .post {
     position: relative;
-    width:80%;
-    max-width: 700px;
+    width: 80%;
+    max-width: 800px;
     margin: 4rem auto;
     padding-bottom: 2rem;
     border-bottom: #EBF2F6 1px solid;
@@ -647,7 +651,7 @@ table.plain {
 .pagination {
     position: relative;
     width: 80%;
-    max-width: 700px;
+    max-width: 800px;
     margin: 4rem auto;
     font-family: 'Open Sans', sans-serif;
     font-size: 1.3rem;

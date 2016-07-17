@@ -20,16 +20,11 @@ The other day, I was watching Ted Ed's collection of YouTube videos on riddles a
 
 We have the following information:
 
-1. Each house's owner is of a different nationality.  
-   The choices are Dane, Brit, Swede, Norwegian, and German.
-2. The interior walls of each house are coloured differently.  
-   The choices are yellow, red, white, green, and blue.
-3. Each house contains a different animal.  
-   The choices are horse, cat, bird, fish, and dog.
-4. The owner of each house drinks a different beverage.  
-   The choices are water, tea, milk, coffee, and root beer.
-5. The owner of each house smokes a different kind of cigar.  
-   The choices are Pall Mall, Prince, Blue Master, Dunhill, and Blends.
+1. Each house's owner is of a different nationality,<br> either Dane, Brit, Swede, Norwegian, or German.
+2. The interior walls of each house are coloured differently,<br> either yellow, red, white, green, or blue.
+3. Each house contains a different animal,<br> either horse, cat, bird, fish, or dog.
+4. The owner of each house drinks a different beverage,<br> either water, tea, milk, coffee, or root beer.
+5. The owner of each house smokes a different kind of cigar,<br> either Pall Mall, Prince, Blue Master, Dunhill, or Blends.
 
 Furthermore, we have the following 15 clues:
 
@@ -65,7 +60,7 @@ There are many ways we could speed up the process, like using some of the clues 
 
 ### Simulated Annealing
 
-The idea behind simulated annealing is fairly simple.
+The idea behind [simulated annealing](https://en.wikipedia.org/wiki/Simulated_annealing) is fairly simple.
 
 We start with an initial state (or "solution"), where a state is one of the almost 25 billion possibilities described above. That is, for each house and for each of its attributes, one of the five choices for the attribute is picked.
 
@@ -150,7 +145,6 @@ Each index in the list for a house corresponds to a specific attribute as shown 
 Now we're ready to define our simulated annealing technique.
 
 ```python
-    import copy
     import math
     import random
 
@@ -165,7 +159,6 @@ Now we're ready to define our simulated annealing technique.
             neighbour = get_random_neighbour(current)
             neighbour_cost = cost_of_state(neighbour)
 
-            current_cost = cost_of_state(current)
             cost_delta = neighbour_cost - current_cost
 
             # If the neighbouring state is at least as good as the current state
@@ -176,8 +169,8 @@ Now we're ready to define our simulated annealing technique.
 
             num_iterations += 1
 
-            # Decrease the temperature by 0.10 every 50 iterations until it's at 0.30
-            if num_iterations % 50 == 0 and temp > 0.30:
+            # Decrease the temperature by 0.10 every 500 iterations until it's at 0.10
+            if num_iterations % 500 == 0 and temp > 0.10:
                 temp -= 0.10
 
         # We found the solution!
@@ -189,8 +182,7 @@ There's two functions we haven't defined yet that are used above. These are `get
 
 ```python
     def get_random_neighbour(state):
-        # Swap two attribute choices in two houses
-        neighbour = copy.deepcopy(state)
+        neighbour = [house[:] for house in state] # Deep copy
 
         i = random.randint(0, 4)
         j = random.choice(range(0, i) + range(i+1, 4))
@@ -258,10 +250,10 @@ We use a seed value of 100 for the random number generator so we can produce the
     ['brit', 'red', 'bird', 'milk', 'pall mall']
     ['german', 'green', 'fish', 'coffee', 'prince']
     ['swede', 'white', 'dog', 'root beer', 'blue master']
-    Number of iterations: 10010
+    Number of iterations: 3301
 ```
 
-We found the solution! In 10010 iterations of simulated annealing, we found that the German has the fish in the fourth house. We only had to look at about 0.00004% of the possibilities to find the solution. Running the `time` command shows this took 0.76 seconds to run on my machine, a 2013 MacBook Pro.
+We found the solution! In 3301 iterations of simulated annealing, we found that the German has the fish in the fourth house. We only had to look at about 0.00001% of the possibilities to find the solution. Running the `time` command shows this took about 90 ms to run on my machine, a 2013 MacBook Pro.
 
 Now although taking the time to code this may have taken longer than to solve the problem by hand, this technique can be applied to many other problems, most notably, the [Travelling Salesman Problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem) in which we would swap cities instead. The only things we would need to change are the state representation, the neighbouring state selection, and the cost function. The technique itself is generally applicable to all sorts of problems. 
 
@@ -272,5 +264,3 @@ It's worth noting that simulated annealing has many tunable parameters (initial 
 Logic problems can be often be solved in a variety of ways. Doing it this way allows us to do very little thinking with regards to the clues and how they all relate to each other. We let the computer do the work for us.
 
 The applications of techniques like this are of course not limited to logic puzzles like this. Simulated annealing in particular can be used for circuit board placement, physics simulations, and structural optimization. Artificial intelligence techniques in general have wide-reaching applications and implications. Learning about different techniques is both interesting and valuable, if only for solving fun logic puzzles like this one.
-
-P.S. if you find any mistakes, please don't hesitate to leave a comment.

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Artificial Intelligence | Things To Think About]]></title>
   <link href="http://agnanachandran.github.io/blog/categories/artificial-intelligence/atom.xml" rel="self"/>
   <link href="http://agnanachandran.github.io/"/>
-  <updated>2016-07-17T03:09:39-04:00</updated>
+  <updated>2016-07-17T03:24:44-04:00</updated>
   <id>http://agnanachandran.github.io/</id>
   <author>
     <name><![CDATA[Anojh Gnanachandran]]></name>
@@ -110,7 +110,7 @@ The choices are Pall Mall, Prince, Blue Master, Dunhill, and Blends.</li>
 
 <p>Looking at the exponential function, the greater the cost delta, the lower the power, and thus the lower the acceptance probability is. If the neighbouring cost is much higher than the current cost, we are not likely to move to it.</p>
 
-<p>t affects how often we pick worse solutions. The greater the value of t, the higher the acceptance probability is. t is a parameter we choose and which typically starts high and steadily decreases every so often, so we are less likely to accept worse solutions as time goes on (where we are hopefully close to finding the global minimum).</p>
+<p>t affects how often we pick worse solutions. The greater the value of t, the higher the acceptance probability is. t is a parameter we choose which typically starts high and steadily decreases every so often, so we are less likely to accept worse solutions as time goes on (where we are hopefully close to finding the global minimum).</p>
 
 <p>Note that since Δc and t are both positive, the exponential function&rsquo;s value is in the range (0, 1). We can use a random number in this range to choose, based on the acceptance probability, whether we should move to the new state or not. If the random number is less than the acceptance probability&rsquo;s value, we should move to the new state.</p>
 

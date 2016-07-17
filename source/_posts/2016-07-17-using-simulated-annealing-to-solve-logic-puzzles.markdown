@@ -261,9 +261,9 @@ We use a seed value of 100 for the random number generator so we can produce the
     Number of iterations: 10010
 ```
 
-We found the solution! In 10010 iterations of simulated annealing, we found that the German has the fish in the fourth house. Running the `time` command shows this took 0.76 seconds to run on my machine, a 2013 MacBook Pro.
+We found the solution! In 10010 iterations of simulated annealing, we found that the German has the fish in the fourth house. We only had to look at about 0.00004% of the possibilities to find the solution. Running the `time` command shows this took 0.76 seconds to run on my machine, a 2013 MacBook Pro.
 
-Now, although taking the time to code this may have taken longer than to solve the problem by hand, this technique can be applied to many other problems, most notably, the [Travelling Salesman Problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem) in which we would swap cities instead. The only things we would need to change are the state representation, the neighbouring state selection, and the cost function. The technique itself is generally applicable to all sorts of problems. 
+Now although taking the time to code this may have taken longer than to solve the problem by hand, this technique can be applied to many other problems, most notably, the [Travelling Salesman Problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem) in which we would swap cities instead. The only things we would need to change are the state representation, the neighbouring state selection, and the cost function. The technique itself is generally applicable to all sorts of problems. 
 
 Logic problems can be often be solved in a variety of ways. Doing it this way allows us to do very little thinking with regards to the clues and how they all relate to each other. We let the computer do the work for us.
 

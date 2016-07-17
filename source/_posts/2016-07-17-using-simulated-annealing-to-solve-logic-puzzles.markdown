@@ -265,6 +265,10 @@ We found the solution! In 10010 iterations of simulated annealing, we found that
 
 Now although taking the time to code this may have taken longer than to solve the problem by hand, this technique can be applied to many other problems, most notably, the [Travelling Salesman Problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem) in which we would swap cities instead. The only things we would need to change are the state representation, the neighbouring state selection, and the cost function. The technique itself is generally applicable to all sorts of problems. 
 
+### Final Notes
+
+It's worth noting that simulated annealing has many tunable parameters (initial temperature, temperature reduction function, stopping conditions, acceptance probability function, and more). If these are changed, the number of iterations taken to find the solution can vary drastically. In my tests, I saw as many as a million iterations and as few as 200 iterations to converge to the solution. Choosing the parameters wisely is part of the art of making simulated annealing performant.
+
 Logic problems can be often be solved in a variety of ways. Doing it this way allows us to do very little thinking with regards to the clues and how they all relate to each other. We let the computer do the work for us.
 
 The applications of techniques like this are of course not limited to logic puzzles like this. Simulated annealing in particular can be used for circuit board placement, physics simulations, and structural optimization. Artificial intelligence techniques in general have wide-reaching applications and implications. Learning about different techniques is both interesting and valuable, if only for solving fun logic puzzles like this one.

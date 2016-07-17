@@ -51,16 +51,11 @@
 <p>We have the following information:</p>
 
 <ol>
-<li>Each house&rsquo;s owner is of a different nationality.<br/>
-The choices are Dane, Brit, Swede, Norwegian, and German.</li>
-<li>The interior walls of each house are coloured differently.<br/>
-The choices are yellow, red, white, green, and blue.</li>
-<li>Each house contains a different animal.<br/>
-The choices are horse, cat, bird, fish, and dog.</li>
-<li>The owner of each house drinks a different beverage.<br/>
-The choices are water, tea, milk, coffee, and root beer.</li>
-<li>The owner of each house smokes a different kind of cigar.<br/>
-The choices are Pall Mall, Prince, Blue Master, Dunhill, and Blends.</li>
+<li>Each house&rsquo;s owner is of a different nationality,<br> either Dane, Brit, Swede, Norwegian, or German.</li>
+<li>The interior walls of each house are coloured differently,<br> either yellow, red, white, green, or blue.</li>
+<li>Each house contains a different animal,<br> either horse, cat, bird, fish, or dog.</li>
+<li>The owner of each house drinks a different beverage,<br> either water, tea, milk, coffee, or root beer.</li>
+<li>The owner of each house smokes a different kind of cigar,<br> either Pall Mall, Prince, Blue Master, Dunhill, or Blends.</li>
 </ol>
 
 
@@ -101,7 +96,7 @@ The choices are Pall Mall, Prince, Blue Master, Dunhill, and Blends.</li>
 
 <h3>Simulated Annealing</h3>
 
-<p>The idea behind simulated annealing is fairly simple.</p>
+<p>The idea behind <a href="https://en.wikipedia.org/wiki/Simulated_annealing">simulated annealing</a> is fairly simple.</p>
 
 <p>We start with an initial state (or &ldquo;solution&rdquo;), where a state is one of the almost 25 billion possibilities described above. That is, for each house and for each of its attributes, one of the five choices for the attribute is picked.</p>
 
@@ -188,8 +183,7 @@ The choices are Pall Mall, Prince, Blue Master, Dunhill, and Blends.</li>
 
 <p>Now we&rsquo;re ready to define our simulated annealing technique.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">copy</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">math</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">math</span>
 </span><span class='line'><span class="kn">import</span> <span class="nn">random</span>
 </span><span class='line'>
 </span><span class='line'><span class="k">def</span> <span class="nf">sa</span><span class="p">(</span><span class="n">initial</span><span class="p">):</span>
@@ -203,7 +197,6 @@ The choices are Pall Mall, Prince, Blue Master, Dunhill, and Blends.</li>
 </span><span class='line'>        <span class="n">neighbour</span> <span class="o">=</span> <span class="n">get_random_neighbour</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
 </span><span class='line'>        <span class="n">neighbour_cost</span> <span class="o">=</span> <span class="n">cost_of_state</span><span class="p">(</span><span class="n">neighbour</span><span class="p">)</span>
 </span><span class='line'>
-</span><span class='line'>        <span class="n">current_cost</span> <span class="o">=</span> <span class="n">cost_of_state</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
 </span><span class='line'>        <span class="n">cost_delta</span> <span class="o">=</span> <span class="n">neighbour_cost</span> <span class="o">-</span> <span class="n">current_cost</span>
 </span><span class='line'>
 </span><span class='line'>        <span class="c"># If the neighbouring state is at least as good as the current state</span>
@@ -214,8 +207,8 @@ The choices are Pall Mall, Prince, Blue Master, Dunhill, and Blends.</li>
 </span><span class='line'>
 </span><span class='line'>        <span class="n">num_iterations</span> <span class="o">+=</span> <span class="mi">1</span>
 </span><span class='line'>
-</span><span class='line'>        <span class="c"># Decrease the temperature by 0.10 every 50 iterations until it&#39;s at 0.30</span>
-</span><span class='line'>        <span class="k">if</span> <span class="n">num_iterations</span> <span class="o">%</span> <span class="mi">50</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">temp</span> <span class="o">&gt;</span> <span class="mf">0.30</span><span class="p">:</span>
+</span><span class='line'>        <span class="c"># Decrease the temperature by 0.10 every 500 iterations until it&#39;s at 0.10</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">num_iterations</span> <span class="o">%</span> <span class="mi">500</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">temp</span> <span class="o">&gt;</span> <span class="mf">0.10</span><span class="p">:</span>
 </span><span class='line'>            <span class="n">temp</span> <span class="o">-=</span> <span class="mf">0.10</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="c"># We found the solution!</span>
@@ -227,8 +220,7 @@ The choices are Pall Mall, Prince, Blue Master, Dunhill, and Blends.</li>
 <p>There&rsquo;s two functions we haven&rsquo;t defined yet that are used above. These are <code>get_random_neighbour</code> and <code>cost_of_state</code>.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">get_random_neighbour</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
-</span><span class='line'>    <span class="c"># Swap two attribute choices in two houses</span>
-</span><span class='line'>    <span class="n">neighbour</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">neighbour</span> <span class="o">=</span> <span class="p">[</span><span class="n">house</span><span class="p">[:]</span> <span class="k">for</span> <span class="n">house</span> <span class="ow">in</span> <span class="n">state</span><span class="p">]</span> <span class="c"># Deep copy</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="n">i</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 </span><span class='line'>    <span class="n">j</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -296,13 +288,13 @@ The choices are Pall Mall, Prince, Blue Master, Dunhill, and Blends.</li>
 </span><span class='line'><span class="p">[</span><span class="s">&#39;brit&#39;</span><span class="p">,</span> <span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;bird&#39;</span><span class="p">,</span> <span class="s">&#39;milk&#39;</span><span class="p">,</span> <span class="s">&#39;pall mall&#39;</span><span class="p">]</span>
 </span><span class='line'><span class="p">[</span><span class="s">&#39;german&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;fish&#39;</span><span class="p">,</span> <span class="s">&#39;coffee&#39;</span><span class="p">,</span> <span class="s">&#39;prince&#39;</span><span class="p">]</span>
 </span><span class='line'><span class="p">[</span><span class="s">&#39;swede&#39;</span><span class="p">,</span> <span class="s">&#39;white&#39;</span><span class="p">,</span> <span class="s">&#39;dog&#39;</span><span class="p">,</span> <span class="s">&#39;root beer&#39;</span><span class="p">,</span> <span class="s">&#39;blue master&#39;</span><span class="p">]</span>
-</span><span class='line'><span class="n">Number</span> <span class="n">of</span> <span class="n">iterations</span><span class="p">:</span> <span class="mi">10010</span>
+</span><span class='line'><span class="n">Number</span> <span class="n">of</span> <span class="n">iterations</span><span class="p">:</span> <span class="mi">3301</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>We found the solution! In 10010 iterations of simulated annealing, we found that the German has the fish in the fourth house. We only had to look at about 0.00004% of the possibilities to find the solution. Running the <code>time</code> command shows this took 0.76 seconds to run on my machine, a 2013 MacBook Pro.</p>
+<p>We found the solution! In 3301 iterations of simulated annealing, we found that the German has the fish in the fourth house. We only had to look at about 0.00001% of the possibilities to find the solution. Running the <code>time</code> command shows this took about 90 ms to run on my machine, a 2013 MacBook Pro.</p>
 
-<p>Now although taking the time to code this may have taken longer than to solve the problem by hand, this technique can be applied to many other problems, most notably, the <a href="https://en.wikipedia.org/wiki/Travelling_salesman_problem">Travelling Salesman Problem</a> in which we would swap cities instead. The only things we would need to change are the state representation, the neighbouring state selection, and the cost function. The technique itself is generally applicable to all sorts of problems.</p>
+<p>Although taking the time to code this may have taken longer than to solve the problem by hand, this technique can be applied to many other problems, most notably, the <a href="https://en.wikipedia.org/wiki/Travelling_salesman_problem">Travelling Salesman Problem</a> in which we would swap cities instead. The only things we would need to change are the state representation, the neighbouring state selection, and the cost function. The technique itself is generally applicable to all sorts of problems.</p>
 
 <h3>Final Notes</h3>
 
@@ -311,8 +303,6 @@ The choices are Pall Mall, Prince, Blue Master, Dunhill, and Blends.</li>
 <p>Logic problems can be often be solved in a variety of ways. Doing it this way allows us to do very little thinking with regards to the clues and how they all relate to each other. We let the computer do the work for us.</p>
 
 <p>The applications of techniques like this are of course not limited to logic puzzles like this. Simulated annealing in particular can be used for circuit board placement, physics simulations, and structural optimization. Artificial intelligence techniques in general have wide-reaching applications and implications. Learning about different techniques is both interesting and valuable, if only for solving fun logic puzzles like this one.</p>
-
-<p>P.S. if you find any mistakes, please don&rsquo;t hesitate to leave a comment.</p>
 
 	</section>
 

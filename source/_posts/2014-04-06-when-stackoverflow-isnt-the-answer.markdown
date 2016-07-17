@@ -10,9 +10,9 @@ I spent the better half of today debugging one of my current projects, an Androi
 
 The issue at hand was a `java.lang.IllegalStateException` resulting from a fragment not being attached to its activity. Reproducing the bug was easy. Launch the app, search for a YouTube video, back out of the app, and search for another YouTube video. The app crashes. An easy 'solution' was to check `fragment.isAdded()` in the `onVideosRetrieved` callback. Of course, the real problem is that the fragment still wasn't attached to an activity.
 
-> ["A fragment must always be embedded in an activity"](http://developer.android.com/guide/components/fragments.html).
-
 <!-- more -->
+
+> ["A fragment must always be embedded in an activity"](http://developer.android.com/guide/components/fragments.html).
 
 Searching every relevant stackoverflow answer yielded nothing. I tried switching to the non-support version of `fragment`, not using a `FragmentActivity`, and not using the `<fragment>` tag in the activity layout. Nothing changed.
 
@@ -23,14 +23,13 @@ The answer revealed itself to me after reading a tangentially related answer
 ### Singleton misuse
 
 I immediately remembered all the "Manager" classes I had, which for some reason, I decided should be singletons.
-
-``` java Singleton misuse
-public static WeatherManager getInstance(Fragment fragment, OnFinishedListener listener) {
-    if (instance == null) {
-        instance = new WeatherManager(fragment, listener);
+```java
+    public static WeatherManager getInstance(Fragment fragment, OnFinishedListener listener) {
+        if (instance == null) {
+            instance = new WeatherManager(fragment, listener);
+        }
+        return instance;
     }
-    return instance;
-}
 ```
 
 Oops.

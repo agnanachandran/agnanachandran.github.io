@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Using Simulated Annealing To Solve Logic Puzzles"
-date: 2016-07-16 02:10
+date: 2016-07-17 02:43
 comments: true
 categories: [Artificial Intelligence, Search Methods, Logic Puzzles]
 ---

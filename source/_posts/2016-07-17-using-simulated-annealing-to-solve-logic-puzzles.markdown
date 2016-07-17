@@ -253,7 +253,7 @@ We use a seed value of 100 for the random number generator so we can produce the
     Number of iterations: 3301
 ```
 
-We found the solution! In 3301 iterations of simulated annealing, we found that the German has the fish in the fourth house. We only had to look at about 0.00001% of the possibilities to find the solution. Running the `time` command shows this took about 90 ms to run on my machine, a 2013 MacBook Pro.
+We found the solution! In 3301 iterations of simulated annealing, we found that the German has the fish in the fourth house. We only had to look at about 0.00001% of the possibilities to find the solution. Running the `time` command shows this took about 90 ms to run on my machine, a 2013 MacBook Pro. If you'd like to review the code in full, it can be found [here](https://gist.github.com/agnanachandran/1cdb49e8360d4c1ac8bea877c252aed3).
 
 Although taking the time to code this may have taken longer than to solve the problem by hand, this technique can be applied to many other problems, most notably, the [Travelling Salesman Problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem) in which we would swap cities instead. The only things we would need to change are the state representation, the neighbouring state selection, and the cost function. The technique itself is generally applicable to all sorts of problems. 
 

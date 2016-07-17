@@ -273,4 +273,4 @@ Logic problems can be often be solved in a variety of ways. Doing it this way al
 
 The applications of techniques like this are of course not limited to logic puzzles like this. Simulated annealing in particular can be used for circuit board placement, physics simulations, and structural optimization. Artificial intelligence techniques in general have wide-reaching applications and implications. Learning about different techniques is both interesting and valuable, if only for solving fun logic puzzles like this one.
 
-P.S. if you find any mistakes, please don't hesitate to [contact me](mailto:anojhgnanachandran@gmail.com).
+P.S. if you find any mistakes, please don't hesitate to leave a comment.

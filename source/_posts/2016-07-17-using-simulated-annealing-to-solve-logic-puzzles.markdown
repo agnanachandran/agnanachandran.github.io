@@ -91,7 +91,7 @@ If it has greater cost, we will only move to it with a certain probability. Othe
 
 Looking at the exponential function, the greater the cost delta, the lower the power, and thus the lower the acceptance probability is. If the neighbouring cost is much higher than the current cost, we are not likely to move to it.
 
-t affects how often we pick worse solutions. The greater the value of t, the higher the acceptance probability is. t is a parameter we choose and which typically starts high and steadily decreases every so often, so we are less likely to accept worse solutions as time goes on (where we are hopefully close to finding the global minimum). 
+t affects how often we pick worse solutions. The greater the value of t, the higher the acceptance probability is. t is a parameter we choose which typically starts high and steadily decreases every so often, so we are less likely to accept worse solutions as time goes on (where we are hopefully close to finding the global minimum). 
 
 Note that since Δc and t are both positive, the exponential function's value is in the range (0, 1). We can use a random number in this range to choose, based on the acceptance probability, whether we should move to the new state or not. If the random number is less than the acceptance probability's value, we should move to the new state.
 

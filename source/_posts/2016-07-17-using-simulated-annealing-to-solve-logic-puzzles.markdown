@@ -87,7 +87,7 @@ If the neighbouring state has lesser or equal cost, then we will always move to 
 
 If it has greater cost, we will only move to it with a certain probability. Otherwise we'll stay where we are and choose another neighbour. We define the cost delta denoted by Δc, which is simply the current cost subtracted from the neighbour cost, and a parameter t, which stands for temperature, and influences how likely we are to accept the neighbouring state.
 
-{% img center caption /images/simulated_annealing/acceptance_probability.png 'Acceptance Probability' %}
+{% img center caption /images/simulated_annealing/acceptance_probability.png Acceptance Probability %}
 
 Looking at the exponential function, the greater the cost delta, the lower the power, and thus the lower the acceptance probability is. If the neighbouring cost is much higher than the current cost, we are not likely to move to it.
 

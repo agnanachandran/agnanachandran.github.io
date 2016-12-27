@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Logic Puzzles | Things To Think About]]></title>
   <link href="http://agnanachandran.github.io/blog/categories/logic-puzzles/atom.xml" rel="self"/>
   <link href="http://agnanachandran.github.io/"/>
-  <updated>2016-07-17T14:11:49-04:00</updated>
+  <updated>2016-12-27T14:30:47-05:00</updated>
   <id>http://agnanachandran.github.io/</id>
   <author>
     <name><![CDATA[Anojh Gnanachandran]]></name>
@@ -173,7 +173,7 @@ CIG = 4 # Cigar index
 
 <p>Each index in the list for a house corresponds to a specific attribute as shown above.</p>
 
-<p>Now we&rsquo;re ready to define our simulated annealing technique.</p>
+<p>Now we&rsquo;re ready to define our simulated annealing procedure.</p>
 
 <p>```python</p>
 
@@ -188,6 +188,8 @@ def sa(initial):
     num_iterations = 0
 
     while current_cost &gt; 0: # keep going until we find the global minimum
+        num_iterations += 1
+
         neighbour = get_random_neighbour(current)
         neighbour_cost = cost_of_state(neighbour)
 
@@ -199,11 +201,9 @@ def sa(initial):
         if cost_delta &lt;= 0 or random.random() &lt; math.exp(-cost_delta/temp):
             current, current_cost = neighbour, neighbour_cost
 
-        num_iterations += 1
-
-        # Decrease the temperature by 0.10 every 500 iterations until it's at 0.10
-        if num_iterations % 500 == 0 and temp &gt; 0.10:
-            temp -= 0.10
+        # Decrease the temperature by 0.05 every 500 iterations until it's at 0.20
+        if num_iterations % 500 == 0 and temp &gt; 0.20:
+            temp -= 0.05
 
     # We found the solution!
     # Return it and the number of iterations it took to get there
@@ -219,8 +219,7 @@ def sa(initial):
 <pre><code>def get_random_neighbour(state):
     neighbour = [house[:] for house in state] # Deep copy
 
-    i = random.randint(0, 4)
-    j = random.choice(range(0, i) + range(i+1, 4))
+    i, j = random.sample(xrange(5), 2)
     attr_idx = random.randint(0, 4)
 
     neighbour[i][attr_idx], neighbour[j][attr_idx] =
@@ -250,7 +249,7 @@ def sa(initial):
             h[COL] == 'yellow' and h[CIG] == 'dunhill',
             i == 2 and h[BEV] == 'milk',
             i == 0 and h[NAT] == 'norwegian',
-            h[CIG] == 'blends' and ((i &gt; 0 and state[i-1][ANI] == 'cat') 
+            h[CIG] == 'blends' and ((i &gt; 0 and state[i-1][ANI] == 'cat')
                                  or (i &lt; 4 and state[i+1][ANI] == 'cat')),
             h[ANI] == 'horse' and ((i &gt; 0 and state[i-1][CIG] == 'dunhill')
                                  or (i &lt; 4 and state[i+1][CIG] == 'dunhill')),
@@ -294,18 +293,18 @@ print 'Number of iterations:', iterations
 ['brit', 'red', 'bird', 'milk', 'pall mall']
 ['german', 'green', 'fish', 'coffee', 'prince']
 ['swede', 'white', 'dog', 'root beer', 'blue master']
-Number of iterations: 3301
+Number of iterations: 9870
 </code></pre>
 
 <p>```</p>
 
-<p>We found the solution! In 3301 iterations of simulated annealing, we found that the German has the fish in the fourth house. We only had to look at about 0.00001% of the possibilities to find the solution. Running the <code>time</code> command shows this took about 90 ms to run on my machine, a 2013 MacBook Pro. If you&rsquo;d like to review the code in full, it can be found <a href="https://gist.github.com/agnanachandran/1cdb49e8360d4c1ac8bea877c252aed3">here</a>.</p>
+<p>We found the solution! In 9870 iterations of simulated annealing, we found that the German has the fish in the fourth house. We only had to look at about 0.00004% of the possibilities to find the solution. If you&rsquo;d like to review the code in full, it can be found <a href="https://gist.github.com/agnanachandran/1cdb49e8360d4c1ac8bea877c252aed3">here</a>.</p>
 
 <p>Although taking the time to code this may have taken longer than to solve the problem by hand, this technique can be applied to many other problems, most notably, the <a href="https://en.wikipedia.org/wiki/Travelling_salesman_problem">Travelling Salesman Problem</a> in which we would swap cities instead. The only things we would need to change are the state representation, the neighbouring state selection, and the cost function. The technique itself is generally applicable to all sorts of problems.</p>
 
 <h3>Final Notes</h3>
 
-<p>It&rsquo;s worth noting that simulated annealing has many tunable parameters (initial temperature, temperature reduction function, stopping conditions, acceptance probability function, and more). If these are changed, the number of iterations taken to find the solution can vary drastically. In my tests, I saw as many as a million iterations and as few as 200 iterations to converge to the solution. Choosing the parameters wisely is part of the art of making simulated annealing performant.</p>
+<p>It&rsquo;s worth noting that simulated annealing has many tunable parameters (initial temperature, temperature reduction function, stopping conditions, acceptance probability function). If these are changed, the number of iterations taken to find the solution can vary drastically. In my tests, I saw as many as a million iterations and as few as 200 iterations to converge to the solution. Choosing the parameters wisely is part of the art of making simulated annealing performant.</p>
 
 <p>Logic problems can be often be solved in a variety of ways. Doing it this way allows us to do very little thinking with regards to the clues and how they all relate to each other. We let the computer do the work for us.</p>
 

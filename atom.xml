@@ -4,7 +4,7 @@
   <title><![CDATA[Things To Think About]]></title>
   <link href="http://agnanachandran.github.io/atom.xml" rel="self"/>
   <link href="http://agnanachandran.github.io/"/>
-  <updated>2016-07-17T14:11:49-04:00</updated>
+  <updated>2016-12-27T14:30:47-05:00</updated>
   <id>http://agnanachandran.github.io/</id>
   <author>
     <name><![CDATA[Anojh Gnanachandran]]></name>
@@ -164,7 +164,7 @@
 
 <p>Each index in the list for a house corresponds to a specific attribute as shown above.</p>
 
-<p>Now we&rsquo;re ready to define our simulated annealing technique.</p>
+<p>Now we&rsquo;re ready to define our simulated annealing procedure.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">math</span>
 </span><span class='line'><span class="kn">import</span> <span class="nn">random</span>
@@ -177,6 +177,8 @@
 </span><span class='line'>    <span class="n">num_iterations</span> <span class="o">=</span> <span class="mi">0</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="k">while</span> <span class="n">current_cost</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c"># keep going until we find the global minimum</span>
+</span><span class='line'>        <span class="n">num_iterations</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'>
 </span><span class='line'>        <span class="n">neighbour</span> <span class="o">=</span> <span class="n">get_random_neighbour</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
 </span><span class='line'>        <span class="n">neighbour_cost</span> <span class="o">=</span> <span class="n">cost_of_state</span><span class="p">(</span><span class="n">neighbour</span><span class="p">)</span>
 </span><span class='line'>
@@ -188,11 +190,9 @@
 </span><span class='line'>        <span class="k">if</span> <span class="n">cost_delta</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">cost_delta</span><span class="o">/</span><span class="n">temp</span><span class="p">):</span>
 </span><span class='line'>            <span class="n">current</span><span class="p">,</span> <span class="n">current_cost</span> <span class="o">=</span> <span class="n">neighbour</span><span class="p">,</span> <span class="n">neighbour_cost</span>
 </span><span class='line'>
-</span><span class='line'>        <span class="n">num_iterations</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c"># Decrease the temperature by 0.10 every 500 iterations until it&#39;s at 0.10</span>
-</span><span class='line'>        <span class="k">if</span> <span class="n">num_iterations</span> <span class="o">%</span> <span class="mi">500</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">temp</span> <span class="o">&gt;</span> <span class="mf">0.10</span><span class="p">:</span>
-</span><span class='line'>            <span class="n">temp</span> <span class="o">-=</span> <span class="mf">0.10</span>
+</span><span class='line'>        <span class="c"># Decrease the temperature by 0.05 every 500 iterations until it&#39;s at 0.20</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">num_iterations</span> <span class="o">%</span> <span class="mi">500</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">temp</span> <span class="o">&gt;</span> <span class="mf">0.20</span><span class="p">:</span>
+</span><span class='line'>            <span class="n">temp</span> <span class="o">-=</span> <span class="mf">0.05</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="c"># We found the solution!</span>
 </span><span class='line'>    <span class="c"># Return it and the number of iterations it took to get there</span>
@@ -205,8 +205,7 @@
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr></pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">get_random_neighbour</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
 </span><span class='line'>    <span class="n">neighbour</span> <span class="o">=</span> <span class="p">[</span><span class="n">house</span><span class="p">[:]</span> <span class="k">for</span> <span class="n">house</span> <span class="ow">in</span> <span class="n">state</span><span class="p">]</span> <span class="c"># Deep copy</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="n">i</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">j</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</span><span class='line'>    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
 </span><span class='line'>    <span class="n">attr_idx</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="n">neighbour</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">attr_idx</span><span class="p">],</span> <span class="n">neighbour</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">attr_idx</span><span class="p">]</span> <span class="o">=</span>
@@ -271,17 +270,17 @@
 </span><span class='line'><span class="p">[</span><span class="s">&#39;brit&#39;</span><span class="p">,</span> <span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;bird&#39;</span><span class="p">,</span> <span class="s">&#39;milk&#39;</span><span class="p">,</span> <span class="s">&#39;pall mall&#39;</span><span class="p">]</span>
 </span><span class='line'><span class="p">[</span><span class="s">&#39;german&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;fish&#39;</span><span class="p">,</span> <span class="s">&#39;coffee&#39;</span><span class="p">,</span> <span class="s">&#39;prince&#39;</span><span class="p">]</span>
 </span><span class='line'><span class="p">[</span><span class="s">&#39;swede&#39;</span><span class="p">,</span> <span class="s">&#39;white&#39;</span><span class="p">,</span> <span class="s">&#39;dog&#39;</span><span class="p">,</span> <span class="s">&#39;root beer&#39;</span><span class="p">,</span> <span class="s">&#39;blue master&#39;</span><span class="p">]</span>
-</span><span class='line'><span class="n">Number</span> <span class="n">of</span> <span class="n">iterations</span><span class="p">:</span> <span class="mi">3301</span>
+</span><span class='line'><span class="n">Number</span> <span class="n">of</span> <span class="n">iterations</span><span class="p">:</span> <span class="mi">9870</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>We found the solution! In 3301 iterations of simulated annealing, we found that the German has the fish in the fourth house. We only had to look at about 0.00001% of the possibilities to find the solution. Running the <code>time</code> command shows this took about 90 ms to run on my machine, a 2013 MacBook Pro. If you&rsquo;d like to review the code in full, it can be found <a href="https://gist.github.com/agnanachandran/1cdb49e8360d4c1ac8bea877c252aed3">here</a>.</p>
+<p>We found the solution! In 9870 iterations of simulated annealing, we found that the German has the fish in the fourth house. We only had to look at about 0.00004% of the possibilities to find the solution. If you&rsquo;d like to review the code in full, it can be found <a href="https://gist.github.com/agnanachandran/1cdb49e8360d4c1ac8bea877c252aed3">here</a>.</p>
 
 <p>Although taking the time to code this may have taken longer than to solve the problem by hand, this technique can be applied to many other problems, most notably, the <a href="https://en.wikipedia.org/wiki/Travelling_salesman_problem">Travelling Salesman Problem</a> in which we would swap cities instead. The only things we would need to change are the state representation, the neighbouring state selection, and the cost function. The technique itself is generally applicable to all sorts of problems.</p>
 
 <h3>Final Notes</h3>
 
-<p>It&rsquo;s worth noting that simulated annealing has many tunable parameters (initial temperature, temperature reduction function, stopping conditions, acceptance probability function, and more). If these are changed, the number of iterations taken to find the solution can vary drastically. In my tests, I saw as many as a million iterations and as few as 200 iterations to converge to the solution. Choosing the parameters wisely is part of the art of making simulated annealing performant.</p>
+<p>It&rsquo;s worth noting that simulated annealing has many tunable parameters (initial temperature, temperature reduction function, stopping conditions, acceptance probability function). If these are changed, the number of iterations taken to find the solution can vary drastically. In my tests, I saw as many as a million iterations and as few as 200 iterations to converge to the solution. Choosing the parameters wisely is part of the art of making simulated annealing performant.</p>
 
 <p>Logic problems can be often be solved in a variety of ways. Doing it this way allows us to do very little thinking with regards to the clues and how they all relate to each other. We let the computer do the work for us.</p>
 

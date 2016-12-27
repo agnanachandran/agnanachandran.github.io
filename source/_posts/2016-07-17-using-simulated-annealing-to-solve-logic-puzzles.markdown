@@ -86,7 +86,7 @@ If it has greater cost, we will only move to it with a certain probability. Othe
 
 Looking at the exponential function, the greater the cost delta, the lower the power, and thus the lower the acceptance probability is. If the neighbouring cost is much higher than the current cost, we are not likely to move to it.
 
-t affects how often we pick worse solutions. The greater the value of t, the higher the acceptance probability is. t is a parameter we choose which typically starts high and steadily decreases every so often, so we are less likely to accept worse solutions as time goes on (where we are hopefully close to finding the global minimum). 
+t affects how often we pick worse solutions. The greater the value of t, the higher the acceptance probability is. t is a parameter we choose which typically starts high and steadily decreases every so often, so we are less likely to accept worse solutions as time goes on (where we are hopefully close to finding the global minimum).
 
 Note that since Δc and t are both positive, the exponential function's value is in the range (0, 1). We can use a random number in this range to choose, based on the acceptance probability, whether we should move to the new state or not. If the random number is less than the acceptance probability's value, we should move to the new state.
 
@@ -142,7 +142,7 @@ For convenience, we'll also define the following constants:
 
 Each index in the list for a house corresponds to a specific attribute as shown above.
 
-Now we're ready to define our simulated annealing technique.
+Now we're ready to define our simulated annealing procedure.
 
 ```python
     import math
@@ -156,6 +156,8 @@ Now we're ready to define our simulated annealing technique.
         num_iterations = 0
 
         while current_cost > 0: # keep going until we find the global minimum
+            num_iterations += 1
+
             neighbour = get_random_neighbour(current)
             neighbour_cost = cost_of_state(neighbour)
 
@@ -167,11 +169,9 @@ Now we're ready to define our simulated annealing technique.
             if cost_delta <= 0 or random.random() < math.exp(-cost_delta/temp):
                 current, current_cost = neighbour, neighbour_cost
 
-            num_iterations += 1
-
-            # Decrease the temperature by 0.10 every 500 iterations until it's at 0.10
-            if num_iterations % 500 == 0 and temp > 0.10:
-                temp -= 0.10
+            # Decrease the temperature by 0.05 every 500 iterations until it's at 0.20
+            if num_iterations % 500 == 0 and temp > 0.20:
+                temp -= 0.05
 
         # We found the solution!
         # Return it and the number of iterations it took to get there
@@ -184,8 +184,7 @@ There's two functions we haven't defined yet that are used above. These are `get
     def get_random_neighbour(state):
         neighbour = [house[:] for house in state] # Deep copy
 
-        i = random.randint(0, 4)
-        j = random.choice(range(0, i) + range(i+1, 4))
+        i, j = random.sample(xrange(5), 2)
         attr_idx = random.randint(0, 4)
 
         neighbour[i][attr_idx], neighbour[j][attr_idx] =
@@ -212,7 +211,7 @@ We now need to define the `cost_of_state` function, which when given a state ret
                 h[COL] == 'yellow' and h[CIG] == 'dunhill',
                 i == 2 and h[BEV] == 'milk',
                 i == 0 and h[NAT] == 'norwegian',
-                h[CIG] == 'blends' and ((i > 0 and state[i-1][ANI] == 'cat') 
+                h[CIG] == 'blends' and ((i > 0 and state[i-1][ANI] == 'cat')
                                      or (i < 4 and state[i+1][ANI] == 'cat')),
                 h[ANI] == 'horse' and ((i > 0 and state[i-1][CIG] == 'dunhill')
                                      or (i < 4 and state[i+1][CIG] == 'dunhill')),
@@ -250,16 +249,16 @@ We use a seed value of 100 for the random number generator so we can produce the
     ['brit', 'red', 'bird', 'milk', 'pall mall']
     ['german', 'green', 'fish', 'coffee', 'prince']
     ['swede', 'white', 'dog', 'root beer', 'blue master']
-    Number of iterations: 3301
+    Number of iterations: 9870
 ```
 
-We found the solution! In 3301 iterations of simulated annealing, we found that the German has the fish in the fourth house. We only had to look at about 0.00001% of the possibilities to find the solution. Running the `time` command shows this took about 90 ms to run on my machine, a 2013 MacBook Pro. If you'd like to review the code in full, it can be found [here](https://gist.github.com/agnanachandran/1cdb49e8360d4c1ac8bea877c252aed3).
+We found the solution! In 9870 iterations of simulated annealing, we found that the German has the fish in the fourth house. We only had to look at about 0.00004% of the possibilities to find the solution. If you'd like to review the code in full, it can be found [here](https://gist.github.com/agnanachandran/1cdb49e8360d4c1ac8bea877c252aed3).
 
-Although taking the time to code this may have taken longer than to solve the problem by hand, this technique can be applied to many other problems, most notably, the [Travelling Salesman Problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem) in which we would swap cities instead. The only things we would need to change are the state representation, the neighbouring state selection, and the cost function. The technique itself is generally applicable to all sorts of problems. 
+Although taking the time to code this may have taken longer than to solve the problem by hand, this technique can be applied to many other problems, most notably, the [Travelling Salesman Problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem) in which we would swap cities instead. The only things we would need to change are the state representation, the neighbouring state selection, and the cost function. The technique itself is generally applicable to all sorts of problems.
 
 ### Final Notes
 
-It's worth noting that simulated annealing has many tunable parameters (initial temperature, temperature reduction function, stopping conditions, acceptance probability function, and more). If these are changed, the number of iterations taken to find the solution can vary drastically. In my tests, I saw as many as a million iterations and as few as 200 iterations to converge to the solution. Choosing the parameters wisely is part of the art of making simulated annealing performant.
+It's worth noting that simulated annealing has many tunable parameters (initial temperature, temperature reduction function, stopping conditions, acceptance probability function). If these are changed, the number of iterations taken to find the solution can vary drastically. In my tests, I saw as many as a million iterations and as few as 200 iterations to converge to the solution. Choosing the parameters wisely is part of the art of making simulated annealing performant.
 
 Logic problems can be often be solved in a variety of ways. Doing it this way allows us to do very little thinking with regards to the clues and how they all relate to each other. We let the computer do the work for us.
 

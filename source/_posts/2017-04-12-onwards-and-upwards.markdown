@@ -14,7 +14,7 @@ So I figured I would take a break. Not so much go on vacation, but try to spend 
 
 So I wanna unwind for a bit, and really focus on the goals I haven't been prioritizing. But of course, I can't do this forever; I only have enough money saved to justify doing this for a few months.
 
-Being in a co-op program, you might have thought I'd've figured it all out by now. I thought I would have too, but as graduation grew closer, I realized I hadn't quite found what I was looking for in terms of a full-time job. Being in co-op has helped tremendously in figuring out what aspects of software engineering I enjoy and which ones I don't. I've gained invaluable experiences and learned a ton about software, tech companies, and the work life in general.
+Being in a co-op program, you might have thought I'd've figured it all out by now. I thought I would have too, but as graduation grew closer, I realized I hadn't quite found what I was looking for in terms of a full-time job. Being in co-op has helped tremendously in figuring out what aspects of software engineering I enjoy and which ones I don't. I've gained invaluable experiences and learned a ton about creating software, tech companies, and the work life in general.
 
 {% img center /images/golden_gate_bridge.jpg %}
 
